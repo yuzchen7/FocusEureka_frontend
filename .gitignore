@@ -1,0 +1,31 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+*/xcuserdata
+*/xcuserdata/*
+
+# CocoaPods
+Pods/
+*.xcworkspace
+
+# Carthage
+Carthage/Checkouts
+Carthage/Build
+
+# Swift Package Manager
+.build
+
+# Compiled source
+*.rdb
+*.gch
+*.pch
+
+# Generated files
+*.hmap
+*.ipa
+*.xcarchive
+*.xctestrun
+*.xcuserstate
+
+# Others
+xcuserdata/
