@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C427DD462B06B11200F7F704 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C427DD452B06B11200F7F704 /* AccountView.swift */; };
 		C4927E542B06A956006CA4A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E532B06A956006CA4A8 /* User.swift */; };
 		C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E572B06A9D4006CA4A8 /* LoginViewModel.swift */; };
 		C4927E5B2B06AAE5006CA4A8 /* InputComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E5A2B06AAE5006CA4A8 /* InputComponentView.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C427DD452B06B11200F7F704 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		C4927E532B06A956006CA4A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C4927E572B06A9D4006CA4A8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C4927E5A2B06AAE5006CA4A8 /* InputComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputComponentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		C4927E682B06AE36006CA4A8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C427DD452B06B11200F7F704 /* AccountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				C4927E642B06AD41006CA4A8 /* RegisterView.swift in Sources */,
 				C4927E5D2B06AB3C006CA4A8 /* SettingRowView.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
+				C427DD462B06B11200F7F704 /* AccountView.swift in Sources */,
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */,
