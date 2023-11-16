@@ -13,6 +13,7 @@
 		C4927E5D2B06AB3C006CA4A8 /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E5C2B06AB3C006CA4A8 /* SettingRowView.swift */; };
 		C4927E5F2B06ABA6006CA4A8 /* SingleScheuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E5E2B06ABA6006CA4A8 /* SingleScheuleView.swift */; };
 		C4927E642B06AD41006CA4A8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E632B06AD41006CA4A8 /* RegisterView.swift */; };
+		C4927E662B06ADCB006CA4A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E652B06ADCB006CA4A8 /* LoginView.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		C4927E5C2B06AB3C006CA4A8 /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
 		C4927E5E2B06ABA6006CA4A8 /* SingleScheuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleScheuleView.swift; sourceTree = "<group>"; };
 		C4927E632B06AD41006CA4A8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C4927E652B06ADCB006CA4A8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				C4927E632B06AD41006CA4A8 /* RegisterView.swift */,
+				C4927E652B06ADCB006CA4A8 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
 				C4927E542B06A956006CA4A8 /* User.swift in Sources */,
+				C4927E662B06ADCB006CA4A8 /* LoginView.swift in Sources */,
 				C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */,
 				C4927E5B2B06AAE5006CA4A8 /* InputComponentView.swift in Sources */,
 			);
@@ -389,8 +393,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,8 +421,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
