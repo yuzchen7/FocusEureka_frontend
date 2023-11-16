@@ -9,13 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        //main view of the app
+            TabView{
+                Group{
+                    //view that display all the posts fetched from backend
+                    PostsView()
+                        .tabItem {
+                            Image(systemName: "globe.americas")
+                                .frame(height:500)
+                            Text("Expore")
+                        }
+                    CreatePost()
+                        .tabItem {
+                            Image(systemName: "plus")
+                                .frame(height: 10000)
+                            Text("Post")
+                        }
+                    Text("Account")
+                        .tabItem{
+                            Text("tab2")
+                        }
+                    Text("Tab3")
+                        .tabItem {
+                            Text("tab3")
+                        }
+                }
+                .toolbarBackground(.pink, for: .tabBar)
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarColorScheme(.dark, for: .tabBar)
+            }
     }
 }
 

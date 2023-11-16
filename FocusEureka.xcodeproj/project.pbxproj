@@ -35,6 +35,17 @@
 		2A47F8322B06B73600039B14 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2A47F8312B06B73600039B14 /* FirebaseStorage */; };
 		2A47F8342B06B73600039B14 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 2A47F8332B06B73600039B14 /* FirebaseStorageCombine-Community */; };
 		2A47F8362B06B7F700039B14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A47F8352B06B7F700039B14 /* GoogleService-Info.plist */; };
+		2A47F8392B06BC7A00039B14 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8382B06BC7A00039B14 /* Comments.swift */; };
+		2A47F83B2B06BCA800039B14 /* Image_set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F83A2B06BCA800039B14 /* Image_set.swift */; };
+		2A47F83D2B06BCCA00039B14 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F83C2B06BCCA00039B14 /* Owner.swift */; };
+		2A47F83F2B06BCE300039B14 /* PostLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F83E2B06BCE300039B14 /* PostLikes.swift */; };
+		2A47F8412B06BCFE00039B14 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8402B06BCFE00039B14 /* Posts.swift */; };
+		2A47F8442B06C04100039B14 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8432B06C04100039B14 /* PostsViewModel.swift */; };
+		2A47F8462B06C07100039B14 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8452B06C07100039B14 /* PostsView.swift */; };
+		2A47F8482B06C09A00039B14 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8472B06C09A00039B14 /* CardView.swift */; };
+		2A47F84A2B06C0D100039B14 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8492B06C0D100039B14 /* PostDetailView.swift */; };
+		2A47F84D2B06C15200039B14 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F84C2B06C15200039B14 /* CreatePostViewModel.swift */; };
+		2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F84E2B06C17500039B14 /* CreatePost.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -43,6 +54,17 @@
 
 /* Begin PBXFileReference section */
 		2A47F8352B06B7F700039B14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2A47F8382B06BC7A00039B14 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		2A47F83A2B06BCA800039B14 /* Image_set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image_set.swift; sourceTree = "<group>"; };
+		2A47F83C2B06BCCA00039B14 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		2A47F83E2B06BCE300039B14 /* PostLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikes.swift; sourceTree = "<group>"; };
+		2A47F8402B06BCFE00039B14 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		2A47F8432B06C04100039B14 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
+		2A47F8452B06C07100039B14 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
+		2A47F8472B06C09A00039B14 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		2A47F8492B06C0D100039B14 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		2A47F84C2B06C15200039B14 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
+		2A47F84E2B06C17500039B14 /* CreatePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePost.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +110,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A47F8372B06BC3700039B14 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A47F8382B06BC7A00039B14 /* Comments.swift */,
+				2A47F83A2B06BCA800039B14 /* Image_set.swift */,
+				2A47F83C2B06BCCA00039B14 /* Owner.swift */,
+				2A47F83E2B06BCE300039B14 /* PostLikes.swift */,
+				2A47F8402B06BCFE00039B14 /* Posts.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2A47F8422B06C02C00039B14 /* PostView */ = {
+			isa = PBXGroup;
+			children = (
+				2A47F8432B06C04100039B14 /* PostsViewModel.swift */,
+				2A47F8452B06C07100039B14 /* PostsView.swift */,
+				2A47F8472B06C09A00039B14 /* CardView.swift */,
+				2A47F8492B06C0D100039B14 /* PostDetailView.swift */,
+			);
+			path = PostView;
+			sourceTree = "<group>";
+		};
+		2A47F84B2B06C11700039B14 /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				2A47F84C2B06C15200039B14 /* CreatePostViewModel.swift */,
+				2A47F84E2B06C17500039B14 /* CreatePost.swift */,
+			);
+			path = CreatePost;
+			sourceTree = "<group>";
+		};
 		C4BC8AD72B03463200DFBED1 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				2A47F8352B06B7F700039B14 /* GoogleService-Info.plist */,
+				2A47F8372B06BC3700039B14 /* Models */,
 				C4BC8AF12B0347B300DFBED1 /* App */,
 				C4BC8AF22B0347BC00DFBED1 /* Views */,
 				C4BC8AE72B03463300DFBED1 /* Assets.xcassets */,
@@ -135,6 +190,8 @@
 		C4BC8AF22B0347BC00DFBED1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2A47F84B2B06C11700039B14 /* CreatePost */,
+				2A47F8422B06C02C00039B14 /* PostView */,
 				C4BC8AF32B0347C500DFBED1 /* Root */,
 			);
 			path = Views;
@@ -251,8 +308,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A47F84A2B06C0D100039B14 /* PostDetailView.swift in Sources */,
+				2A47F83B2B06BCA800039B14 /* Image_set.swift in Sources */,
+				2A47F84D2B06C15200039B14 /* CreatePostViewModel.swift in Sources */,
+				2A47F8412B06BCFE00039B14 /* Posts.swift in Sources */,
+				2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
+				2A47F83F2B06BCE300039B14 /* PostLikes.swift in Sources */,
+				2A47F8482B06C09A00039B14 /* CardView.swift in Sources */,
+				2A47F8442B06C04100039B14 /* PostsViewModel.swift in Sources */,
 				C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */,
+				2A47F83D2B06BCCA00039B14 /* Owner.swift in Sources */,
+				2A47F8392B06BC7A00039B14 /* Comments.swift in Sources */,
+				2A47F8462B06C07100039B14 /* PostsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

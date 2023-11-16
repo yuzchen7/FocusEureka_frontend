@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct FocusEurekaApp: App {
@@ -13,5 +14,9 @@ struct FocusEurekaApp: App {
         WindowGroup {
             ContentView()
         }
+    }
+    
+    init() {
+        FirebaseApp.configure()
     }
 }
