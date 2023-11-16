@@ -10,6 +10,7 @@
 		C4927E542B06A956006CA4A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E532B06A956006CA4A8 /* User.swift */; };
 		C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E572B06A9D4006CA4A8 /* LoginViewModel.swift */; };
 		C4927E5B2B06AAE5006CA4A8 /* InputComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E5A2B06AAE5006CA4A8 /* InputComponentView.swift */; };
+		C4927E5D2B06AB3C006CA4A8 /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E5C2B06AB3C006CA4A8 /* SettingRowView.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		C4927E532B06A956006CA4A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C4927E572B06A9D4006CA4A8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C4927E5A2B06AAE5006CA4A8 /* InputComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputComponentView.swift; sourceTree = "<group>"; };
+		C4927E5C2B06AB3C006CA4A8 /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				C4927E5A2B06AAE5006CA4A8 /* InputComponentView.swift */,
+				C4927E5C2B06AB3C006CA4A8 /* SettingRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4927E5D2B06AB3C006CA4A8 /* SettingRowView.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
