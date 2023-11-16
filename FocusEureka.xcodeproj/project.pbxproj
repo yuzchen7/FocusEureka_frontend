@@ -15,6 +15,7 @@
 		C4927E642B06AD41006CA4A8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E632B06AD41006CA4A8 /* RegisterView.swift */; };
 		C4927E662B06ADCB006CA4A8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E652B06ADCB006CA4A8 /* LoginView.swift */; };
 		C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E6E2B06AECF006CA4A8 /* Schedule.swift */; };
+		C4927E712B06AF1E006CA4A8 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E702B06AF1E006CA4A8 /* ScheduleViewModel.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		C4927E632B06AD41006CA4A8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C4927E652B06ADCB006CA4A8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4927E6E2B06AECF006CA4A8 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		C4927E702B06AF1E006CA4A8 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		C4927E6D2B06AE9F006CA4A8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C4927E702B06AF1E006CA4A8 /* ScheduleViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */,
+				C4927E712B06AF1E006CA4A8 /* ScheduleViewModel.swift in Sources */,
 				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
 				C4927E542B06A956006CA4A8 /* User.swift in Sources */,
 				C4927E662B06ADCB006CA4A8 /* LoginView.swift in Sources */,
