@@ -17,6 +17,7 @@
 		C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E6E2B06AECF006CA4A8 /* Schedule.swift */; };
 		C4927E712B06AF1E006CA4A8 /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E702B06AF1E006CA4A8 /* ScheduleViewModel.swift */; };
 		C4927E732B06AF97006CA4A8 /* ScheuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E722B06AF97006CA4A8 /* ScheuleView.swift */; };
+		C4927E772B06B04F006CA4A8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4927E762B06B04F006CA4A8 /* ProfileView.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		C4927E6E2B06AECF006CA4A8 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C4927E702B06AF1E006CA4A8 /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		C4927E722B06AF97006CA4A8 /* ScheuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheuleView.swift; sourceTree = "<group>"; };
+		C4927E762B06B04F006CA4A8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,6 +143,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C4927E742B06B02B006CA4A8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C4927E752B06B041006CA4A8 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C4927E752B06B041006CA4A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4927E762B06B04F006CA4A8 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C4BC8AD72B03463200DFBED1 = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +210,7 @@
 			children = (
 				C4927E672B06AE2D006CA4A8 /* Account */,
 				C4927E552B06A9AB006CA4A8 /* Authentication */,
+				C4927E742B06B02B006CA4A8 /* Profile */,
 				C4927E6B2B06AE8C006CA4A8 /* Scheule */,
 				C4BC8AF32B0347C500DFBED1 /* Root */,
 			);
@@ -300,6 +319,7 @@
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */,
+				C4927E772B06B04F006CA4A8 /* ProfileView.swift in Sources */,
 				C4927E712B06AF1E006CA4A8 /* ScheduleViewModel.swift in Sources */,
 				C4927E732B06AF97006CA4A8 /* ScheuleView.swift in Sources */,
 				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
