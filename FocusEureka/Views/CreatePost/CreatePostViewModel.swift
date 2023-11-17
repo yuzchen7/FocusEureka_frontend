@@ -19,8 +19,9 @@ class CreatePostViewModel: ObservableObject{
     }
     @Published var ImageURL: [String] = []
     @Published var isLoading = false;
-    let storage = Storage.storage().reference()
+    @State var fetchedPost:Posts?
     
+    let storage = Storage.storage().reference()
     func setImages(pickedImages: [PhotosPickerItem]) {
         Task{
             var images: [UIImage] = []
@@ -80,6 +81,62 @@ class CreatePostViewModel: ObservableObject{
         self.selectedImages.removeAll()
         isLoading = false;
 //        print("Completed")
+    }
+    
+    func uploadPost(title:String, contents:String, address:String, city:String, state:String,
+                    zipcode:String, start_date:String, start_time:String, end_date:String,
+                    end_time:String, isEvent:String) async throws{
+        isLoading = true;
+        if selectedImages.isEmpty{
+            return
+        }
+        let storage = Storage.storage().reference()
+        do{
+            for img in selectedImages{
+                let imgData = img.jpegData(compressionQuality: 0.8)
+                guard imgData != nil else{
+                    return
+                }
+                let pathRef = storage.child("postImages/\(UUID().uuidString).jpg")
+                
+                let _ = try await pathRef.putDataAsync(imgData!,metadata: nil)
+                let downloadURL = try await pathRef.downloadURL()
+                self.ImageURL.append("\"\(downloadURL)\"")
+            }
+            fetchedPost = try await swiftxios.post(
+                "http://localhost:8080/api/posts/create",
+                [
+                    "title":title,
+                    "contents":contents,
+                    "address":address,
+                    "city":city,
+                    "state":state,
+                    "zipcode":zipcode,
+                    "start_date":start_date,
+                    "start_time":start_time,
+                    "end_date":end_date,
+                    "end_time":end_time,
+                    "ownerid":1,
+                    "event":isEvent,
+                    "urls":ImageURL
+                ],
+                [
+                    "application/json" : "Content-Type"
+                ]
+            )
+        } catch Swiftxios.FetchError.invalidURL {
+            print("function signIn from class Swiftxios has URL error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidResponse {
+            print("function signIn from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidData {
+            print("function signIn from class Swiftxios has response Data error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidObjectConvert {
+            print("function signIn from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
+        } catch {
+            print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
+        }
+        self.selectedImages.removeAll()
+        isLoading = false;
     }
 
 }
