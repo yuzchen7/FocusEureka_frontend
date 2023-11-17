@@ -85,7 +85,7 @@ class CreatePostViewModel: ObservableObject{
     
     func uploadPost(title:String, contents:String, address:String, city:String, state:String,
                     zipcode:String, start_date:String, start_time:String, end_date:String,
-                    end_time:String, isEvent:String) async throws{
+                    end_time:String, isEvent:Bool) async throws{
         isLoading = true;
         if selectedImages.isEmpty{
             return

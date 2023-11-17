@@ -49,7 +49,8 @@ struct CreatePost: View {
                         .lineSpacing(5)
                         .frame(height: 260)
                         .background(Color.gray.opacity(0.1))
-                    
+                    TextField("Title",text: $title)
+                        .disableAutocorrection(true)
                     TextField("Address",text: $address)
                         .disableAutocorrection(true)
                     HStack{
@@ -58,7 +59,7 @@ struct CreatePost: View {
                         TextField("State",text: $state)
                             .disableAutocorrection(true)
                     }
-                    TextField("zip-code",text: $state)
+                    TextField("zip-code",text: $zipcode)
                         .disableAutocorrection(true)
                     Toggle(isOn: $isEvent) {
                         Label("Event?", systemImage: "balloon.fill")
@@ -82,7 +83,7 @@ struct CreatePost: View {
             }
             Button(action: {
                 Task{
-                   try await createPostVM.uploadImage()
+                    try await createPostVM.uploadPost(title:self.title,contents:self.contents,address:self.address,city:self.city,state:self.state,zipcode:self.state,start_date:self.state,start_time:self.start_time,end_date:self.end_date,end_time:self.end_time,isEvent:self.isEvent)
                 }
             }, label: {
                 Text("upload to firebase")
