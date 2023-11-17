@@ -13,11 +13,18 @@ struct ScheuleView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
-        if let schedules = scheduleViewModel.schedule {
+        if let schedules = scheduleViewModel.schedule, scheduleViewModel.isUpdate == false {
             VStack {
                 // single scheule view
-                ForEach(schedules.scheduleDay) {element in
-                    SingleScheuleView(day: element.day, isAvailable: element.isAvaliable)
+                ForEach(schedules.scheduleDay.indices, id: \.self) {index in
+                    Button(action: {
+                        print("Click able")
+                        scheduleViewModel.updateScheduleData(userId: loginViewModel.currentUser!.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
+                        print(schedules.scheduleDay)
+                    }, label: {
+                        let element = schedules.scheduleDay[index]
+                        SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
+                    })
                 }
             }
         } else {
@@ -27,4 +34,8 @@ struct ScheuleView: View {
                 }
         }
     }
+}
+
+#Preview {
+    ScheuleView(scheduleViewModel: ScheduleViewModel())
 }
