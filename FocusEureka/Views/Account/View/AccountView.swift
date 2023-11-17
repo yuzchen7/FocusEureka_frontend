@@ -12,8 +12,6 @@ struct AccountView: View {
     @State var isShowPost: Bool = true;
     @State var isShowSchedule: Bool = false;
     
-    @State var scheuleViewModel: ScheduleViewModel = ScheduleViewModel()
-    
     var body: some View {
         if let currentUser = self.loginViewModel.currentUser {
             NavigationStack{
@@ -31,20 +29,20 @@ struct AccountView: View {
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color(.white))
-                                .frame(width: 76, height: 76)
+                                .frame(width: 66, height: 66)
                                 .background(Color(.systemGray))
                                 .clipShape(Circle())
                             
                             VStack(alignment: .leading) {
                                 Text(currentUser.fullName)
                                 // Text("Yuzhuang Chen")
-                                    .font(.system(size: 25))
+                                    .font(.system(size: 15))
                                     .fontWeight(.semibold)
                                     .padding(.top, 4)
                                 
                                 Text(currentUser.username)
                                 // Text("yuzchen")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 14))
                                     .foregroundStyle(Color(.systemGray))
                             }
                             
@@ -67,7 +65,6 @@ struct AccountView: View {
                             Button(action: {
                                 self.isShowSchedule = false
                                 self.isShowPost = true
-                                self.scheuleViewModel.getScheduleData(userId: currentUser.id)
                             }, label: {
                                 ZStack {
                                     Text("Post")
@@ -101,7 +98,7 @@ struct AccountView: View {
                     // content view section
                     Section {
                         if (self.isShowSchedule) {
-                            ScheuleView(scheduleViewModel: self.$scheuleViewModel)
+                            ScheuleView()
                         }
                     }
                     .padding(.top)

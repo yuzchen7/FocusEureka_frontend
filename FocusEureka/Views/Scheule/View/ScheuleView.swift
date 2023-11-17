@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ScheuleView: View {
     
-    @Binding var scheduleViewModel: ScheduleViewModel
+    @ObservedObject var scheduleViewModel: ScheduleViewModel = ScheduleViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
         if let schedules = scheduleViewModel.schedule {
@@ -19,6 +20,11 @@ struct ScheuleView: View {
                     SingleScheuleView(day: element.day, isAvailable: element.isAvaliable)
                 }
             }
+        } else {
+            Text("Loading...")
+                .onAppear {
+                    self.scheduleViewModel.getScheduleData(userId: loginViewModel.currentUser!.id)
+                }
         }
     }
 }
