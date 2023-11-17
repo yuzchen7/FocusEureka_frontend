@@ -9,14 +9,14 @@ import Foundation
 
 /// Swiftxios Tools Object
 /// - version
-///     - Swiftxios 0.1.1 alpha
+///     -  version 0.2.0 alpha
 /// - Since 0.1.1 alpha
 /// for more less code to fetch the api call
 var swiftxios: Swiftxios = Swiftxios.swiftxios
 
 /// Swiftxios Tools
 /// for more less code to fetch the api call
-/// - version 0.1.2 alpha
+/// - version 0.2.0 alpha
 final class Swiftxios: ObservableObject {
     // Since 0.1.0 alpha
     static var swiftxios: Swiftxios = Swiftxios()
@@ -41,6 +41,7 @@ final class Swiftxios: ObservableObject {
     private enum RequestMethod: String {
         case POST = "POST"
         case GET = "GET"
+        case PUT = "PUT"
     }
     
     private func makeRequestObj(_ url: URL, _ method: RequestMethod, _ body: [String : Any]? = nil, _ config: [String : String]? = nil) -> URLRequest {
@@ -161,5 +162,45 @@ final class Swiftxios: ObservableObject {
         }
     }
     
-    
+    /// put method to fetch a put request
+    /// - Parameters:
+    ///     - url: String url to farder request
+    ///     - config: adddtion header config that need to customize
+    /// - Throws: There is 4 type of exception will the throw,
+    ///           invalidURL, invalidResponse, invalidData, invalidObjectConvert
+    /// - Returns: optional object T
+    /// - Example:
+    ///     ```swift
+    ///     try await swiftxios.get(
+    ///        "http://localhost:8080/api/schedule/update",
+    ///        [
+    ///            "user_id" : userID
+    ///            "Monday" : true,
+    ///        ],
+    ///        [
+    ///            "application/json" : "Content-Type"
+    ///        ]
+    ///     )
+    ///    ```
+    ///
+    /// Swiftxios to fetch the given endpoint ulr make a put request, then return the result data object
+    func put<T: Codable>(_ urlEndpoint: String, _ body: [String : Any]? = nil, _ config: [String : String]? = nil) async throws -> T? {
+        print(urlEndpoint)
+        // prepare the url object to init request object
+        guard let url: URL = URL(string: urlEndpoint) else {
+            throw Swiftxios.FetchError.invalidURL;
+        };
+        
+        let request: URLRequest = makeRequestObj(url, RequestMethod.PUT, body, config)
+        
+        // featch the url request
+        let data: Data = try await makeFetch(request: request)
+
+        do {
+            print(data.description)
+            return try self.swiftxiosJSONDecoder(data: data)
+        } catch {
+            throw Swiftxios.FetchError.invalidData;
+        }
+    }
 }
