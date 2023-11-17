@@ -38,7 +38,6 @@ class CreatePostViewModel: ObservableObject{
     func uploadImage() async throws{
 //        print("Started")
         isLoading = true;
-        self.ImageURL.removeAll()
         if selectedImages.isEmpty{
             return
         }
@@ -78,7 +77,7 @@ class CreatePostViewModel: ObservableObject{
             }
             
         }
-        
+        self.selectedImages.removeAll()
         isLoading = false;
 //        print("Completed")
     }
