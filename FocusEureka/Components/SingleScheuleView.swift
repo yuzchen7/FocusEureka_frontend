@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SingleScheuleView: View {
+    var index: Int
     var day: String
-    var isAvailable: Bool
+    @State var isAvailable: Bool
     
     var body: some View {
         HStack{
             Rectangle()
                 .frame(width: 10)
             
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(.green)
+            Image(systemName: self.isAvailable ? "checkmark.circle.fill" : "xmark.circle.fill")
+                .foregroundColor(self.isAvailable ? .green : .red)
                 .imageScale(.large)
             // .padding(.trailing)
             
@@ -29,8 +30,8 @@ struct SingleScheuleView: View {
                 
                 Spacer()
                 
-                Text("Avalible")
-                    .foregroundStyle(Color(.systemGreen))
+                Text(self.isAvailable ? "Avalible" : "Not Avalible")
+                    .foregroundStyle(Color(self.isAvailable ? .systemGreen : .systemRed))
                     .padding(.trailing)
             }
         }
@@ -42,7 +43,7 @@ struct SingleScheuleView: View {
 }
 
 #Preview {
-    SingleScheuleView(day: "Snnday", isAvailable: true)
+    SingleScheuleView(index: 0, day: "Snnday", isAvailable: true)
 }
 
 
