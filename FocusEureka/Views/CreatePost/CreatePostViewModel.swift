@@ -71,7 +71,7 @@ class CreatePostViewModel: ObservableObject{
             do{
                 let _ = try await pathRef.putDataAsync(imgData!,metadata: nil)
                 let downloadURL = try await pathRef.downloadURL()
-                self.ImageURL.append("\"\(downloadURL)\"")
+                self.ImageURL.append("\(downloadURL)")
                 print(self.ImageURL.count)
             }catch{
                 print(error)
@@ -101,7 +101,7 @@ class CreatePostViewModel: ObservableObject{
                 
                 let _ = try await pathRef.putDataAsync(imgData!,metadata: nil)
                 let downloadURL = try await pathRef.downloadURL()
-                self.ImageURL.append("\"\(downloadURL)\"")
+                self.ImageURL.append("\(downloadURL)")
             }
             fetchedPost = try await swiftxios.post(
                 "http://localhost:8080/api/posts/create",

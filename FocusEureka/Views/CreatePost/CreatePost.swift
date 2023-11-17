@@ -83,7 +83,17 @@ struct CreatePost: View {
             }
             Button(action: {
                 Task{
-                    try await createPostVM.uploadPost(title:self.title,contents:self.contents,address:self.address,city:self.city,state:self.state,zipcode:self.state,start_date:self.state,start_time:self.start_time,end_date:self.end_date,end_time:self.end_time,isEvent:self.isEvent)
+                    try await createPostVM.uploadPost(title:self.title,
+                                                      contents:self.contents,
+                                                      address:self.address,
+                                                      city:self.city,
+                                                      state:self.state,
+                                                      zipcode:self.zipcode,
+                                                      start_date:self.start_date,
+                                                      start_time:self.start_time,
+                                                      end_date:self.end_date,
+                                                      end_time:self.end_time,
+                                                      isEvent:self.isEvent)
                 }
             }, label: {
                 Text("upload to firebase")
