@@ -50,6 +50,8 @@
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
 		C4BC8AEB2B03463300DFBED1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AEA2B03463300DFBED1 /* Preview Assets.xcassets */; };
+		C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AF62B0348EF00DFBED1 /* Swiftxios.swift */; };
+		C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AF82B03492900DFBED1 /* SwiftxiosCodeable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C4BC8AE72B03463300DFBED1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4BC8AEA2B03463300DFBED1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4BC8AF62B0348EF00DFBED1 /* Swiftxios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiftxios.swift; sourceTree = "<group>"; };
+		C4BC8AF82B03492900DFBED1 /* SwiftxiosCodeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftxiosCodeable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 				2A47F8372B06BC3700039B14 /* Models */,
 				C4BC8AF12B0347B300DFBED1 /* App */,
 				C4BC8AF22B0347BC00DFBED1 /* Views */,
+				C4BC8AF42B0348C000DFBED1 /* Utils */,
 				C4BC8AE72B03463300DFBED1 /* Assets.xcassets */,
 				C4BC8AE92B03463300DFBED1 /* Preview Content */,
 			);
@@ -203,6 +208,23 @@
 				C4BC8AE52B03463200DFBED1 /* ContentView.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		C4BC8AF42B0348C000DFBED1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C4BC8AF52B0348D800DFBED1 /* Swiftxios */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C4BC8AF52B0348D800DFBED1 /* Swiftxios */ = {
+			isa = PBXGroup;
+			children = (
+				C4BC8AF62B0348EF00DFBED1 /* Swiftxios.swift */,
+				C4BC8AF82B03492900DFBED1 /* SwiftxiosCodeable.swift */,
+			);
+			path = Swiftxios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +336,8 @@
 				2A47F8412B06BCFE00039B14 /* Posts.swift in Sources */,
 				2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
+				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
+				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
 				2A47F83F2B06BCE300039B14 /* PostLikes.swift in Sources */,
 				2A47F8482B06C09A00039B14 /* CardView.swift in Sources */,
 				2A47F8442B06C04100039B14 /* PostsViewModel.swift in Sources */,
