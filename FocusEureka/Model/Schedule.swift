@@ -28,8 +28,4 @@ struct ScheduleDay: Identifiable, Codable {
              isAvaliable = "isAvaliable"
     }
     
-    mutating func setIsAvaliable(isAvaliable: Bool) {
-        self.isAvaliable = isAvaliable
-    }
-    
 }
