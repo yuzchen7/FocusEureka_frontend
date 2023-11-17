@@ -20,6 +20,7 @@ struct CreatePost: View {
     @State var end_date: String = ""
     @State var end_time: String = ""
     @State var isEvent: Bool = false
+    @FocusState var displayKeybaord:Bool
 
     var body: some View {
         VStack{
@@ -49,18 +50,25 @@ struct CreatePost: View {
                         .lineSpacing(5)
                         .frame(height: 260)
                         .background(Color.gray.opacity(0.1))
+                        .focused($displayKeybaord)
+                    
                     TextField("Title",text: $title)
                         .disableAutocorrection(true)
+                        .focused($displayKeybaord)
                     TextField("Address",text: $address)
                         .disableAutocorrection(true)
+                        .focused($displayKeybaord)
                     HStack{
                         TextField("City",text: $city)
                             .disableAutocorrection(true)
+                            .focused($displayKeybaord)
                         TextField("State",text: $state)
                             .disableAutocorrection(true)
+                            .focused($displayKeybaord)
                     }
                     TextField("zip-code",text: $zipcode)
                         .disableAutocorrection(true)
+                        .focused($displayKeybaord)
                     Toggle(isOn: $isEvent) {
                         Label("Event?", systemImage: "balloon.fill")
                     }
@@ -68,13 +76,17 @@ struct CreatePost: View {
                     if(isEvent){
                         TextField("date start",text: $start_date)
                             .disableAutocorrection(true)
+                            .focused($displayKeybaord)
                         TextField("date end",text: $end_date)
                             .disableAutocorrection(true)
+                            .focused($displayKeybaord)
                     }
                     TextField("Time start",text: $start_time)
                         .disableAutocorrection(true)
+                        .focused($displayKeybaord)
                     TextField("Time end",text: $end_time)
                         .disableAutocorrection(true)
+                        .focused($displayKeybaord)
                 }
                 
             }
@@ -98,6 +110,8 @@ struct CreatePost: View {
             }, label: {
                 Text("upload to firebase")
             })
+        }.onTapGesture {
+            displayKeybaord = false;
         }
     }
 }
