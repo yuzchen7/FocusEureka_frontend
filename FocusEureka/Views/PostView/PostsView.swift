@@ -18,7 +18,10 @@ struct PostsView: View {
                         value: post
                     ){
                         VStack{
-                            CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username)
+                            CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                                postId:post.id,
+                                userId: 1
+                            )
                         }
 //                        VStack{
 //                            CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username)

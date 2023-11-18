@@ -38,7 +38,7 @@ class PostsViewModel : ObservableObject{
     func addLikes(postID: Int, userID: Int) async throws{
         do{
             likesRes = try await swiftxios.post(
-                "http://localhost:8080/api/posts/create",
+                "http://localhost:8080/api/posts/Likes",
                 [
                     "post_id" : postID,
                     "user_id" : userID
@@ -58,7 +58,6 @@ class PostsViewModel : ObservableObject{
         } catch {
             print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
         }
-        
     }
 }
 
