@@ -13,8 +13,7 @@ class PostsViewModel : ObservableObject{
     @Published var posts = [Posts]()
 //    @Published var singlePost:Posts = MockData.dummyPost
     @Published var singlePost:Posts?
-
-
+    var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
     init (){
@@ -34,6 +33,32 @@ class PostsViewModel : ObservableObject{
         let (data, _) = try await URLSession.shared.data(from: url)
         let fetchedPost = try JSONDecoder().decode(Posts.self, from: data)
         singlePost = fetchedPost
+    }
+    
+    func addLikes(postID: Int, userID: Int) async throws{
+        do{
+            likesRes = try await swiftxios.post(
+                "http://localhost:8080/api/posts/create",
+                [
+                    "post_id" : postID,
+                    "user_id" : userID
+                ],
+                [
+                    "application/json" : "Content-Type"
+                ]
+            )
+        }catch Swiftxios.FetchError.invalidURL {
+            print("function signIn from class Swiftxios has URL error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidResponse {
+            print("function signIn from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidData {
+            print("function signIn from class Swiftxios has response Data error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidObjectConvert {
+            print("function signIn from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
+        } catch {
+            print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
+        }
+        
     }
 }
 

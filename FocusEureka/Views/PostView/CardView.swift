@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct CardView: View {
+    @StateObject var postVM = PostsViewModel()
     var imageURL:String
     var title:String
     var Likes:Int
     var posterName:String
+    var postId:Int
+    var userId:Int
     var body: some View {
         VStack(spacing:10){
             HStack{
@@ -30,7 +33,9 @@ struct CardView: View {
                 VStack{
                     Button(
                         action: {
-                            //add Likes
+                            Task{
+                                try await postVM.addLikes(postID: postId, userID: userId)
+                            }
                         },
                         label: {
                             Image(systemName: "heart.circle")
@@ -51,8 +56,10 @@ struct CardView: View {
 
 #Preview {
     CardView(imageURL:"https://images.squarespace-cdn.com/content/v1/571abd61e3214001fb3b9966/1518814837468-LZXSJ9HHAUX6YEDZQMF9/entrance.jpg?format=2500w",
-         title:"Kinokuniya",
-         Likes:6,
-         posterName:"anonymous"
+             title:"Kinokuniya",
+             Likes:6,
+             posterName:"anonymous",
+             postId: 6,
+             userId: 2
     )
 }
