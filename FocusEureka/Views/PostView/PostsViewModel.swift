@@ -6,24 +6,27 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 class PostsViewModel : ObservableObject{
     //array to store data fetched from backend
     @Published var posts = [Posts]()
 //    @Published var singlePost:Posts = MockData.dummyPost
+    @Published var RColumns = [Posts]()
+    @Published var LColumns = [Posts]()
     @Published var singlePost:Posts?
     var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
-    init (){
-        loadData()
-    }
+//    init (){
+//        loadData()
+//    }
     
-    func handleRefreash(){
-        posts.removeAll()
-        loadData()
-    }
+//    func handleRefreash(){
+//        posts.removeAll()
+//        loadData()
+//    }
     
     func fetchSinglePost(postID: Int) async throws {
         guard let url = URL(string: baseURL + "singleView?postId=\(postID)") else {
@@ -79,6 +82,16 @@ extension PostsViewModel{
     func loadData() {
         Task (priority: .medium){
             try await fetchAllPosts()
+            var counter = 0
+            for fetchedPost in posts{
+                if(counter%2==0){
+                    RColumns.append(fetchedPost)
+                }
+                else{
+                    LColumns.append(fetchedPost)
+                }
+                counter+=1
+            }
         }
     }
 }

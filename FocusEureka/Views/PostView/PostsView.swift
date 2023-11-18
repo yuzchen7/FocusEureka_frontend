@@ -35,8 +35,8 @@ struct PostsView: View {
             .navigationDestination(for: Posts.self, destination: { detailPost in
                 PostDetailView(detailedPost: detailPost)
             })
-            .refreshable{
-                postVM.handleRefreash()
+            .onAppear(){
+                postVM.loadData()
             }
         }
         .ignoresSafeArea()
