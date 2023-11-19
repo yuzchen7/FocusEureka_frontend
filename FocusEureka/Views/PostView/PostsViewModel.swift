@@ -85,10 +85,10 @@ extension PostsViewModel{
             var counter = 0
             for fetchedPost in posts{
                 if(counter%2==0){
-                    RColumns.append(fetchedPost)
+                    LColumns.append(fetchedPost)
                 }
                 else{
-                    LColumns.append(fetchedPost)
+                    RColumns.append(fetchedPost)
                 }
                 counter+=1
             }
