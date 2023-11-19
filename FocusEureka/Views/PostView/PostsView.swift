@@ -9,23 +9,37 @@ import SwiftUI
 
 struct PostsView: View {
     @StateObject var postVM = PostsViewModel()
+    private var homeGridItems: [GridItem] = [
+            .init(.flexible())
+        ]
     var body: some View {
         NavigationStack{
             //display the title of each posts
-            ScrollView{
-                ForEach(postVM.posts){ post in
-                    NavigationLink(
-                        value: post
-                    ){
-                        VStack{
-                            CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
-                                postId:post.id,
-                                userId: 1
-                            )
+            ScrollView(showsIndicators: false){
+                HStack(alignment: .top){
+                    LazyVGrid(columns: homeGridItems) {
+                        ForEach(postVM.LColumns){ post in
+                            NavigationLink(
+                                value: post
+                            ){
+                                CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                                         postId:post.id,
+                                         userId: 1
+                                )
+                            }
                         }
-//                        VStack{
-//                            CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username)
-//                        }
+                    }
+                    LazyVGrid(columns: homeGridItems) {
+                        ForEach(postVM.RColumns){ post in
+                            NavigationLink(
+                                value: post
+                            ){
+                                CardView(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                                         postId:post.id,
+                                         userId: 1
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -36,6 +50,8 @@ struct PostsView: View {
                 PostDetailView(detailedPost: detailPost)
             })
             .onAppear(){
+                postVM.LColumns.removeAll()
+                postVM.RColumns.removeAll()
                 postVM.loadData()
             }
         }
