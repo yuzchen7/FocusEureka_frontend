@@ -15,7 +15,7 @@ struct PostComponent: View {
     var postRColumn:[Posts]
     var body: some View {
         ScrollView(showsIndicators: false){
-            HStack(alignment: .top){
+            HStack(alignment: .top, spacing: 1){
                 LazyVGrid(columns: pinterestView) {
                     ForEach(postLColumn){ post in
                         NavigationLink(

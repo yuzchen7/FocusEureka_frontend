@@ -50,8 +50,8 @@ struct CardComponent: View {
         }
         .background(.white)
         .cornerRadius(10)
-        .frame(width: UIScreen.main.bounds.width/2-25)
-        .padding()
+        .frame(width: UIScreen.main.bounds.width/2-10)
+        .padding(5)
     }
 }
 
