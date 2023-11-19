@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct CardComponent: View {
     @StateObject var postVM = PostsViewModel()
     var imageURL:String
     var title:String
@@ -24,6 +24,7 @@ struct CardView: View {
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
                     ProgressView()
+                        .frame(width: 100,height: 100)
                 }
             }
             HStack{
@@ -55,7 +56,7 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(imageURL:"https://images.squarespace-cdn.com/content/v1/571abd61e3214001fb3b9966/1518814837468-LZXSJ9HHAUX6YEDZQMF9/entrance.jpg?format=2500w",
+    CardComponent(imageURL:"https://images.squarespace-cdn.com/content/v1/571abd61e3214001fb3b9966/1518814837468-LZXSJ9HHAUX6YEDZQMF9/entrance.jpg?format=2500w",
              title:"Kinokuniya",
              Likes:6,
              posterName:"anonymous",

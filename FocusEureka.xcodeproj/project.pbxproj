@@ -42,10 +42,11 @@
 		2A47F8412B06BCFE00039B14 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8402B06BCFE00039B14 /* Posts.swift */; };
 		2A47F8442B06C04100039B14 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8432B06C04100039B14 /* PostsViewModel.swift */; };
 		2A47F8462B06C07100039B14 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8452B06C07100039B14 /* PostsView.swift */; };
-		2A47F8482B06C09A00039B14 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8472B06C09A00039B14 /* CardView.swift */; };
+		2A47F8482B06C09A00039B14 /* CardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8472B06C09A00039B14 /* CardComponent.swift */; };
 		2A47F84A2B06C0D100039B14 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F8492B06C0D100039B14 /* PostDetailView.swift */; };
 		2A47F84D2B06C15200039B14 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F84C2B06C15200039B14 /* CreatePostViewModel.swift */; };
 		2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A47F84E2B06C17500039B14 /* CreatePost.swift */; };
+		2AC8B2172B0AB58C001D3388 /* PostComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8B2162B0AB58C001D3388 /* PostComponent.swift */; };
 		C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */; };
 		C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC8AE52B03463200DFBED1 /* ContentView.swift */; };
 		C4BC8AE82B03463300DFBED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4BC8AE72B03463300DFBED1 /* Assets.xcassets */; };
@@ -63,10 +64,11 @@
 		2A47F8402B06BCFE00039B14 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		2A47F8432B06C04100039B14 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		2A47F8452B06C07100039B14 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
-		2A47F8472B06C09A00039B14 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		2A47F8472B06C09A00039B14 /* CardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardComponent.swift; sourceTree = "<group>"; };
 		2A47F8492B06C0D100039B14 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		2A47F84C2B06C15200039B14 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
 		2A47F84E2B06C17500039B14 /* CreatePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePost.swift; sourceTree = "<group>"; };
+		2AC8B2162B0AB58C001D3388 /* PostComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComponent.swift; sourceTree = "<group>"; };
 		C4BC8AE02B03463200DFBED1 /* FocusEureka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusEureka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4BC8AE32B03463200DFBED1 /* FocusEurekaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusEurekaApp.swift; sourceTree = "<group>"; };
 		C4BC8AE52B03463200DFBED1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,8 +133,9 @@
 			children = (
 				2A47F8432B06C04100039B14 /* PostsViewModel.swift */,
 				2A47F8452B06C07100039B14 /* PostsView.swift */,
-				2A47F8472B06C09A00039B14 /* CardView.swift */,
+				2A47F8472B06C09A00039B14 /* CardComponent.swift */,
 				2A47F8492B06C0D100039B14 /* PostDetailView.swift */,
+				2AC8B2162B0AB58C001D3388 /* PostComponent.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -337,9 +340,10 @@
 				2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
+				2AC8B2172B0AB58C001D3388 /* PostComponent.swift in Sources */,
 				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
 				2A47F83F2B06BCE300039B14 /* PostLikes.swift in Sources */,
-				2A47F8482B06C09A00039B14 /* CardView.swift in Sources */,
+				2A47F8482B06C09A00039B14 /* CardComponent.swift in Sources */,
 				2A47F8442B06C04100039B14 /* PostsViewModel.swift in Sources */,
 				C4BC8AE42B03463200DFBED1 /* FocusEurekaApp.swift in Sources */,
 				2A47F83D2B06BCCA00039B14 /* Owner.swift in Sources */,
