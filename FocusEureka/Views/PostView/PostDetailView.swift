@@ -13,7 +13,12 @@ struct PostDetailView: View {
     
     var body: some View {
         ZStack{
-            VStack{
+            ScrollView(showsIndicators: false){
+                HStack{
+                    Text("\(postVM.singlePost?.title ?? "")")
+                        .font(.system(size:40, design: .rounded))
+                        .fontWeight(.bold)
+                }
                 TabView{
                     ForEach(postVM.singlePost?.image_set.urls ?? [], id: \.self){picture in
                         AsyncImage(url: URL(string:picture)) { detailedImage in
@@ -27,15 +32,32 @@ struct PostDetailView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
-                .frame(height:250)
-                HStack{
-                    Image(systemName: "location")
-                    Text("\(postVM.singlePost?.address ?? "")")
-                    VStack{
+                .frame(height:350)
+                VStack{
+                    HStack{
+                        Image(systemName: "location")
+                        Text("\(postVM.singlePost?.address ?? "")")
+                    }
+                    HStack{
                         Text("\(postVM.singlePost?.city ?? "")")
                         Text("\(postVM.singlePost?.state ?? "")")
                         Text("\(postVM.singlePost?.zipcode ?? "")")
-                    }.foregroundColor(.blue)
+                    }
+                }
+                if(postVM.singlePost?.event == true){
+                    HStack{
+                        if let DateBegin = postVM.singlePost?.start_date {
+                            Text("Event begins at: \(DateBegin)")
+                        } else {
+                            Text("???")
+                        }
+                        if let DateEnd = postVM.singlePost?.end_date {
+                            Text("- \(DateEnd)")
+                        } else {
+                            Text("???")
+                        }
+
+                    }
                 }
                 HStack{
                     Image(systemName: "hourglass")
