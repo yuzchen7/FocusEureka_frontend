@@ -52,6 +52,7 @@ struct CardComponent: View {
         .cornerRadius(10)
         .frame(width: UIScreen.main.bounds.width/2-10)
         .padding(5)
+        .shadow(radius: 1)
     }
 }
 
