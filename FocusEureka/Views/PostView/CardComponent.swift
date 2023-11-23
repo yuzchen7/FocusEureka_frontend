@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CardComponent: View {
-    @StateObject var postVM = PostsViewModel()
+//    @StateObject var postVM = PostsViewModel()
+    @EnvironmentObject var postVM : PostsViewModel
     var imageURL:String
     var title:String
     var Likes:Int

@@ -13,6 +13,7 @@ struct PostComponent: View {
     ]
     var postLColumn:[Posts]
     var postRColumn:[Posts]
+    @EnvironmentObject var postVM : PostsViewModel
     var body: some View {
         ScrollView(showsIndicators: false){
             HStack(alignment: .top, spacing: 1){
@@ -25,6 +26,7 @@ struct PostComponent: View {
                                           postId:post.id,
                                           userId: 1
                             )
+                            .environmentObject(postVM)
                         }
                     }
                 }
@@ -47,6 +49,11 @@ struct PostComponent: View {
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
         })
+        .onAppear{
+            print("this is from post component")
+            print(postLColumn.count)
+            print(postRColumn.count)
+        }
     }
 }
 

@@ -19,14 +19,6 @@ class PostsViewModel : ObservableObject{
     var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
-//    init (){
-//        loadData()
-//    }
-    
-//    func handleRefreash(){
-//        posts.removeAll()
-//        loadData()
-//    }
     
     func fetchSinglePost(postID: Int) async throws {
         guard let url = URL(string: baseURL + "singleView?postId=\(postID)") else {
@@ -61,6 +53,7 @@ class PostsViewModel : ObservableObject{
         } catch {
             print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
         }
+        loadPostData()
     }
 }
 
@@ -79,8 +72,11 @@ extension PostsViewModel{
         }
     }
     
-    func loadData() {
+    func loadPostData() {
         Task (priority: .medium){
+            posts.removeAll()
+            LColumns.removeAll()
+            RColumns.removeAll()
             try await fetchAllPosts()
             var counter = 0
             for fetchedPost in posts{

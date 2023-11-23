@@ -12,11 +12,10 @@ struct PostsView: View {
     var body: some View {
         NavigationStack{
             PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
+                .environmentObject(postVM)
         }
         .onAppear(){
-            postVM.LColumns.removeAll()
-            postVM.RColumns.removeAll()
-            postVM.loadData()
+            postVM.loadPostData()
         }
         .ignoresSafeArea()
     }
