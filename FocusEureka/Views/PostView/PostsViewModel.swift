@@ -75,19 +75,26 @@ extension PostsViewModel{
     func loadPostData() {
         Task (priority: .medium){
             posts.removeAll()
-            LColumns.removeAll()
-            RColumns.removeAll()
+//            LColumns.removeAll()
+//            RColumns.removeAll()
+            var LC = [Posts]()
+            var RC = [Posts]()
             try await fetchAllPosts()
             var counter = 0
             for fetchedPost in posts{
                 if(counter%2==0){
-                    LColumns.append(fetchedPost)
+//                    LColumns.append(fetchedPost)
+                    LC.append(fetchedPost)
                 }
                 else{
-                    RColumns.append(fetchedPost)
+//                    RColumns.append(fetchedPost)
+                    RC.append(fetchedPost)
+
                 }
                 counter+=1
             }
+            LColumns = LC
+            RColumns = RC
         }
     }
 }

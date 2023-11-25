@@ -26,7 +26,6 @@ struct PostComponent: View {
                                           postId:post.id,
                                           userId: 1
                             )
-                            .environmentObject(postVM)
                         }
                     }
                 }
@@ -49,11 +48,6 @@ struct PostComponent: View {
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
         })
-        .onAppear{
-            print("this is from post component")
-            print(postLColumn.count)
-            print(postRColumn.count)
-        }
     }
 }
 
