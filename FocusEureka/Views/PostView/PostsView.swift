@@ -12,6 +12,8 @@ struct PostsView: View {
     var body: some View {
         NavigationStack{
             Text("")
+                .navigationTitle(postVM.title)
+                .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement:.topBarTrailing) {
                     Button(action: {

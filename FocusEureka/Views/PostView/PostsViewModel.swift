@@ -21,6 +21,7 @@ class PostsViewModel : ObservableObject{
     @Published var RColumns = [Posts]()
     @Published var LColumns = [Posts]()
     @Published var singlePost:Posts?
+    @Published var title = "Discover & Enjoy"
     var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
@@ -116,10 +117,13 @@ extension PostsViewModel{
     func switchPostType(){
         if(viewState == .general){
             viewState = .events
+            title = "Events"
         }else if(viewState == .events){
             viewState = .spots
+            title = "Spots"
         }else{
             viewState = .general
+            title = "Discover & Enjoy"
         }
         loadPostData()
     }
