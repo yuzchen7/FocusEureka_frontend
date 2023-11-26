@@ -141,6 +141,8 @@ struct AccountView: View {
                             .frame(width: 100)
                         }
                         .foregroundColor(Color(.black))
+                        
+                        Divider()
                     }
                     
                     // content view section
@@ -150,14 +152,11 @@ struct AccountView: View {
                         }
                         
                         if (self.isShowFriendList) {
-                            Text("Friend List")
-                            // TODO:
                             // display FriendList page
+                            FriendListView()
                         }
                     }
-                    .padding(.top)
                     .padding()
-                    
                     
                 } // VStack
             } // ScrollView
