@@ -43,8 +43,8 @@ struct PostComponent: View {
             }
         }
         .background(.gray.opacity(0.2))
-        .navigationTitle("Interesting Spot")
-        .navigationBarTitleDisplayMode(.inline)
+//        .navigationTitle("Interesting Spot")
+//        .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
         })
