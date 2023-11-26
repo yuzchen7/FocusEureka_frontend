@@ -15,11 +15,23 @@ struct PostsView: View {
     @StateObject var postVM = PostsViewModel()
     var body: some View {
         NavigationStack{
-            Button(action: {
-                postVM.switchPostType()
-            }, label: {
-                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-            })
+            Text("")
+            .toolbar {
+                ToolbarItem(placement:.topBarTrailing) {
+                    Button(action: {
+                        postVM.switchPostType()
+                    }, label: {
+                        switch postVM.viewState {
+                        case .general:
+                            Image("generalPost")
+                        case .events:
+                            Image("events")
+                        case .spots:
+                            Image("spot")
+                        }
+                    })
+                }
+            }
             switch postVM.viewState {
             case .general:
                 PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
@@ -31,6 +43,7 @@ struct PostsView: View {
                 PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
                     .environmentObject(postVM)
             }
+            
 //            PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
 //                .environmentObject(postVM)
         }

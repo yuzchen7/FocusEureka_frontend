@@ -112,8 +112,15 @@ extension PostsViewModel{
 }
 
 extension PostsViewModel{
+    
     func switchPostType(){
-        viewState = .events
+        if(viewState == .general){
+            viewState = .events
+        }else if(viewState == .events){
+            viewState = .spots
+        }else{
+            viewState = .general
+        }
         loadPostData()
     }
     
