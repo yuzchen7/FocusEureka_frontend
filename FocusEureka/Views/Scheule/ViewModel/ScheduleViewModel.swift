@@ -50,7 +50,7 @@ class ScheduleViewModel: ObservableObject {
                         "application/json" : "Content-Type"
                     ]
                 )
-                print(self.schedule ?? "nothing")
+                // print(self.schedule ?? "nothing")
                 self.isUpdate = !(self.isUpdate)
             } catch Swiftxios.FetchError.invalidURL {
                 print("function getScheduleData from class Swiftxios has URL error (╯’ – ‘)╯︵")
@@ -72,7 +72,7 @@ class ScheduleViewModel: ObservableObject {
                 print("getScheduleData run -> ")
                 let urlString: String = "http://localhost:8080/api/schedule/currentUser?userId=\(userId)"
                 self.schedule = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
-                print(self.schedule ?? "nothing")
+                // print(self.schedule ?? "nothing")
                 self.isUpdate = false
             } catch Swiftxios.FetchError.invalidURL {
                 print("function getScheduleData from class Swiftxios has URL error (╯’ – ‘)╯︵")
