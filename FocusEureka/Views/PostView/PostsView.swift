@@ -7,16 +7,20 @@
 
 import SwiftUI
 
-enum postState{
-    case general, events, spots
-}
+//enum postState{
+//    case general, events, spots
+//}
 
 struct PostsView: View {
     @StateObject var postVM = PostsViewModel()
-    var viewState = postState.general
     var body: some View {
         NavigationStack{
-            switch viewState {
+            Button(action: {
+                postVM.switchPostType()
+            }, label: {
+                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+            })
+            switch postVM.viewState {
             case .general:
                 PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
                     .environmentObject(postVM)

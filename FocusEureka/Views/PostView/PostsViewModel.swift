@@ -8,9 +8,14 @@
 import Foundation
 import SwiftUI
 
+enum postState{
+    case general, events, spots
+}
+
 @MainActor
 class PostsViewModel : ObservableObject{
     //array to store data fetched from backend
+    @Published var viewState = postState.general
     @Published var posts = [Posts]()
 //    @Published var singlePost:Posts = MockData.dummyPost
     @Published var RColumns = [Posts]()
@@ -79,7 +84,14 @@ extension PostsViewModel{
 //            RColumns.removeAll()
             var LC = [Posts]()
             var RC = [Posts]()
-            try await fetchAllPosts()
+            switch viewState {
+            case .general:
+                try await fetchAllPosts()
+            case .events:
+                try await fetchEventPosts(postState: "true")
+            case .spots:
+                try await fetchEventPosts(postState: "false")
+            }
             var counter = 0
             for fetchedPost in posts{
                 if(counter%2==0){
@@ -95,6 +107,26 @@ extension PostsViewModel{
             }
             LColumns = LC
             RColumns = RC
+        }
+    }
+}
+
+extension PostsViewModel{
+    func switchPostType(){
+        viewState = .events
+        loadPostData()
+    }
+    
+    func fetchEventPosts(postState: String) async throws{
+        guard let url = URL(string: baseURL + "event?lookForEvent=\(postState)") else{
+            return
+        }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let fetchedPosts = try JSONDecoder().decode([Posts].self, from: data)
+            self.posts = fetchedPosts
+        } catch {
+            print("Error: \(error)")
         }
     }
 }
