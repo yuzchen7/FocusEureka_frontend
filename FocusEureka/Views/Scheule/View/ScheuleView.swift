@@ -18,9 +18,7 @@ struct ScheuleView: View {
                 // single scheule view
                 ForEach(schedules.scheduleDay.indices, id: \.self) {index in
                     Button(action: {
-                        print("Click able")
                         scheduleViewModel.updateScheduleData(userId: loginViewModel.currentUser!.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
-                        print(schedules.scheduleDay)
                     }, label: {
                         let element = schedules.scheduleDay[index]
                         SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
