@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-//enum postState{
-//    case general, events, spots
-//}
-
 struct PostsView: View {
     @StateObject var postVM = PostsViewModel()
     var body: some View {
@@ -32,20 +28,8 @@ struct PostsView: View {
                     })
                 }
             }
-            switch postVM.viewState {
-            case .general:
-                PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
-                    .environmentObject(postVM)
-            case .events:
-                PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
-                    .environmentObject(postVM)
-            case .spots:
-                PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
-                    .environmentObject(postVM)
-            }
-            
-//            PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
-//                .environmentObject(postVM)
+        PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
+                .environmentObject(postVM)
         }
         .onAppear(){
             postVM.loadPostData()
