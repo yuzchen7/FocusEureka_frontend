@@ -10,22 +10,18 @@ import SwiftUI
 struct PostDetailView: View {
     var detailedPost:Posts
     @StateObject var postVM = PostsViewModel()
+    @State var isGrouping: Bool = false
     
     var body: some View {
         ZStack{
             ScrollView(showsIndicators: false){
-                HStack{
-                    Text("\(postVM.singlePost?.title ?? "")")
-                        .font(.system(size:40, design: .rounded))
-                        .fontWeight(.bold)
-                }
                 TabView{
                     ForEach(postVM.singlePost?.image_set.urls ?? [], id: \.self){picture in
                         AsyncImage(url: URL(string:picture)) { detailedImage in
                             detailedImage
                                 .resizable()
                                 .scaledToFit()
-                                .cornerRadius(10)
+//                                .cornerRadius(10)
                         } placeholder: {
                             ProgressView()
                         }
@@ -33,6 +29,17 @@ struct PostDetailView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
                 .frame(height:350)
+                HStack{
+                    Text("\(postVM.singlePost?.title ?? "")")
+                        .font(.system(size:40, design: .rounded))
+                        .fontWeight(.bold)
+                        .background(.blue)
+                }
+                VStack{
+                    Text(postVM.singlePost?.contents ?? "")
+                        .background(.pink)
+                        .padding()
+                }
                 VStack{
                     HStack{
                         Image(systemName: "location")
@@ -73,8 +80,10 @@ struct PostDetailView: View {
                         Text("End time unavailable")
                     }
                 }
-                VStack{
-                    Text(postVM.singlePost?.contents ?? "")
+                Button {
+                    isGrouping = true
+                } label: {
+                    Text("lets group")
                 }
                 Spacer()
                 ForEach(postVM.singlePost?.comments ?? [], id: \.self){comment in
@@ -83,11 +92,16 @@ struct PostDetailView: View {
                     }
                 }
             }
-        }.task{
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .task{
             Task{
                 try await postVM.fetchSinglePost(postID: detailedPost.id)
             }
         }
+        .sheet(isPresented: $isGrouping, content: {
+                
+        })
     }
 }
 
