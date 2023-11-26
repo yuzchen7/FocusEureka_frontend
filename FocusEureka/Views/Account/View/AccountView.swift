@@ -9,40 +9,43 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
+    
     @State var isShowPost: Bool = true;
     @State var isShowSchedule: Bool = false;
+    @State var isShowFriendList: Bool = false;
     
     var body: some View {
-        if let currentUser = self.loginViewModel.currentUser {
+//        if let currentUser = self.loginViewModel.currentUser {
             NavigationStack{
                 ScrollView {
                     VStack() {
                         
                         Text("FocusEureka!!")
-                            .font(.system(size: 20))
+                            .font(.system(size: 25))
+                            .foregroundStyle(.pink)
                             .padding(.top, 10)
                         
                         // user information
                         HStack() {
-                            Text(currentUser.initials)
-                            // Text("YC")
+//                            Text(currentUser.initials)
+                             Text("YC")
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color(.white))
-                                .frame(width: 66, height: 66)
+                                .frame(width: 70, height: 70)
                                 .background(Color(.systemGray))
                                 .clipShape(Circle())
                             
                             VStack(alignment: .leading) {
-                                Text(currentUser.fullName)
-                                // Text("Yuzhuang Chen")
-                                    .font(.system(size: 15))
+//                                Text(currentUser.fullName)
+                                 Text("Yuzhuang Chen")
+                                    .font(.system(size: 20))
                                     .fontWeight(.semibold)
                                     .padding(.top, 4)
                                 
-                                Text(currentUser.username)
-                                // Text("yuzchen")
-                                    .font(.system(size: 14))
+//                                Text(currentUser.username)
+                                 Text("yuzchen")
+                                    .font(.system(size: 16))
                                     .foregroundStyle(Color(.systemGray))
                             }
                             
@@ -51,7 +54,16 @@ struct AccountView: View {
                             NavigationLink(destination: {
                                 ProfileView()
                             }, label: {
-                                SettingRowView(image: "gear", title: "", tinColor: Color(.systemGray))
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 7)
+                                        .stroke(style: /*@START_MENU_TOKEN@*/StrokeStyle()/*@END_MENU_TOKEN@*/)
+                                        .frame(width: 55, height: 25)
+                                    
+                                    Text("Edit")
+                                }
+                                .foregroundStyle(.black)
+                                .padding(.horizontal)
+//                                SettingRowView(image: "gear", title: "", tinColor: Color(.systemGray))
                             })
                             
                         }
@@ -62,35 +74,71 @@ struct AccountView: View {
                     
                     Section {
                         HStack {
+                            // post button
                             Button(action: {
-                                self.isShowSchedule = false
                                 self.isShowPost = true
+                                self.isShowSchedule = false
+                                self.isShowFriendList = false
                             }, label: {
                                 ZStack {
-                                    Text("Post")
+                                    Image(systemName: "camera.viewfinder")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundStyle(isShowPost ? .pink : .black)
+                                        .frame(width: 35, height: 33)
                                     if (self.isShowPost) {
                                         Rectangle()
-                                            .frame(height: 0.5)
+                                            .foregroundStyle(.pink)
+                                            .frame(height: 1)
                                             .offset(y: 20)
                                     }
                                 }
                             })
-                            .frame(width: 150)
+                            .frame(width: 100)
                             
+                            // schedule button
                             Button(action: {
-                                self.isShowSchedule = true
                                 self.isShowPost = false
+                                self.isShowSchedule = true
+                                self.isShowFriendList = false
                             }, label: {
                                 ZStack {
-                                    Text("Scheule")
+                                    Image(systemName: "calendar")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundStyle(isShowSchedule ? .pink : .black)
+                                        .frame(width: 35, height: 35)
                                     if (self.isShowSchedule) {
                                         Rectangle()
-                                            .frame(height: 0.5)
+                                            .foregroundStyle(.pink)
+                                            .frame(height: 1)
                                             .offset(y: 20)
                                     }
                                 }
                             })
-                            .frame(width: 150)
+                            .frame(width: 100)
+                            
+                            // friend list button
+                            Button(action: {
+                                self.isShowPost = false
+                                self.isShowSchedule = false
+                                self.isShowFriendList = true
+                            }, label: {
+                                ZStack {
+                                    Image(systemName: "person.2.crop.square.stack.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundStyle(isShowFriendList ? .pink : .black)
+                                        .frame(width: 35, height: 35)
+                                    if (self.isShowFriendList) {
+                                        Rectangle()
+                                            .foregroundStyle(.pink)
+                                            .frame(height: 1)
+                                            .offset(y: 20)
+                                    }
+                                }
+                            })
+                            .frame(width: 100)
                         }
                         .foregroundColor(Color(.black))
                     }
@@ -100,6 +148,12 @@ struct AccountView: View {
                         if (self.isShowSchedule) {
                             ScheuleView()
                         }
+                        
+                        if (self.isShowFriendList) {
+                            Text("Friend List")
+                            // TODO:
+                            // display FriendList page
+                        }
                     }
                     .padding(.top)
                     .padding()
@@ -108,7 +162,7 @@ struct AccountView: View {
                 } // VStack
             } // ScrollView
         } // NavigationStack
-    } // if currentuser
+//    } // if currentuser
 }
 
 #Preview {
