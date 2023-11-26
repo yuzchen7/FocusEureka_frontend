@@ -15,7 +15,7 @@ struct AccountView: View {
     @State var isShowFriendList: Bool = false;
     
     var body: some View {
-//        if let currentUser = self.loginViewModel.currentUser {
+        if let currentUser = self.loginViewModel.currentUser {
             NavigationStack{
                 ScrollView {
                     VStack() {
@@ -27,8 +27,8 @@ struct AccountView: View {
                         
                         // user information
                         HStack() {
-//                            Text(currentUser.initials)
-                             Text("YC")
+                            Text(currentUser.initials)
+                            // Text("YC")
                                 .font(.title)
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color(.white))
@@ -37,14 +37,14 @@ struct AccountView: View {
                                 .clipShape(Circle())
                             
                             VStack(alignment: .leading) {
-//                                Text(currentUser.fullName)
-                                 Text("Yuzhuang Chen")
+                                Text(currentUser.fullName)
+                                  // Text("Yuzhuang Chen")
                                     .font(.system(size: 20))
                                     .fontWeight(.semibold)
                                     .padding(.top, 4)
                                 
-//                                Text(currentUser.username)
-                                 Text("yuzchen")
+                                Text(currentUser.username)
+                                // Text("yuzchen")
                                     .font(.system(size: 16))
                                     .foregroundStyle(Color(.systemGray))
                             }
@@ -63,7 +63,7 @@ struct AccountView: View {
                                 }
                                 .foregroundStyle(.black)
                                 .padding(.horizontal)
-//                                SettingRowView(image: "gear", title: "", tinColor: Color(.systemGray))
+                                // SettingRowView(image: "gear", title: "", tinColor: Color(.systemGray))
                             })
                             
                         }
@@ -162,7 +162,7 @@ struct AccountView: View {
                 } // VStack
             } // ScrollView
         } // NavigationStack
-//    } // if currentuser
+    } // if currentuser
 }
 
 #Preview {
