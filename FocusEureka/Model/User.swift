@@ -60,7 +60,7 @@ struct User: Identifiable, Codable {
     
     var fullName: String {
         get {
-            return self.fristName + " " + self.middleName + " " + self.lastName
+            return self.fristName + " " + (self.middleName != "null" ? self.middleName + " " : "") + self.lastName
         }
     }
     
