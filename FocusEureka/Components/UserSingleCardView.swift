@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct UserSingleCardView: View {
+    var initials: String
+    var fullname: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            RoundedRectangle(cornerRadius: 7)
+                .foregroundStyle(.white)
+                .shadow(color: Color.black.opacity(0.5), radius: 10)
+                .frame(height: 45)
+            
+            HStack(spacing: 10) {
+                Text(self.initials)
+                    .font(.system(size: 13))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color(.white))
+                    .frame(width: 30, height: 30)
+                    .background(Color(.systemGray))
+                    .clipShape(Circle())
+                
+                Text(self.fullname)
+                    .font(.subheadline)
+                    .foregroundStyle(.black)
+                
+                Spacer()
+            }
+            .padding(10)
+        }
     }
 }
 
 #Preview {
-    UserSingleCardView()
+    UserSingleCardView(initials: "YC", fullname: "Yuzhuang Chen")
 }
