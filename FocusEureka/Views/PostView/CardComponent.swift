@@ -31,6 +31,7 @@ struct CardComponent: View {
             HStack{
                 VStack{
                     Text("\(title)")
+                        .lineLimit(1)
                 }
                 VStack{
                     Button(
