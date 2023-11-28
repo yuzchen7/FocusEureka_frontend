@@ -10,10 +10,11 @@ import SwiftUI
 struct PostDetailView: View {
     var detailedPost:Posts
     @StateObject var postVM = PostsViewModel()
+//    @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
     
     var body: some View {
-        ZStack{
+        VStack{
             ScrollView(showsIndicators: false){
                 TabView{
                     ForEach(postVM.singlePost?.image_set.urls ?? [], id: \.self){picture in
@@ -21,25 +22,36 @@ struct PostDetailView: View {
                             detailedImage
                                 .resizable()
                                 .scaledToFit()
-//                                .cornerRadius(10)
                         } placeholder: {
                             ProgressView()
                         }
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
-                .frame(height:350)
+                .frame(height:UIScreen.main.bounds.height/2)
+                .background(Color.gray.opacity(0.1))
                 HStack{
-                    Text("\(postVM.singlePost?.title ?? "")")
-                        .font(.system(size:40, design: .rounded))
-                        .fontWeight(.bold)
-                        .background(.blue)
+                    VStack(alignment: .leading){
+                        Text("\(postVM.singlePost?.title ?? "")")
+                            .font(.system(size:28, design: .rounded))
+                            .fontWeight(.bold)
+                    }
+                    .background(Color.gray.opacity(0.1))
+                    Spacer()
+                    VStack{
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    .frame(width: 40)
                 }
+                .padding(.horizontal)
                 VStack{
                     Text(postVM.singlePost?.contents ?? "")
-                        .background(.pink)
-                        .padding()
+                        .font(.system(size: 20))
                 }
+                .padding(.horizontal)
+                .background(Color.gray.opacity(0.1))
                 VStack{
                     HStack{
                         Image(systemName: "location")
@@ -80,17 +92,37 @@ struct PostDetailView: View {
                         Text("End time unavailable")
                     }
                 }
-                Button {
-                    isGrouping = true
-                } label: {
-                    Text("lets group")
-                }
                 Spacer()
                 ForEach(postVM.singlePost?.comments ?? [], id: \.self){comment in
                     HStack{
                         Text("\(comment.contents)")
                     }
                 }
+                HStack{
+                    HStack{
+                        Button(
+                            action: {
+                                Task{
+                                    try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+                                }
+                            },
+                            label: {
+                                Image(systemName: "heart.circle")
+                                Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
+                                    .foregroundStyle(Color.white)
+                            })
+                    }
+                    HStack{
+                        Button {
+                            isGrouping = true
+                        } label: {
+                            Text("lets group")
+                                .foregroundStyle(Color.white)
+                        }
+                    }
+                }
+                .padding()
+                .background(Color.pink.opacity(0.7))
             }
         }
         .edgesIgnoringSafeArea(.bottom)

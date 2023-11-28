@@ -60,6 +60,7 @@ class PostsViewModel : ObservableObject{
             print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
         }
         loadPostData()
+        try await fetchSinglePost(postID: postID)
     }
 }
 

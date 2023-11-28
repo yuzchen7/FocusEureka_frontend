@@ -47,6 +47,7 @@ struct PostComponent: View {
 //        .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
+                .environmentObject(postVM)
         })
     }
 }
