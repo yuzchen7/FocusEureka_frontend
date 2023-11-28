@@ -14,10 +14,8 @@ enum postState{
 
 @MainActor
 class PostsViewModel : ObservableObject{
-    //array to store data fetched from backend
     @Published var viewState = postState.general
-    @Published var posts = [Posts]()
-//    @Published var singlePost:Posts = MockData.dummyPost
+    var posts = [Posts]()
     @Published var RColumns = [Posts]()
     @Published var LColumns = [Posts]()
     @Published var singlePost:Posts?
@@ -82,8 +80,6 @@ extension PostsViewModel{
     func loadPostData() {
         Task (priority: .medium){
             posts.removeAll()
-//            LColumns.removeAll()
-//            RColumns.removeAll()
             var LC = [Posts]()
             var RC = [Posts]()
             switch viewState {
@@ -97,11 +93,9 @@ extension PostsViewModel{
             var counter = 0
             for fetchedPost in posts{
                 if(counter%2==0){
-//                    LColumns.append(fetchedPost)
                     LC.append(fetchedPost)
                 }
                 else{
-//                    RColumns.append(fetchedPost)
                     RC.append(fetchedPost)
 
                 }
