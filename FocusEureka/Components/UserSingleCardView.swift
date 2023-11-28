@@ -15,13 +15,14 @@ struct UserSingleCardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 7)
                 .foregroundStyle(.white)
-                .shadow(color: Color.black.opacity(0.5), radius: 10)
-                .frame(height: 45)
+//                .shadow(color: Color.black.opacity(0.5), radius: 10)
+//                .frame(height: 55)
             
             HStack(spacing: 10) {
                 Text(self.initials)
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
+                    .lineLimit(1)
                     .foregroundStyle(Color(.white))
                     .frame(width: 30, height: 30)
                     .background(Color(.systemGray))
@@ -29,11 +30,11 @@ struct UserSingleCardView: View {
                 
                 Text(self.fullname)
                     .font(.subheadline)
+                    .lineLimit(1)
                     .foregroundStyle(.black)
                 
                 Spacer()
             }
-            .padding(10)
         }
     }
 }
