@@ -14,7 +14,7 @@ struct FriendListView: View {
     @State private var keyword: String = ""
     
     var body: some View {
-        if let friendList = friendListModel.filteredFriendList {
+        if let friendList = friendListModel.filteredFriendList, friendListModel.isUpdate == false {
             VStack {
                 SearchBarView(placeHolder: "Search Friend", searchText: $keyword)
                 List {
@@ -23,7 +23,7 @@ struct FriendListView: View {
                         UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
                             .swipeActions(edge: .trailing) {
                                 Button(action: {
-                                    print("delete button")
+                                    friendListModel.deleteFriend(id: loginViewModel.currentUser!.id, friendId: currentUser.id)
                                 }, label: {
                                     Text("Delete")
                                 })
