@@ -10,14 +10,35 @@ import SwiftUI
 struct FriendListView: View {
     @ObservedObject var friendListModel: FriendListModel = FriendListModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
+    
+    @State private var keyword: String = ""
+    
     var body: some View {
-        if true {
+        if let friendList = friendListModel.filteredFriendList {
             VStack {
-                ForEach(self.friendListModel.testingData.indices, id: \.self) {index in
-                    let currentUser = friendListModel.testingData[index]
-                    UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
+                SearchBarView(placeHolder: "Search Friend", searchText: $keyword)
+                List {
+                    ForEach(friendList.indices, id: \.self) {index in
+                        let currentUser = friendList[index]
+                        UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
+                            .swipeActions(edge: .trailing) {
+                                Button(action: {
+                                    print("delete button")
+                                }, label: {
+                                    Text("Delete")
+                                })
+                                .tint(.red)
+                            }
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }
+            .onChange(of: keyword) { oldValue, newValue in
+                if (oldValue != newValue) {
+                    friendListModel.filterFriendList(searchText: newValue)
                 }
             }
+            
         } else {
             Text("Loading...")
                 .onAppear {
