@@ -11,17 +11,38 @@ struct CommentsComponent: View {
     var commentsToPost:[Comments]
     var body: some View {
         VStack{
-            HStack(alignment:.firstTextBaseline){
+            Divider()
+            HStack() {
                 Text("\(commentsToPost.count) Comments")
+                Spacer()
             }
-            ForEach(commentsToPost, id: \.self){comment in
-                VStack{
-                    Text("\(comment.contents)")
-                    ForEach(comment.reply_comment ?? [], id: \.self){ replys in
-                        Text("\(replys.contents)")
+            .padding(.leading)
+            .padding(.bottom)
+            VStack{
+                ForEach(commentsToPost, id: \.self){comment in
+                    HStack(alignment: .top,spacing: 20){
+                        VStack{
+                            Image(systemName: "person.crop.circle")
+                        }
+                        VStack(alignment: .leading){
+                            Text("\(comment.contents)")
+                            ForEach(comment.reply_comment ?? [], id: \.self){ replys in
+                                HStack(spacing: 20){
+                                    VStack{
+                                        Image(systemName: "person.crop.circle")
+                                    }
+                                    Text("\(replys.contents)")
+                                }
+                            }
+                            Divider()
+                        }
+                        Spacer()
                     }
+                    .padding(.leading)
                 }
             }
+            Spacer()
+            
         }
     }
 }

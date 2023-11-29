@@ -16,6 +16,7 @@ struct PostDetailView: View {
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
+                //Images tabview
                 TabView{
                     ForEach(postVM.singlePost?.image_set.urls ?? [], id: \.self){picture in
                         AsyncImage(url: URL(string:picture)) { detailedImage in
@@ -30,39 +31,44 @@ struct PostDetailView: View {
                 .tabViewStyle(.page(indexDisplayMode: .always))
                 .frame(height:UIScreen.main.bounds.height/2)
                 .background(Color.gray.opacity(0.1))
+                //Title
                 HStack{
                     VStack(alignment: .leading){
                         Text("\(postVM.singlePost?.title ?? "")")
                             .font(.system(size:28, design: .rounded))
                             .fontWeight(.bold)
                     }
-                    .background(Color.gray.opacity(0.1))
                     Spacer()
                     VStack{
                         Image(systemName: "person.crop.circle")
                             .resizable()
                             .scaledToFit()
+                            .foregroundColor(.red)
                     }
                     .frame(width: 40)
                 }
                 .padding(.horizontal)
+                //Contents
                 VStack{
                     Text(postVM.singlePost?.contents ?? "")
                         .font(.system(size: 20))
                 }
                 .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                VStack{
-                    HStack{
-                        Image(systemName: "location")
+                HStack{
+                    Image(systemName: "location")
+                    VStack{
                         Text("\(postVM.singlePost?.address ?? "")")
+                        HStack{
+                            Text("\(postVM.singlePost?.city ?? "")")
+                            Text("\(postVM.singlePost?.state ?? "")")
+                            Text("\(postVM.singlePost?.zipcode ?? "")")
+                        }
                     }
-                    HStack{
-                        Text("\(postVM.singlePost?.city ?? "")")
-                        Text("\(postVM.singlePost?.state ?? "")")
-                        Text("\(postVM.singlePost?.zipcode ?? "")")
-                    }
+                    Spacer()
                 }
+                .padding(.top)
+                .padding(.leading)
+                Divider()
                 if(postVM.singlePost?.event == true){
                     HStack{
                         if let DateBegin = postVM.singlePost?.start_date {
@@ -75,8 +81,9 @@ struct PostDetailView: View {
                         } else {
                             Text("???")
                         }
-
+                        Spacer()
                     }
+                    .padding(.leading)
                 }
                 HStack{
                     Image(systemName: "hourglass")
@@ -91,41 +98,42 @@ struct PostDetailView: View {
                     } else {
                         Text("End time unavailable")
                     }
+                    Spacer()
                 }
-                Spacer()
-                ForEach(postVM.singlePost?.comments ?? [], id: \.self){comment in
-                    HStack{
-                        Text("\(comment.contents)")
-                    }
+                .padding(.leading)
+//                ForEach(postVM.singlePost?.comments ?? [], id: \.self){comment in
+//                    HStack{
+//                        Text("\(comment.contents)")
+//                    }
+//                }
+                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [])
+            }
+            HStack{
+                HStack{
+                    Button(
+                        action: {
+                            Task{
+                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+                            }
+                        },
+                        label: {
+                            Image(systemName: "heart.circle")
+                            Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
+                                .foregroundStyle(Color.white)
+                        })
                 }
                 HStack{
-                    HStack{
-                        Button(
-                            action: {
-                                Task{
-                                    try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
-                                }
-                            },
-                            label: {
-                                Image(systemName: "heart.circle")
-                                Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
-                                    .foregroundStyle(Color.white)
-                            })
-                    }
-                    HStack{
-                        Button {
-                            isGrouping = true
-                        } label: {
-                            Text("lets group")
-                                .foregroundStyle(Color.white)
-                        }
+                    Button {
+                        isGrouping = true
+                    } label: {
+                        Text("lets group")
+                            .foregroundStyle(Color.white)
                     }
                 }
-                .padding()
-                .background(Color.pink.opacity(0.7))
             }
+            .padding()
+            .background(Color.pink.opacity(0.7))
         }
-        .edgesIgnoringSafeArea(.bottom)
         .task{
             Task{
                 try await postVM.fetchSinglePost(postID: detailedPost.id)
