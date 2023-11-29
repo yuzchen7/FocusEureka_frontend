@@ -27,5 +27,10 @@ Carthage/Build
 *.xctestrun
 *.xcuserstate
 
+# Firebase api keys
+GoogleService-Info.plist
+/GoogleService-Info.plist
+/FocusEureka/GoogleService-Info.plist
+
 # Others
 xcuserdata/
