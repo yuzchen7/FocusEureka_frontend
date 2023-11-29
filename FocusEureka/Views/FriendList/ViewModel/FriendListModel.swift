@@ -12,6 +12,8 @@ class FriendListModel: ObservableObject {
     @Published var friendList: [User]? = nil
     @Published var filteredFriendList: [User]? = nil
     
+    @Published var isUpdate: Bool = false
+    
     func filterFriendList(searchText: String) {
         if let friends = friendList {
             if searchText.isEmpty {
@@ -32,6 +34,34 @@ class FriendListModel: ObservableObject {
                 print("url -> \(urlString)")
                 self.friendList = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
                 self.filteredFriendList = self.friendList
+                self.isUpdate = false
+            } catch Swiftxios.FetchError.invalidURL {
+                print("function getScheduleData from class Swiftxios has URL error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidResponse {
+                print("function getScheduleData from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidData {
+                print("function getScheduleData from class Swiftxios has response Data error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidObjectConvert {
+                print("function getScheduleData from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
+            } catch {
+                print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
+            }
+        }
+    }
+    
+    func deleteFriend(id:Int, friendId: Int) {
+        Task {
+            do {
+                print("deleteFriend run -> current user id:\(id), friend id \(friendId)")
+                let urlString: String = "http://localhost:8080/api/friend_request?currentUser=\(id)&friend=\(friendId)"
+                print("url -> \(urlString)")
+                let row: Int? = try await swiftxios.delete(urlString, ["application/json" : "Content-Type"])
+                if let row = row, row <= 0 {
+                    print("delete error happen -> invalied delete")
+                    return
+                }
+                self.isUpdate = !self.isUpdate
+                return
             } catch Swiftxios.FetchError.invalidURL {
                 print("function getScheduleData from class Swiftxios has URL error (╯’ – ‘)╯︵")
             } catch Swiftxios.FetchError.invalidResponse {
