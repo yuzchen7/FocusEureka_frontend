@@ -12,6 +12,7 @@ struct CommentsComponent: View {
     @Binding var commentID: Int
     @Binding var reply: String
     @Binding var isReplying: Bool
+    @Binding var replys_to:String
     var body: some View {
         VStack{
             Divider()
@@ -24,6 +25,7 @@ struct CommentsComponent: View {
             VStack{
                 ForEach(commentsToPost, id: \.self){comment in
                     HStack(alignment: .top,spacing: 10){
+                        //main comment
                         HStack{
                             Image(systemName: "person.crop.circle")
                         }
@@ -34,18 +36,33 @@ struct CommentsComponent: View {
                             Button {
                                 isReplying = true
                                 commentID = comment.id
+                                replys_to = ""
                             } label: {
                                 Image(systemName: "text.bubble")
                             }
+                            //replies under commment
                             ForEach(comment.reply_comment ?? [], id: \.self){ replys in
                                 HStack(spacing: 10){
                                     VStack{
                                         Image(systemName: "person.crop.circle")
                                     }
                                     VStack(alignment: .leading){
-                                        Text("\(replys.user.username)")
-                                            .font(.caption)
+                                        if(replys.replied_to != nil){
+                                            Text("\(replys.user.username) reply to \(replys.replied_to ?? "")")
+                                                .font(.caption)
+                                                .lineLimit(1)
+                                        }else{
+                                            Text("\(replys.user.username)")
+                                                .font(.caption)
+                                        }
                                         Text(": \(replys.contents)")
+                                        Button {
+                                            isReplying = true
+                                            commentID = comment.id
+                                            replys_to = replys.user.username
+                                        } label: {
+                                            Image(systemName: "text.bubble")
+                                        }
                                     }
                                     .padding(.top)
                                 }
@@ -74,7 +91,7 @@ struct CommentsComponent: View {
                 createdAt: "2023-11-19T21:33:50.298Z",
                 updatedAt: "2023-11-19T21:33:50.298Z",
                 reply_comment_id: nil,
-                replyied_to: nil,
+                replied_to: nil,
                 reply_comment: Optional([
                     FocusEureka.Comments(
                         id: 2,
@@ -85,7 +102,7 @@ struct CommentsComponent: View {
                         createdAt: "2023-11-19T21:33:50.298Z",
                         updatedAt: "2023-11-19T21:33:50.298Z",
                         reply_comment_id: Optional(1),
-                        replyied_to: nil,
+                        replied_to: nil,
                         reply_comment: nil),
                     FocusEureka.Comments(
                         id: 5,
@@ -95,7 +112,7 @@ struct CommentsComponent: View {
                         createdAt: "2023-11-30T18:55:58.291Z",
                         updatedAt: "2023-11-30T18:55:58.291Z",
                         reply_comment_id: Optional(1),
-                        replyied_to: Optional("Kaifeng99890@gmail.com"),
+                        replied_to: Optional("Kaifeng99890@gmail.com"),
                         reply_comment: nil)
                 ])
             ),
@@ -108,12 +125,13 @@ struct CommentsComponent: View {
                 createdAt: "2023-11-19T21:33:50.298Z",
                 updatedAt: "2023-11-19T21:33:50.298Z",
                 reply_comment_id: nil,
-                replyied_to: nil,
+                replied_to: nil,
                 reply_comment: Optional([
                 ]))
         ],
         commentID: .constant(0),
         reply: .constant(""),
-        isReplying: .constant(false)
+        isReplying: .constant(false),
+        replys_to: .constant("")
     )
 }

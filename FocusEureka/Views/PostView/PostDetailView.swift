@@ -20,6 +20,7 @@ struct PostDetailView: View {
     @State var commentID:Int = 0
     @State var reply: String = ""
     @State var isReplying: Bool = false
+    @State var replys_to:String = ""
     @FocusState var focusTextField: userInput?
     var body: some View {
         VStack{
@@ -125,7 +126,7 @@ struct PostDetailView: View {
                         }
                         .foregroundColor(.gray.opacity(0.1))
                 })
-                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying)
+                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to)
             }
 //            HStack{
 //                HStack{
@@ -183,10 +184,15 @@ struct PostDetailView: View {
                     .onSubmit {
                         Task{
                             if(!reply.isEmpty && !reply.trimmingCharacters(in: .whitespaces).isEmpty){
-                                try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID)
+                                if(replys_to.isEmpty){
+                                    try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID)
+                                }else{
+                                    try await postVM.replyToResponse(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID, userReplied: replys_to)
+                                }
                             }
                             isReplying = false
                             reply = ""
+                            replys_to = ""
                         }
                     }
             }

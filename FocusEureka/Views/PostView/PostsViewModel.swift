@@ -108,6 +108,7 @@ extension PostsViewModel{
     }
 }
 
+//switch post view type feature
 extension PostsViewModel{
     
     func switchPostType(){
@@ -138,6 +139,8 @@ extension PostsViewModel{
     }
 }
 
+
+//comments feature
 extension PostsViewModel{
     
     func userInputComment(userID: Int, postID: Int, userInput: String) async throws{
@@ -165,6 +168,23 @@ extension PostsViewModel{
                 "contents":userInput,
                 "reply_comment_id": replyID
                 
+            ],
+            [
+                "application/json" : "Content-Type"
+            ]
+        )
+        try await fetchSinglePost(postID: postID)
+    }
+    
+    func replyToResponse(userID: Int, postID: Int, userInput: String, replyID:Int, userReplied: String) async throws{
+        fetchedComment = try await swiftxios.post(
+            "http://localhost:8080/api/comments/write",
+            [
+                "onwer_id": userID,
+                "post_id": postID,
+                "contents": userInput,
+                "reply_comment_id": replyID,
+                "replied_to": userReplied
             ],
             [
                 "application/json" : "Content-Type"
