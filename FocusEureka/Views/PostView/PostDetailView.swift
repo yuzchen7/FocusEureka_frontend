@@ -12,8 +12,16 @@ struct PostDetailView: View {
     @StateObject var postVM = PostsViewModel()
 //    @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
-    
+    @State var comment: String = ""
     var body: some View {
+//            AsyncImage(url: URL(string:(postVM.singlePost?.image_set.urls[0]) ?? "")){
+//                backgroundImage in
+//                backgroundImage
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//            }placeholder: {
+//                ProgressView()
+//            }
         VStack{
             ScrollView(showsIndicators: false){
                 //Images tabview
@@ -22,7 +30,7 @@ struct PostDetailView: View {
                         AsyncImage(url: URL(string:picture)) { detailedImage in
                             detailedImage
                                 .resizable()
-                                .scaledToFit()
+                                .aspectRatio(contentMode: .fit)
                         } placeholder: {
                             ProgressView()
                         }
@@ -54,9 +62,10 @@ struct PostDetailView: View {
                         .font(.system(size: 20))
                 }
                 .padding(.horizontal)
+                //address
                 HStack{
                     Image(systemName: "location")
-                    VStack{
+                    VStack(alignment: .leading){
                         Text("\(postVM.singlePost?.address ?? "")")
                         HStack{
                             Text("\(postVM.singlePost?.city ?? "")")
@@ -69,43 +78,44 @@ struct PostDetailView: View {
                 .padding(.top)
                 .padding(.leading)
                 Divider()
-                if(postVM.singlePost?.event == true){
-                    HStack{
-                        if let DateBegin = postVM.singlePost?.start_date {
-                            Text("Event begins at: \(DateBegin)")
-                        } else {
-                            Text("???")
-                        }
-                        if let DateEnd = postVM.singlePost?.end_date {
-                            Text("- \(DateEnd)")
-                        } else {
-                            Text("???")
-                        }
-                        Spacer()
-                    }
-                    .padding(.leading)
-                }
+                //date & times
                 HStack{
                     Image(systemName: "hourglass")
-                    if let startTime = postVM.singlePost?.start_time {
-                        Text("Open at: \(startTime)")
-                    } else {
-                        Text("Open time unavailable")
+                    VStack{
+                        if(postVM.singlePost?.event == true){
+                            Text("Event begins at: ")
+                            if let DateBegin = postVM.singlePost?.start_date {
+                                Text("\(DateBegin)")
+                            } else {
+                                Text("???")
+                            }
+                            if let DateEnd = postVM.singlePost?.end_date {
+                                Text("- \(DateEnd)")
+                            } else {
+                                Text("???")
+                            }
+                        }
                     }
-                    
-                    if let endTime = postVM.singlePost?.end_time {
-                        Text("End at: \(endTime)")
-                    } else {
-                        Text("End time unavailable")
+                    VStack{
+                        if let startTime = postVM.singlePost?.start_time {
+                            Text("Open at: \(startTime)")
+                        } else {
+                            Text("Open time unavailable")
+                        }
+                        
+                        if let endTime = postVM.singlePost?.end_time {
+                            Text("End at: \(endTime)")
+                        } else {
+                            Text("End time unavailable")
+                        }
                     }
+                    .padding(.leading)
                     Spacer()
                 }
                 .padding(.leading)
-//                ForEach(postVM.singlePost?.comments ?? [], id: \.self){comment in
-//                    HStack{
-//                        Text("\(comment.contents)")
-//                    }
-//                }
+                TextField("Let people haer your voice", text: $comment)
+                
+                    .background(Color.red)
                 CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [])
             }
             HStack{
@@ -140,8 +150,9 @@ struct PostDetailView: View {
             }
         }
         .sheet(isPresented: $isGrouping, content: {
-                
+            
         })
+        
     }
 }
 
