@@ -9,10 +9,15 @@ import SwiftUI
 
 struct PostDetailView: View {
     var detailedPost:Posts
+    enum userInput{
+        case commentInput
+    }
     @StateObject var postVM = PostsViewModel()
 //    @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
     @State var comment: String = ""
+    @State var isCommenting: Bool = false
+    @FocusState var focusTextField: userInput?
     var body: some View {
 //            AsyncImage(url: URL(string:(postVM.singlePost?.image_set.urls[0]) ?? "")){
 //                backgroundImage in
@@ -113,36 +118,56 @@ struct PostDetailView: View {
                     Spacer()
                 }
                 .padding(.leading)
-                TextField("Let people haer your voice", text: $comment)
-                
-                    .background(Color.red)
+                Button(action: {
+                    isCommenting = true
+                    focusTextField = .commentInput
+                }, label: {
+                    Rectangle()
+                        .frame(width: 200,height: 40,alignment: .leading)
+                        .cornerRadius(30)
+                        .overlay {
+                            Text("Let us hear your voice")
+                                .foregroundStyle(Color.black.opacity(0.3))
+                        }
+                        .foregroundColor(.gray.opacity(0.1))
+                })
                 CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [])
             }
-            HStack{
-                HStack{
-                    Button(
-                        action: {
-                            Task{
-                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
-                            }
-                        },
-                        label: {
-                            Image(systemName: "heart.circle")
-                            Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
-                                .foregroundStyle(Color.white)
-                        })
-                }
-                HStack{
-                    Button {
-                        isGrouping = true
-                    } label: {
-                        Text("lets group")
-                            .foregroundStyle(Color.white)
+//            HStack{
+//                HStack{
+//                    Button(
+//                        action: {
+//                            Task{
+//                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+//                            }
+//                        },
+//                        label: {
+//                            Image(systemName: "heart.circle")
+//                            Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
+//                                .foregroundStyle(Color.white)
+//                        })
+//                }
+//                HStack{
+//                    Button {
+//                        isGrouping = true
+//                    } label: {
+//                        Text("lets group")
+//                            .foregroundStyle(Color.white)
+//                    }
+//                }
+//            }
+//            .padding()
+//            .background(Color.pink.opacity(0.7))
+            if(isCommenting){
+                TextEditor(text: $comment)
+                    .focused($focusTextField, equals: .commentInput)
+//                    .scrollContentBackground(.hidden)
+                    .background(.gray.opacity(0.1))
+                    .frame(width: UIScreen.main.bounds.width, height: 40)
+                    .submitLabel(.done)
+                    .onSubmit {
                     }
-                }
             }
-            .padding()
-            .background(Color.pink.opacity(0.7))
         }
         .task{
             Task{
