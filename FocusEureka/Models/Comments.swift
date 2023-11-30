@@ -17,11 +17,16 @@ struct Comments: Codable, Hashable{
     }
     let id: Int
     let onwer_id: Int
+    let user: User_Comments
     let post_id: Int
     let contents: String
     let createdAt: String
     let updatedAt: String
     let reply_comment_id: Int?
     let reply_comment:[Comments]?
-    
+}
+
+struct User_Comments: Codable{
+    let id: Int
+    let username: String
 }
