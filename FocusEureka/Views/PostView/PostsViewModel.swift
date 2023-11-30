@@ -20,6 +20,7 @@ class PostsViewModel : ObservableObject{
     @Published var LColumns = [Posts]()
     @Published var singlePost:Posts?
     @Published var title = "Discover & Enjoy"
+    @State var fetchedComment:Comments?
     var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
@@ -134,5 +135,25 @@ extension PostsViewModel{
         } catch {
             print("Error: \(error)")
         }
+    }
+}
+
+extension PostsViewModel{
+    
+    func userInputComment(userID: Int, postID: Int, userInput: String) async throws{
+        fetchedComment = try await swiftxios.post(
+            "http://localhost:8080/api/posts/create",
+            [
+                "onwer_id":userID,
+                "post_id":postID,
+                "contents":userInput
+                
+            ],
+            [
+                "application/json" : "Content-Type"
+            ]
+        )
+        try await fetchSinglePost(postID: postID)
+        
     }
 }

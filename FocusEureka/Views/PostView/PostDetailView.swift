@@ -166,6 +166,9 @@ struct PostDetailView: View {
                     .frame(width: UIScreen.main.bounds.width, height: 40)
                     .submitLabel(.done)
                     .onSubmit {
+                        Task{
+                            try await postVM.userInputComment(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: comment)
+                        }
                     }
             }
         }
