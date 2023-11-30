@@ -30,7 +30,7 @@ struct CommentsComponent: View {
                             Image(systemName: "person.crop.circle")
                         }
                         VStack(alignment: .leading){
-                            Text("\(comment.user.username)")
+                            Text("\(comment.user?.username ?? "")")
                                 .font(.caption)
                             Text(": \(comment.contents)")
                             Button {
@@ -48,18 +48,18 @@ struct CommentsComponent: View {
                                     }
                                     VStack(alignment: .leading){
                                         if(replys.replied_to != nil){
-                                            Text("\(replys.user.username) reply to \(replys.replied_to ?? "")")
+                                            Text("\(replys.user?.username ?? "") reply to \(replys.replied_to ?? "")")
                                                 .font(.caption)
                                                 .lineLimit(1)
                                         }else{
-                                            Text("\(replys.user.username)")
+                                            Text("\(replys.user?.username ?? "")")
                                                 .font(.caption)
                                         }
                                         Text(": \(replys.contents)")
                                         Button {
                                             isReplying = true
                                             commentID = comment.id
-                                            replys_to = replys.user.username
+                                            replys_to = replys.user?.username ?? ""
                                         } label: {
                                             Image(systemName: "text.bubble")
                                         }

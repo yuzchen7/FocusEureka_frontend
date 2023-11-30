@@ -17,7 +17,7 @@ struct Comments: Codable, Hashable{
     }
     let id: Int
     let onwer_id: Int
-    let user: User_Comments
+    let user: User_Comments?
     let post_id: Int
     let contents: String
     let createdAt: String

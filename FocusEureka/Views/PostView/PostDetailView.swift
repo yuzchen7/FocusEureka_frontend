@@ -155,6 +155,7 @@ struct PostDetailView: View {
 //            .background(Color.pink.opacity(0.7))
             if(isCommenting){
                 TextField("",text: $comment)
+                    .disableAutocorrection(true)
                     .focused($focusTextField, equals: .commentInput)
                     .background(.gray.opacity(0.1))
                     .frame(width: UIScreen.main.bounds.width, height: 40)
@@ -174,6 +175,7 @@ struct PostDetailView: View {
             }
             if(isReplying){
                 TextField("",text: $reply)
+                    .disableAutocorrection(true)
                     .focused($focusTextField, equals: .userReply)
                     .background(.gray.opacity(0.1))
                     .frame(width: UIScreen.main.bounds.width, height: 40)
@@ -185,9 +187,9 @@ struct PostDetailView: View {
                         Task{
                             if(!reply.isEmpty && !reply.trimmingCharacters(in: .whitespaces).isEmpty){
                                 if(replys_to.isEmpty){
-                                    try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID)
+                                    try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID)
                                 }else{
-                                    try await postVM.replyToResponse(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID, userReplied: replys_to)
+                                    try await postVM.replyToResponse(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID, userReplied: replys_to)
                                 }
                             }
                             isReplying = false
