@@ -167,7 +167,11 @@ struct PostDetailView: View {
                     .submitLabel(.done)
                     .onSubmit {
                         Task{
-                            try await postVM.userInputComment(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: comment)
+                            if(!comment.isEmpty && !comment.trimmingCharacters(in: .whitespaces).isEmpty){
+                                try await postVM.userInputComment(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: comment)
+                            }
+                            isCommenting = false
+                            comment = ""
                         }
                     }
             }
