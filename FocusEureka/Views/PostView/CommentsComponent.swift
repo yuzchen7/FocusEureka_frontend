@@ -23,18 +23,25 @@ struct CommentsComponent: View {
             .padding(.bottom)
             VStack{
                 ForEach(commentsToPost, id: \.self){comment in
-                    HStack(alignment: .top,spacing: 20){
-                        VStack{
+                    HStack(alignment: .top,spacing: 10){
+                        HStack{
                             Image(systemName: "person.crop.circle")
                         }
                         VStack(alignment: .leading){
+                            Text("\(comment.user.username)")
+                                .font(.caption)
                             Text("\(comment.contents)")
                             ForEach(comment.reply_comment ?? [], id: \.self){ replys in
-                                HStack(spacing: 20){
+                                HStack(spacing: 10){
                                     VStack{
                                         Image(systemName: "person.crop.circle")
                                     }
-                                    Text("\(replys.contents)")
+                                    VStack(alignment: .leading){
+                                        Text("\(replys.user.username)")
+                                            .font(.caption)
+                                        Text("\(replys.contents)")
+                                    }
+                                    .padding(.top)
                                 }
                             }
                             Button {
@@ -62,6 +69,7 @@ struct CommentsComponent: View {
             Comments(
                 id: 1,
                 onwer_id: 1,
+                user: FocusEureka.User_Comments(id: 1, username: "Yuzhuang7789@gmail.com"),
                 post_id: 1,
                 contents: "Very excited about the event...",
                 createdAt: "2023-11-19T21:33:50.298Z",
@@ -70,6 +78,7 @@ struct CommentsComponent: View {
                 reply_comment: Optional([FocusEureka.Comments(
                     id: 2,
                     onwer_id: 2,
+                    user: FocusEureka.User_Comments(id: 2, username: "Kaifeng99890@gmail.com"),
                     post_id: 1,
                     contents: "cant wait to see the event...",
                     createdAt: "2023-11-19T21:33:50.298Z",
@@ -80,6 +89,7 @@ struct CommentsComponent: View {
             Comments(
                 id: 4,
                 onwer_id: 3,
+                user: FocusEureka.User_Comments(id: 3, username: "AdienLogan@gmail.com"),
                 post_id: 1,
                 contents: "testing testing",
                 createdAt: "2023-11-19T21:33:50.298Z",
