@@ -142,7 +142,7 @@ extension PostsViewModel{
     
     func userInputComment(userID: Int, postID: Int, userInput: String) async throws{
         fetchedComment = try await swiftxios.post(
-            "http://localhost:8080/api/posts/create",
+            "http://localhost:8080/api/comments/write",
             [
                 "onwer_id":userID,
                 "post_id":postID,

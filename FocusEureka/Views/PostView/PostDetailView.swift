@@ -159,7 +159,7 @@ struct PostDetailView: View {
 //            .padding()
 //            .background(Color.pink.opacity(0.7))
             if(isCommenting){
-                TextEditor(text: $comment)
+                TextField("",text: $comment)
                     .focused($focusTextField, equals: .commentInput)
 //                    .scrollContentBackground(.hidden)
                     .background(.gray.opacity(0.1))
