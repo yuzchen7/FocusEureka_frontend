@@ -30,7 +30,13 @@ struct CommentsComponent: View {
                         VStack(alignment: .leading){
                             Text("\(comment.user.username)")
                                 .font(.caption)
-                            Text("\(comment.contents)")
+                            Text(": \(comment.contents)")
+                            Button {
+                                isReplying = true
+                                commentID = comment.id
+                            } label: {
+                                Image(systemName: "text.bubble")
+                            }
                             ForEach(comment.reply_comment ?? [], id: \.self){ replys in
                                 HStack(spacing: 10){
                                     VStack{
@@ -39,18 +45,11 @@ struct CommentsComponent: View {
                                     VStack(alignment: .leading){
                                         Text("\(replys.user.username)")
                                             .font(.caption)
-                                        Text("\(replys.contents)")
+                                        Text(": \(replys.contents)")
                                     }
                                     .padding(.top)
                                 }
                             }
-                            Button {
-                                isReplying = true
-                                commentID = comment.id
-                            } label: {
-                                Text("reply")
-                            }
-                            .frame(width: UIScreen.main.bounds.width-100, alignment: .center)
                             Divider()
                         }
                         Spacer()
@@ -75,16 +74,30 @@ struct CommentsComponent: View {
                 createdAt: "2023-11-19T21:33:50.298Z",
                 updatedAt: "2023-11-19T21:33:50.298Z",
                 reply_comment_id: nil,
-                reply_comment: Optional([FocusEureka.Comments(
-                    id: 2,
-                    onwer_id: 2,
-                    user: FocusEureka.User_Comments(id: 2, username: "Kaifeng99890@gmail.com"),
-                    post_id: 1,
-                    contents: "cant wait to see the event...",
-                    createdAt: "2023-11-19T21:33:50.298Z",
-                    updatedAt: "2023-11-19T21:33:50.298Z",
-                    reply_comment_id: Optional(1),
-                    reply_comment: nil)])
+                replyied_to: nil,
+                reply_comment: Optional([
+                    FocusEureka.Comments(
+                        id: 2,
+                        onwer_id: 2,
+                        user: FocusEureka.User_Comments(id: 2, username:    "Kaifeng99890@gmail.com"),
+                        post_id: 1,
+                        contents: "cant wait to see the event...",
+                        createdAt: "2023-11-19T21:33:50.298Z",
+                        updatedAt: "2023-11-19T21:33:50.298Z",
+                        reply_comment_id: Optional(1),
+                        replyied_to: nil,
+                        reply_comment: nil),
+                    FocusEureka.Comments(
+                        id: 5,
+                        onwer_id: 6,
+                        user: FocusEureka.User_Comments(id: 6, username: "Jenna9223@gmail.com"),
+                        post_id: 1, contents: "这个是个测试",
+                        createdAt: "2023-11-30T18:55:58.291Z",
+                        updatedAt: "2023-11-30T18:55:58.291Z",
+                        reply_comment_id: Optional(1),
+                        replyied_to: Optional("Kaifeng99890@gmail.com"),
+                        reply_comment: nil)
+                ])
             ),
             Comments(
                 id: 4,
@@ -95,6 +108,7 @@ struct CommentsComponent: View {
                 createdAt: "2023-11-19T21:33:50.298Z",
                 updatedAt: "2023-11-19T21:33:50.298Z",
                 reply_comment_id: nil,
+                replyied_to: nil,
                 reply_comment: Optional([
                 ]))
         ],

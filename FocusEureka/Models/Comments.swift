@@ -23,6 +23,7 @@ struct Comments: Codable, Hashable{
     let createdAt: String
     let updatedAt: String
     let reply_comment_id: Int?
+    let replyied_to: String?
     let reply_comment:[Comments]?
 }
 
