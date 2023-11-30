@@ -10,23 +10,18 @@ import SwiftUI
 struct PostDetailView: View {
     var detailedPost:Posts
     enum userInput{
-        case commentInput
+        case commentInput, userReply
     }
     @StateObject var postVM = PostsViewModel()
 //    @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
     @State var comment: String = ""
     @State var isCommenting: Bool = false
+    @State var commentID:Int = 0
+    @State var reply: String = ""
+    @State var isReplying: Bool = false
     @FocusState var focusTextField: userInput?
     var body: some View {
-//            AsyncImage(url: URL(string:(postVM.singlePost?.image_set.urls[0]) ?? "")){
-//                backgroundImage in
-//                backgroundImage
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//            }placeholder: {
-//                ProgressView()
-//            }
         VStack{
             ScrollView(showsIndicators: false){
                 //Images tabview
@@ -120,7 +115,6 @@ struct PostDetailView: View {
                 .padding(.leading)
                 Button(action: {
                     isCommenting = true
-                    focusTextField = .commentInput
                 }, label: {
                     Rectangle()
                         .frame(width: 200,height: 40,alignment: .leading)
@@ -131,7 +125,7 @@ struct PostDetailView: View {
                         }
                         .foregroundColor(.gray.opacity(0.1))
                 })
-                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [])
+                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying)
             }
 //            HStack{
 //                HStack{
@@ -161,10 +155,12 @@ struct PostDetailView: View {
             if(isCommenting){
                 TextField("",text: $comment)
                     .focused($focusTextField, equals: .commentInput)
-//                    .scrollContentBackground(.hidden)
                     .background(.gray.opacity(0.1))
                     .frame(width: UIScreen.main.bounds.width, height: 40)
                     .submitLabel(.done)
+                    .onAppear{
+                        focusTextField = .commentInput
+                    }
                     .onSubmit {
                         Task{
                             if(!comment.isEmpty && !comment.trimmingCharacters(in: .whitespaces).isEmpty){
@@ -172,6 +168,25 @@ struct PostDetailView: View {
                             }
                             isCommenting = false
                             comment = ""
+                        }
+                    }
+            }
+            if(isReplying){
+                TextField("",text: $reply)
+                    .focused($focusTextField, equals: .userReply)
+                    .background(.gray.opacity(0.1))
+                    .frame(width: UIScreen.main.bounds.width, height: 40)
+                    .submitLabel(.done)
+                    .onAppear{
+                        focusTextField = .userReply
+                    }
+                    .onSubmit {
+                        Task{
+                            if(!reply.isEmpty && !reply.trimmingCharacters(in: .whitespaces).isEmpty){
+                                try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: reply, replyID: commentID)
+                            }
+                            isReplying = false
+                            reply = ""
                         }
                     }
             }

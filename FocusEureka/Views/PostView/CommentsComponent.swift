@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CommentsComponent: View {
     var commentsToPost:[Comments]
+    @Binding var commentID: Int
+    @Binding var reply: String
+    @Binding var isReplying: Bool
     var body: some View {
         VStack{
             Divider()
@@ -34,6 +37,13 @@ struct CommentsComponent: View {
                                     Text("\(replys.contents)")
                                 }
                             }
+                            Button {
+                                isReplying = true
+                                commentID = comment.id
+                            } label: {
+                                Text("reply")
+                            }
+                            .frame(width: UIScreen.main.bounds.width-100, alignment: .center)
                             Divider()
                         }
                         Spacer()
@@ -42,40 +52,44 @@ struct CommentsComponent: View {
                 }
             }
             Spacer()
-            
         }
     }
 }
 
 #Preview {
-    CommentsComponent(commentsToPost: [
-        Comments(
-            id: 1, 
-            onwer_id: 1,
-            post_id: 1,
-            contents: "Very excited about the event...",
-            createdAt: "2023-11-19T21:33:50.298Z",
-            updatedAt: "2023-11-19T21:33:50.298Z",
-            reply_comment_id: nil,
-            reply_comment: Optional([FocusEureka.Comments(
-                id: 2,
-                onwer_id: 2,
+    CommentsComponent(
+        commentsToPost: [
+            Comments(
+                id: 1,
+                onwer_id: 1,
                 post_id: 1,
-                contents: "cant wait to see the event...",
+                contents: "Very excited about the event...",
                 createdAt: "2023-11-19T21:33:50.298Z",
                 updatedAt: "2023-11-19T21:33:50.298Z",
-                reply_comment_id: Optional(1),
-                reply_comment: nil)])
-        ), 
-        Comments(
-            id: 4,
-            onwer_id: 3,
-            post_id: 1,
-            contents: "testing testing",
-            createdAt: "2023-11-19T21:33:50.298Z",
-            updatedAt: "2023-11-19T21:33:50.298Z",
-            reply_comment_id: nil,
-            reply_comment: Optional([
-            ]))
-    ])
+                reply_comment_id: nil,
+                reply_comment: Optional([FocusEureka.Comments(
+                    id: 2,
+                    onwer_id: 2,
+                    post_id: 1,
+                    contents: "cant wait to see the event...",
+                    createdAt: "2023-11-19T21:33:50.298Z",
+                    updatedAt: "2023-11-19T21:33:50.298Z",
+                    reply_comment_id: Optional(1),
+                    reply_comment: nil)])
+            ),
+            Comments(
+                id: 4,
+                onwer_id: 3,
+                post_id: 1,
+                contents: "testing testing",
+                createdAt: "2023-11-19T21:33:50.298Z",
+                updatedAt: "2023-11-19T21:33:50.298Z",
+                reply_comment_id: nil,
+                reply_comment: Optional([
+                ]))
+        ],
+        commentID: .constant(0),
+        reply: .constant(""),
+        isReplying: .constant(false)
+    )
 }

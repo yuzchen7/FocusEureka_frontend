@@ -154,6 +154,22 @@ extension PostsViewModel{
             ]
         )
         try await fetchSinglePost(postID: postID)
-        
+    }
+    
+    func userInputReply(userID: Int, postID: Int, userInput: String, replyID:Int) async throws{
+        fetchedComment = try await swiftxios.post(
+            "http://localhost:8080/api/comments/write",
+            [
+                "onwer_id":userID,
+                "post_id":postID,
+                "contents":userInput,
+                "reply_comment_id": replyID
+                
+            ],
+            [
+                "application/json" : "Content-Type"
+            ]
+        )
+        try await fetchSinglePost(postID: postID)
     }
 }
