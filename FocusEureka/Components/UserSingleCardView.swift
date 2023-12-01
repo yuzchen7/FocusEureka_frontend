@@ -20,16 +20,16 @@ struct UserSingleCardView: View {
             
             HStack(spacing: 10) {
                 Text(self.initials)
-                    .font(.system(size: 13))
+                    .font(.system(size: 15))
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .foregroundStyle(Color(.white))
-                    .frame(width: 30, height: 30)
+                    .frame(width: 35, height: 35)
                     .background(Color(.systemGray))
                     .clipShape(Circle())
                 
                 Text(self.fullname)
-                    .font(.subheadline)
+                    .font(.system(size: 18))
                     .lineLimit(1)
                     .foregroundStyle(.black)
                 
