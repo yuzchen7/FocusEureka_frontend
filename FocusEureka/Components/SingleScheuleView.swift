@@ -15,6 +15,7 @@ struct SingleScheuleView: View {
     var body: some View {
         HStack{
             Rectangle()
+                .fill(isAvailable ? .green : .red)
                 .frame(width: 10)
             
             Image(systemName: self.isAvailable ? "checkmark.circle.fill" : "xmark.circle.fill")
@@ -35,7 +36,7 @@ struct SingleScheuleView: View {
                     .padding(.trailing)
             }
         }
-        .frame(height: 70)
+        .frame(height: 65)
         .foregroundStyle(Color(.systemGray))
         .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 20.0))
