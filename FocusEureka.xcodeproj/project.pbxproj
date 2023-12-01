@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C427DD462B06B11200F7F704 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C427DD452B06B11200F7F704 /* AccountView.swift */; };
+		C437EC852B195E9500774C63 /* SearchFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC842B195E9500774C63 /* SearchFriend.swift */; };
+		C437EC872B195ED700774C63 /* SearchFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC862B195ED700774C63 /* SearchFriendModel.swift */; };
+		C437EC892B198BD800774C63 /* RequestFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC882B198BD800774C63 /* RequestFriendView.swift */; };
+		C437EC8B2B198BE300774C63 /* RequestFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC8A2B198BE300774C63 /* RequestFriendModel.swift */; };
+		C437EC8D2B199B1E00774C63 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC8C2B199B1E00774C63 /* RequestResult.swift */; };
 		C441E8022B13DF4600CD1C49 /* FriendListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8012B13DF4600CD1C49 /* FriendListModel.swift */; };
 		C441E8042B13E15000CD1C49 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8032B13E15000CD1C49 /* FriendListView.swift */; };
 		C441E8062B13E28E00CD1C49 /* UserSingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8052B13E28E00CD1C49 /* UserSingleCardView.swift */; };
@@ -33,6 +38,11 @@
 
 /* Begin PBXFileReference section */
 		C427DD452B06B11200F7F704 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		C437EC842B195E9500774C63 /* SearchFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriend.swift; sourceTree = "<group>"; };
+		C437EC862B195ED700774C63 /* SearchFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendModel.swift; sourceTree = "<group>"; };
+		C437EC882B198BD800774C63 /* RequestFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendView.swift; sourceTree = "<group>"; };
+		C437EC8A2B198BE300774C63 /* RequestFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendModel.swift; sourceTree = "<group>"; };
+		C437EC8C2B199B1E00774C63 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
 		C441E8012B13DF4600CD1C49 /* FriendListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListModel.swift; sourceTree = "<group>"; };
 		C441E8032B13E15000CD1C49 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		C441E8052B13E28E00CD1C49 /* UserSingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSingleCardView.swift; sourceTree = "<group>"; };
@@ -81,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				C441E8032B13E15000CD1C49 /* FriendListView.swift */,
+				C437EC842B195E9500774C63 /* SearchFriend.swift */,
+				C437EC882B198BD800774C63 /* RequestFriendView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -89,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				C441E8012B13DF4600CD1C49 /* FriendListModel.swift */,
+				C437EC862B195ED700774C63 /* SearchFriendModel.swift */,
+				C437EC8A2B198BE300774C63 /* RequestFriendModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -98,6 +112,7 @@
 			children = (
 				C4927E532B06A956006CA4A8 /* User.swift */,
 				C4927E6E2B06AECF006CA4A8 /* Schedule.swift */,
+				C437EC8C2B199B1E00774C63 /* RequestResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,14 +373,19 @@
 				C441E8062B13E28E00CD1C49 /* UserSingleCardView.swift in Sources */,
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
 				C427DD462B06B11200F7F704 /* AccountView.swift in Sources */,
+				C437EC892B198BD800774C63 /* RequestFriendView.swift in Sources */,
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C4927E6F2B06AECF006CA4A8 /* Schedule.swift in Sources */,
 				C441E8042B13E15000CD1C49 /* FriendListView.swift in Sources */,
 				C441E8022B13DF4600CD1C49 /* FriendListModel.swift in Sources */,
+				C437EC872B195ED700774C63 /* SearchFriendModel.swift in Sources */,
 				C4927E772B06B04F006CA4A8 /* ProfileView.swift in Sources */,
+				C437EC8B2B198BE300774C63 /* RequestFriendModel.swift in Sources */,
 				C4927E712B06AF1E006CA4A8 /* ScheduleViewModel.swift in Sources */,
 				C4927E732B06AF97006CA4A8 /* ScheuleView.swift in Sources */,
+				C437EC8D2B199B1E00774C63 /* RequestResult.swift in Sources */,
+				C437EC852B195E9500774C63 /* SearchFriend.swift in Sources */,
 				C4BC8AF72B0348EF00DFBED1 /* Swiftxios.swift in Sources */,
 				C4927E542B06A956006CA4A8 /* User.swift in Sources */,
 				C4927E662B06ADCB006CA4A8 /* LoginView.swift in Sources */,
