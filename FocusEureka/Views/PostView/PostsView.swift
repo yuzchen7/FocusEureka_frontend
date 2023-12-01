@@ -21,11 +21,11 @@ struct PostsView: View {
                     }, label: {
                         switch postVM.viewState {
                         case .general:
-                            Image("generalPost")
+                            Image(systemName: "camera.fill")
                         case .events:
-                            Image("events")
+                            Image(systemName: "party.popper.fill")
                         case .spots:
-                            Image("spot")
+                            Image(systemName: "mappin")
                         }
                     })
                 }
