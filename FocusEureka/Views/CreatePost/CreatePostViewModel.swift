@@ -37,37 +37,17 @@ class CreatePostViewModel: ObservableObject{
     }
     
     func uploadImage() async throws{
-//        print("Started")
         isLoading = true;
         if selectedImages.isEmpty{
             return
         }
         let storage = Storage.storage().reference()
         for img in selectedImages{
-//            print("looping.....")
             let imgData = img.jpegData(compressionQuality: 0.8)
             guard imgData != nil else{
                 return
             }
             let pathRef = storage.child("postImages/\(UUID().uuidString).jpg")
-//            let uploadTask = try await pathRef.putData(imgData!, metadata: nil) { metadata, error in
-//                if (metadata !== nil && error != nil) {
-//                    print("Error occur when uploading image")
-//                }
-//                let downloadTask = pathRef.downloadURL { url, error in
-//                    if let error = error {
-//                        print(error)
-//                        return
-//                    } else {
-//                        guard let downloadURL = url else {
-//                            print("asdfsafsaf")
-//                            return
-//                        }
-//                        self.ImageURL.append("\"\(downloadURL)\"")
-//                        print(self.ImageURL.count)
-//                    }
-//                }
-//            }
             do{
                 let _ = try await pathRef.putDataAsync(imgData!,metadata: nil)
                 let downloadURL = try await pathRef.downloadURL()
@@ -80,7 +60,6 @@ class CreatePostViewModel: ObservableObject{
         }
         self.selectedImages.removeAll()
         isLoading = false;
-//        print("Completed")
     }
     
     func uploadPost(title:String, contents:String, address:String, city:String, state:String,

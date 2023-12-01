@@ -15,10 +15,10 @@ struct CreatePost: View {
     @State var city: String = ""
     @State var state: String = ""
     @State var zipcode: String = ""
-    @State var start_date: String = ""
-    @State var start_time: String = ""
-    @State var end_date: String = ""
-    @State var end_time: String = ""
+    @State var start_date = Date()
+    @State var start_time = Date()
+    @State var end_date = Date()
+    @State var end_time = Date()
     @State var isEvent: Bool = false
     @FocusState var displayKeybaord:Bool
 
@@ -45,7 +45,6 @@ struct CreatePost: View {
                 Section{
                     
                     TextEditor(text: $contents)
-                        .foregroundColor(Color.purple)
                         .font(.custom("HelveticaNeue", size: 18))
                         .lineSpacing(5)
                         .frame(height: 260)
@@ -74,19 +73,13 @@ struct CreatePost: View {
                     }
                     .toggleStyle(.button)
                     if(isEvent){
-                        TextField("date start",text: $start_date)
-                            .disableAutocorrection(true)
-                            .focused($displayKeybaord)
-                        TextField("date end",text: $end_date)
-                            .disableAutocorrection(true)
-                            .focused($displayKeybaord)
+                            DatePicker("date start", selection: $start_date, displayedComponents: .date)
+                            DatePicker("date end", selection: $end_date, displayedComponents: .date)
                     }
-                    TextField("Time start",text: $start_time)
-                        .disableAutocorrection(true)
-                        .focused($displayKeybaord)
-                    TextField("Time end",text: $end_time)
-                        .disableAutocorrection(true)
-                        .focused($displayKeybaord)
+                    HStack{
+                        DatePicker("Time start", selection: $start_time, displayedComponents: .hourAndMinute)
+                        DatePicker("Time end", selection: $end_time, displayedComponents: .hourAndMinute)
+                    }
                 }
                 Button(action: {
                     Task{
@@ -96,14 +89,25 @@ struct CreatePost: View {
                                                           city:self.city,
                                                           state:self.state,
                                                           zipcode:self.zipcode,
-                                                          start_date:self.start_date,
-                                                          start_time:self.start_time,
-                                                          end_date:self.end_date,
-                                                          end_time:self.end_time,
+                                                          start_date:convertDateToString(originalDate: self.start_date),
+                                                          start_time:convertTimeToString(originalTime: self.start_time),
+                                                          end_date:convertDateToString(originalDate: self.end_date),
+                                                          end_time:convertTimeToString(originalTime: self.end_time),
                                                           isEvent:self.isEvent)
+                        title = ""
+                        contents = ""
+                        address = ""
+                        city = ""
+                        state = ""
+                        zipcode = ""
+                        start_date = Date.now
+                        start_time = Date.now
+                        end_date = Date.now
+                        end_time = Date.now
+                        isEvent = false;
                     }
                 }, label: {
-                    Text("upload to firebase")
+                    Text("")
                 })
                 
             }
@@ -118,6 +122,18 @@ struct CreatePost: View {
             })
             }
         }
+    }
+    
+    func convertTimeToString(originalTime: Date) -> String{
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = .short
+        return timeFormatter.string(from: originalTime)
+    }
+    
+    func convertDateToString(originalDate: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: originalDate)
     }
 }
 
