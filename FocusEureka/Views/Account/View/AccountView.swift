@@ -152,9 +152,7 @@ struct AccountView: View {
                 // content view section
                 Section {
                     if (self.isShowSchedule) {
-                        ScrollView {
-                            ScheuleView()
-                        }
+                        ScheuleView()
                     }
                     
                     if (self.isShowFriendList) {
