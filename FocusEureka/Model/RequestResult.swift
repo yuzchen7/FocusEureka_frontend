@@ -1,5 +1,5 @@
 //
-//  RequestReslut.swift
+//  RequestResult.swift
 //  FocusEureka
 //
 //  Created by yuz_chen on 11/30/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RequestReslut:Codable {
+struct RequestResult:Codable {
     var requester: Int?
     var accepter: Int?
     var errorMessage: String?
