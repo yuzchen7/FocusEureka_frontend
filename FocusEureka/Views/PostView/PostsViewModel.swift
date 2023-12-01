@@ -32,7 +32,12 @@ class PostsViewModel : ObservableObject{
 
         let (data, _) = try await URLSession.shared.data(from: url)
         let fetchedPost = try JSONDecoder().decode(Posts.self, from: data)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        let date = formatter.date(from: fetchedPost.createdAt)
+        _ = Calendar.current.date(byAdding: .hour, value: -5, to: date!)
         singlePost = fetchedPost
+        singlePost?.createdAt = date!.formatted(date: .long, time: .shortened)
     }
     
     func addLikes(postID: Int, userID: Int) async throws{

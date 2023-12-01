@@ -30,7 +30,7 @@ struct Posts: Codable, Identifiable, Hashable{
     let end_time: String?
     let ownerid: Int
     let event: Bool
-    let createdAt: String
+    var createdAt: String
     let updatedAt: String
     let image_set: Image_set
     let owner: Owner
