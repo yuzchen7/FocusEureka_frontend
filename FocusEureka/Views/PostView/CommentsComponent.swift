@@ -13,6 +13,7 @@ struct CommentsComponent: View {
     @Binding var reply: String
     @Binding var isReplying: Bool
     @Binding var replys_to:String
+    @State var isExpanding:Bool = false
     var body: some View {
         VStack{
             Divider()
@@ -33,38 +34,50 @@ struct CommentsComponent: View {
                             Text("\(comment.user?.username ?? "")")
                                 .font(.caption)
                             Text(": \(comment.contents)")
-                            Button {
-                                isReplying = true
-                                commentID = comment.id
-                                replys_to = ""
-                            } label: {
-                                Image(systemName: "text.bubble")
+                            HStack(alignment: .center, spacing: 118){
+                                Button {
+                                    isReplying = true
+                                    commentID = comment.id
+                                    replys_to = ""
+                                } label: {
+                                    Image(systemName: "text.bubble")
+                                }
+                                //expand comment
+                                if(comment.reply_comment?.count != 0){
+                                    Button {
+                                        isExpanding = !isExpanding
+                                    } label: {
+                                        Image(systemName: "ellipsis")
+                                    }
+                                }
                             }
                             //replies under commment
-                            ForEach(comment.reply_comment ?? [], id: \.self){ replys in
-                                HStack(spacing: 10){
-                                    VStack{
-                                        Image(systemName: "person.crop.circle")
-                                    }
-                                    VStack(alignment: .leading){
-                                        if(replys.replied_to != nil){
-                                            Text("\(replys.user?.username ?? "") reply to \(replys.replied_to ?? "")")
-                                                .font(.caption)
-                                                .lineLimit(1)
-                                        }else{
-                                            Text("\(replys.user?.username ?? "")")
-                                                .font(.caption)
+                            if(isExpanding){
+                                ForEach(comment.reply_comment ?? [], id: \.self){ replys in
+                                    HStack(spacing: 10){
+                                        VStack{
+                                            Image(systemName: "person.crop.circle")
                                         }
-                                        Text(": \(replys.contents)")
-                                        Button {
-                                            isReplying = true
-                                            commentID = comment.id
-                                            replys_to = replys.user?.username ?? ""
-                                        } label: {
-                                            Image(systemName: "text.bubble")
+                                        VStack(alignment: .leading){
+                                            if(replys.replied_to != nil){
+                                                Text("\(replys.user?.username ?? "") reply to \(replys.replied_to ?? "")")
+                                                    .font(.caption)
+                                                    .lineLimit(1)
+                                            }else{
+                                                Text("\(replys.user?.username ?? "")")
+                                                    .font(.caption)
+                                            }
+                                            Text(": \(replys.contents)")
+                                            Button {
+                                                isReplying = true
+                                                commentID = comment.id
+                                                replys_to = replys.user?.username ?? ""
+                                            } label: {
+                                                Image(systemName: "text.bubble")
+                                            }
                                         }
+                                        .padding(.top)
                                     }
-                                    .padding(.top)
                                 }
                             }
                             Divider()
