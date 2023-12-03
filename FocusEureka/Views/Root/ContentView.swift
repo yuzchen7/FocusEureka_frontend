@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel;
+    
     var body: some View {
         //main view of the app
             TabView{
@@ -37,7 +39,13 @@ struct ContentView: View {
                 .toolbarBackground(.pink, for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarColorScheme(.dark, for: .tabBar)
+        Group {
+            if (self.loginViewModel.sessionUser != nil) {
+                AccountView()
+            } else {
+                LoginView()
             }
+        }
     }
 }
 
