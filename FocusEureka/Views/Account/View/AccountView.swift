@@ -48,7 +48,7 @@ struct AccountView: View {
                             Text(currentUser.username)
                             // Text("yuzchen")
                                 .font(.system(size: 16))
-                                .foregroundStyle(Color(.systemGray))
+                                .foregroundStyle(Color(.systemPink).opacity(0.8))
                                 .lineLimit(1)
                         }
                         
