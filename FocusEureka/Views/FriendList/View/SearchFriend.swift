@@ -13,6 +13,8 @@ struct SearchFriend: View {
     @State var targetUsername: String = ""
     @State private var showAlert = false
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack {
             Text("Search Friends").font(.title2).foregroundStyle(.pink)
@@ -72,6 +74,21 @@ struct SearchFriend: View {
                 }.padding(.top)
                 Spacer()
             }
+            
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Dismiss")
+                    .font(.system(size: 25))
+                    .fontWeight(.light)
+                    .padding(.horizontal)
+            })
+            .frame(height: 35)
+            .background(
+                RoundedRectangle(cornerRadius: 5) // 圆角矩形作为背景
+                    .stroke(Color.pink.opacity(0.3), lineWidth: 1) // 边框样式
+            )
+            .foregroundStyle(Color.pink.opacity(0.9))
         }
         .padding(.top)
         .onChange(of: targetUsername) { oldValue, newValue in
