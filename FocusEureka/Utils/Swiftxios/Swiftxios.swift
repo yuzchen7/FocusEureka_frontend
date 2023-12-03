@@ -9,17 +9,41 @@ import Foundation
 
 /// Swiftxios Tools Object
 /// - version
-///     -  version 0.2.0 alpha
+///     -  version 0.4.1 alpha
 /// - Since 0.1.1 alpha
 /// for more less code to fetch the api call
-var swiftxios: Swiftxios = Swiftxios.swiftxios
+var swiftxios: Swiftxios = SwiftxiosFactory.getSwiftxios()
+
+/// Swiftxios Singleton Factory Object
+/// - version
+///     -  version 0.1.0 alpha
+/// - Since 0.1.0 alpha
+/// a Factory class to used by user to get the Swiftxios obj
+final class SwiftxiosFactory: ObservableObject {
+    private static var swiftxios: Swiftxios = Swiftxios()
+    
+    private init() {}
+    
+    static func getSwiftxios(_ config: URLSession? = nil) -> Swiftxios {
+        return SwiftxiosFactory.swiftxios
+    }
+    
+    static func setSwiftxios(_ config: URLSession) {
+        SwiftxiosFactory.swiftxios.setHttpSession(config: config)
+    }
+    
+    static func resetSwiftxios() {
+        setSwiftxios(URLSession.shared)
+    }
+    
+}
 
 /// Swiftxios Tools
 /// for more less code to fetch the api call
-/// - version 0.3.0 alpha
+/// - version 0.3.1 alpha
 final class Swiftxios: ObservableObject {
     // Since 0.1.0 alpha
-    static var swiftxios: Swiftxios = Swiftxios()
+    // static var swiftxios: Swiftxios = Swiftxios()
     
     private var httpSession: URLSession
     
@@ -31,7 +55,7 @@ final class Swiftxios: ObservableObject {
     /// - Parameters
     ///     - config, URLSession object to be set
     func setHttpSession(config: URLSession) {
-        Swiftxios.swiftxios.httpSession = config
+        self.httpSession = config
     }
     
     enum FetchError: Error {
@@ -72,7 +96,7 @@ final class Swiftxios: ObservableObject {
         
         guard
             let response = response as? HTTPURLResponse,
-            response.statusCode == 200
+            response.statusCode ~= 200
         else {
             print(response)
             throw Swiftxios.FetchError.invalidResponse
