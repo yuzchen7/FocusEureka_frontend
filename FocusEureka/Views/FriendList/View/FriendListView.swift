@@ -14,6 +14,7 @@ struct FriendListView: View {
     @State private var keyword: String = ""
     
     @State private var showSearchFriendView: Bool = false
+    @State private var showRequestFriendView: Bool = false
     
     var body: some View {
         if let friendList = self.friendListModel.filteredFriendList, friendListModel.isUpdate == false {
@@ -21,6 +22,7 @@ struct FriendListView: View {
                 HStack {
                     SearchBarView(placeHolder: "Search Friend", searchText: $keyword)
                     
+                    // search friend sheet button
                     Button(action: {
                         self.showSearchFriendView = true
                     }, label: {
@@ -34,13 +36,18 @@ struct FriendListView: View {
                     })
                     .padding(.trailing)
                     
+                    
+                    // request friend list sheet button
                     Button(action: {
-                        
+                        self.showRequestFriendView = true
                     }, label: {
                         Image(systemName: "person.bubble.fill")
                             .resizable()
                             .foregroundStyle(Color.pink.opacity(0.9))
                             .frame(width: 30, height: 30)
+                    })
+                    .sheet(isPresented: self.$showRequestFriendView, content: {
+                        RequestFriendView()
                     })
                     .padding(.trailing)
                 }
