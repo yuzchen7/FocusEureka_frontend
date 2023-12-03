@@ -10,6 +10,8 @@ import Foundation
 @MainActor
 class RequestFriendModel: ObservableObject {
     @Published var requestFriendList: [User]? = nil
+    @Published var friendAcceptResult: FriendAcceptResult? = nil
+    @Published var isUpdate = false
 
     func requestFriendFetch(id: Int) {
         Task {
@@ -17,6 +19,40 @@ class RequestFriendModel: ObservableObject {
                 print("requestFriendFetch run -> user ID : \(id)")
                 let urlString: String = "http://localhost:8080/api/friend_request/receiving?targetid=\(id)"
                 self.requestFriendList = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
+                self.isUpdate = false
+            } catch Swiftxios.FetchError.invalidURL {
+                print("function requestFriendFetch from class Swiftxios has URL error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidResponse {
+                print("function requestFriendFetch from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidData {
+                print("function requestFriendFetch from class Swiftxios has response Data error (╯’ – ‘)╯︵")
+            } catch Swiftxios.FetchError.invalidObjectConvert {
+                print("function requestFriendFetch from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
+            } catch {
+                print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
+            }
+        }
+    }
+    
+    func acceptFriendRequestFetch(id: Int, targetID: Int) {
+        Task {
+            do {
+                print("acceptFriendRequestFetch run -> userID : \(id), targetID : \(targetID)")
+                let urlString: String = "http://localhost:8080/api/friend_request/acceptRequest"
+                self.friendAcceptResult = try await swiftxios.post(
+                    urlString,
+                    [
+                        "accepter" : id,
+                        "requester" : targetID
+                    ],
+                    [
+                        "application/json" : "Content-Type"
+                    ]
+                )
+                
+                if let friendAcceptResult = self.friendAcceptResult, friendAcceptResult.result == true {
+                    self.isUpdate = !self.isUpdate
+                }
             } catch Swiftxios.FetchError.invalidURL {
                 print("function requestFriendFetch from class Swiftxios has URL error (╯’ – ‘)╯︵")
             } catch Swiftxios.FetchError.invalidResponse {
