@@ -11,11 +11,13 @@ struct RequestFriendView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     @ObservedObject var requestFriendModel: RequestFriendModel = RequestFriendModel()
     @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack {
-            Text("Search Friends").font(.title2).foregroundStyle(.pink)
+            Text("Request pending Friends List").font(.title2).foregroundStyle(.pink)
             
-            if let requestFriendList = self.requestFriendModel.requestFriendList {
+            if let requestFriendList = self.requestFriendModel.requestFriendList,
+               self.requestFriendModel.isUpdate == false {
                 
                 if requestFriendList.isEmpty {
                     VStack {
@@ -31,27 +33,23 @@ struct RequestFriendView: View {
                         ForEach(requestFriendList.indices, id: \.self) {index in
                             let currentUser = requestFriendList[index]
                             
-                            Button(action: {
+                            ZStack {
+                                UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
+                                    .frame(height: 40)
                                 
-                            }, label: {
-                                ZStack {
-                                    UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
-                                        .frame(height: 40)
-                                    
-                                    HStack {
-                                        Spacer()
-                                        Button(action: {
-                                            
-                                        }, label: {
-                                            Image(systemName: "plus.app")
-                                                .resizable()
-                                                .foregroundStyle(Color.pink.opacity(0.8))
-                                                .frame(width: 30, height: 30)
-                                                .padding(.horizontal)
-                                        })
-                                    }
+                                HStack {
+                                    Spacer()
+                                    Button(action: {
+                                        self.requestFriendModel.acceptFriendRequestFetch(id: self.loginViewModel.currentUser!.id, targetID: currentUser.id)
+                                    }, label: {
+                                        Image(systemName: "plus.app")
+                                            .resizable()
+                                            .foregroundStyle(Color.pink.opacity(0.8))
+                                            .frame(width: 30, height: 30)
+                                            .padding(.horizontal)
+                                    })
                                 }
-                            })
+                            }
                         }
                     }
                     .listStyle(PlainListStyle())
