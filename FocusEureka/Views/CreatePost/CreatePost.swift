@@ -83,31 +83,33 @@ struct CreatePost: View {
                 }
                 Button(action: {
                     Task{
-                        try await createPostVM.uploadPost(title:self.title,
-                                                          contents:self.contents,
-                                                          address:self.address,
-                                                          city:self.city,
-                                                          state:self.state,
-                                                          zipcode:self.zipcode,
-                                                          start_date:convertDateToString(originalDate: self.start_date),
-                                                          start_time:convertTimeToString(originalTime: self.start_time),
-                                                          end_date:convertDateToString(originalDate: self.end_date),
-                                                          end_time:convertTimeToString(originalTime: self.end_time),
-                                                          isEvent:self.isEvent)
-                        title = ""
-                        contents = ""
-                        address = ""
-                        city = ""
-                        state = ""
-                        zipcode = ""
-                        start_date = Date.now
-                        start_time = Date.now
-                        end_date = Date.now
-                        end_time = Date.now
-                        isEvent = false;
+                        if(!contents.isEmpty && !title.isEmpty && !address.isEmpty && !city.isEmpty && !state.isEmpty && !zipcode.isEmpty && createPostVM.selectedImages.count == 0){
+                            try await createPostVM.uploadPost(title:self.title,
+                                                              contents:self.contents,
+                                                              address:self.address,
+                                                              city:self.city,
+                                                              state:self.state,
+                                                              zipcode:self.zipcode,
+                                                              start_date:convertDateToString(originalDate: self.start_date),
+                                                              start_time:convertTimeToString(originalTime: self.start_time),
+                                                              end_date:convertDateToString(originalDate: self.end_date),
+                                                              end_time:convertTimeToString(originalTime: self.end_time),
+                                                              isEvent:self.isEvent)
+                            title = ""
+                            contents = ""
+                            address = ""
+                            city = ""
+                            state = ""
+                            zipcode = ""
+                            start_date = Date.now
+                            start_time = Date.now
+                            end_date = Date.now
+                            end_time = Date.now
+                            isEvent = false;
+                        }
                     }
                 }, label: {
-                    Text("")
+                    Text("                        post! V(^_^)V")
                 })
                 
             }
