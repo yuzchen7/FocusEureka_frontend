@@ -48,6 +48,13 @@ struct FriendListView: View {
                     })
                     .sheet(isPresented: self.$showRequestFriendView, content: {
                         RequestFriendView()
+                            // run the code inside when swap out or disppare the view
+                            // use for update the firend list when user operated the
+                            // accept / cancel friends
+                            .onDisappear(perform: {
+                                self.friendListModel.filteredFriendList = nil
+                                self.friendListModel.isUpdate = true
+                            })
                     })
                     .padding(.trailing)
                 }
