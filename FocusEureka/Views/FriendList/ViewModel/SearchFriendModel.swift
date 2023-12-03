@@ -10,7 +10,7 @@ import Foundation
 @MainActor
 class SearchFriendModel: ObservableObject {
     @Published var resultFriendList: [User]? = nil
-    @Published var requestResult: RequestResult? = nil
+    @Published var requestResult: FriendRequestResult? = nil
     
     func searchFetch(username: String) {
         Task {

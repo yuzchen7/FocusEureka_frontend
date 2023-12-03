@@ -1,5 +1,5 @@
 //
-//  RequestResult.swift
+//  FriendRequestResult.swift
 //  FocusEureka
 //
 //  Created by yuz_chen on 11/30/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RequestResult:Codable {
+struct FriendRequestResult: Codable {
     var requester: Int?
     var accepter: Int?
     var errorMessage: String?
