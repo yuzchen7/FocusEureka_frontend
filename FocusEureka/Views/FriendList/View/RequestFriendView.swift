@@ -37,18 +37,30 @@ struct RequestFriendView: View {
                                 UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
                                     .frame(height: 40)
                                 
-                                HStack {
+                                HStack(spacing: 5) {
                                     Spacer()
+                                    
+                                    // accpet friend request button
                                     Button(action: {
                                         self.requestFriendModel.acceptFriendRequestFetch(id: self.loginViewModel.currentUser!.id, targetID: currentUser.id)
                                     }, label: {
-                                        Image(systemName: "plus.app")
+                                        Image(systemName: "plus.square")
                                             .resizable()
                                             .foregroundStyle(Color.pink.opacity(0.8))
                                             .frame(width: 30, height: 30)
-                                            .padding(.horizontal)
+                                            .padding(.trailing)
                                     })
+                                    
                                 }
+                                
+                            }
+                            .swipeActions(edge: .trailing) {
+                                Button(action: {
+                                    self.requestFriendModel.declineFriendRequestFetch(id: self.loginViewModel.currentUser!.id, targetID: currentUser.id)
+                                }, label: {
+                                    Image(systemName: "trash")
+                                })
+                                .tint(.red)
                             }
                         }
                     }
