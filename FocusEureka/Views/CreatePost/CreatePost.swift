@@ -83,7 +83,7 @@ struct CreatePost: View {
                 }
                 Button(action: {
                     Task{
-                        if(!contents.isEmpty && !title.isEmpty && !address.isEmpty && !city.isEmpty && !state.isEmpty && !zipcode.isEmpty && createPostVM.selectedImages.count == 0){
+                        if(!contents.isEmpty && !title.isEmpty && !address.isEmpty && !city.isEmpty && !state.isEmpty && !zipcode.isEmpty && createPostVM.selectedImages.count != 0){
                             try await createPostVM.uploadPost(title:self.title,
                                                               contents:self.contents,
                                                               address:self.address,
