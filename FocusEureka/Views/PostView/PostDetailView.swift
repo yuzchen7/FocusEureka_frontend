@@ -12,8 +12,8 @@ struct PostDetailView: View {
     enum userInput{
         case commentInput, userReply
     }
-    @StateObject var postVM = PostsViewModel()
-//    @EnvironmentObject var postVM: PostsViewModel
+//    @StateObject var postVM = PostsViewModel()
+    @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
     @State var comment: String = ""
     @State var isCommenting: Bool = false
