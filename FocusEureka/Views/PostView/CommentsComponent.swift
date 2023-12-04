@@ -13,6 +13,7 @@ struct CommentsComponent: View {
     @Binding var reply: String
     @Binding var isReplying: Bool
     @Binding var replys_to:String
+    @Binding var isCommenting: Bool
     @State var isExpanding:Bool = false
     var body: some View {
         VStack{
@@ -22,6 +23,18 @@ struct CommentsComponent: View {
                 Spacer()
             }
             .padding(.leading)
+            Button(action: {
+                isCommenting = true
+            }, label: {
+                Rectangle()
+                    .frame(width: 200,height: 40,alignment: .leading)
+                    .cornerRadius(30)
+                    .overlay {
+                        Text("Let everyone hear your voice")
+                            .foregroundStyle(Color.black.opacity(0.3))
+                    }
+                    .foregroundColor(.gray.opacity(0.1))
+            })
             .padding(.bottom)
             VStack{
                 ForEach(commentsToPost, id: \.self){comment in
@@ -145,6 +158,7 @@ struct CommentsComponent: View {
         commentID: .constant(0),
         reply: .constant(""),
         isReplying: .constant(false),
-        replys_to: .constant("")
+        replys_to: .constant(""),
+        isCommenting: .constant(false)
     )
 }

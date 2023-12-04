@@ -44,7 +44,7 @@ struct PostDetailView: View {
                 HStack{
                     VStack(alignment: .leading){
                         Text("\(postVM.singlePost?.title ?? "")")
-                            .font(.system(size:28, design: .rounded))
+                            .font(.system(size:20, design: .monospaced))
                             .fontWeight(.bold)
                     }
                     Spacer()
@@ -54,22 +54,66 @@ struct PostDetailView: View {
                             .scaledToFit()
                             .foregroundColor(.red)
                     }
-                    .frame(width: 40)
+                    .frame(width: 30)
                 }
                 .padding(.horizontal)
                 //Contents
                 VStack{
                     Text(postVM.singlePost?.contents ?? "")
-                        .font(.system(size: 20))
+                        .font(.system(size: 16))
                 }
                 .padding(.horizontal)
-                HStack(){
+                .padding(.top)
+                .padding(.bottom)
+//                HStack(){
+//                    Button {
+//                        isGrouping = true
+//                    } label: {
+//                        Image(systemName: "person.2.circle")
+//                            .resizable()
+//                            .frame(width:30, height: 30)
+//                    }
+//                    
+//                    Button(
+//                        action: {
+//                            Task{
+//                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+//                            }
+//                        },
+//                        label: {
+//                            HStack(spacing:3){
+//                                Image(systemName: "heart.circle")
+//                                    .resizable()
+//                                    .frame(width:30, height: 30)
+//                                Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
+//                                    .foregroundStyle(Color.black)
+//                            }
+//                        })
+//                }
+//                .padding(.top)
+                //address
+                HStack{
+                    Image(systemName: "location")
+                        .imageScale(.medium)
+                    VStack(alignment: .leading){
+                        Text("\(postVM.singlePost?.address ?? "")")
+                            .font(.subheadline)
+                        HStack{
+                            Group{
+                                Text("\(postVM.singlePost?.city ?? "")")
+                                Text("\(postVM.singlePost?.state ?? "")")
+                                Text("\(postVM.singlePost?.zipcode ?? "")")
+                            }
+                            .font(.subheadline)
+                        }
+                    }
+                    Spacer()
                     Button {
                         isGrouping = true
                     } label: {
                         Image(systemName: "person.2.circle")
                             .resizable()
-                            .frame(width:30, height: 30)
+                            .frame(width:20, height: 20)
                     }
                     
                     Button(
@@ -82,47 +126,37 @@ struct PostDetailView: View {
                             HStack(spacing:3){
                                 Image(systemName: "heart.circle")
                                     .resizable()
-                                    .frame(width:30, height: 30)
+                                    .frame(width:20, height: 20)
                                 Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
                                     .foregroundStyle(Color.black)
                             }
-                        })
-                }
-                //address
-                HStack{
-                    Image(systemName: "location")
-                    VStack(alignment: .leading){
-                        Text("\(postVM.singlePost?.address ?? "")")
-                            .bold()
-                        HStack{
-                            Group{
-                                Text("\(postVM.singlePost?.city ?? "")")
-                                Text("\(postVM.singlePost?.state ?? "")")
-                                Text("\(postVM.singlePost?.zipcode ?? "")")
-                            }
-                            .bold()
-                        }
-                    }
+                    })
                     Spacer()
                 }
-//                .padding(.top)
+                .padding(.top)
                 .padding(.leading)
                 Divider()
                 //date & times
                 HStack{
                     Image(systemName: "hourglass")
+                        .imageScale(.medium)
                     VStack{
                         if(postVM.singlePost?.event == true){
                             Text("Event begins: ")
+                                .font(.subheadline)
                             if let DateBegin = postVM.singlePost?.start_date {
                                 Text("\(DateBegin)")
+                                    .font(.subheadline)
                             } else {
-                                Text("???")
+                                Text("unknown")
+                                    .font(.subheadline)
                             }
                             if let DateEnd = postVM.singlePost?.end_date {
                                 Text("- \(DateEnd)")
+                                    .font(.subheadline)
                             } else {
-                                Text("???")
+                                Text("unknown")
+                                    .font(.subheadline)
                             }
                         }
                     }
@@ -130,14 +164,18 @@ struct PostDetailView: View {
                         if let startTime = postVM.singlePost?.start_time {
                             Text("")
                             Text("Open at: \(startTime)")
+                                .font(.subheadline)
                         } else {
                             Text("Open time unavailable")
+                                .font(.subheadline)
                         }
                         
                         if let endTime = postVM.singlePost?.end_time {
                             Text("End at: \(endTime)")
+                                .font(.subheadline)
                         } else {
                             Text("End time unavailable")
+                                .font(.subheadline)
                         }
                     }
                     .padding(.leading)
@@ -146,24 +184,13 @@ struct PostDetailView: View {
                 .padding(.leading)
                 //posted date & time
                 HStack{
-                    Spacer()
-                    Text("Posted at: \(postVM.singlePost?.createdAt ?? "")")
+                    Text("  Posted at: \(postVM.singlePost?.createdAt ?? "")")
                         .font(.footnote)
                         .foregroundStyle(Color.gray.opacity(0.8))
+                    Spacer()
                 }
-                Button(action: {
-                    isCommenting = true
-                }, label: {
-                    Rectangle()
-                        .frame(width: 200,height: 40,alignment: .leading)
-                        .cornerRadius(30)
-                        .overlay {
-                            Text("Let us hear your voice")
-                                .foregroundStyle(Color.black.opacity(0.3))
-                        }
-                        .foregroundColor(.gray.opacity(0.1))
-                })
-                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to)
+                .padding(.top)
+                CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to, isCommenting: $isCommenting)
             }
             if(isCommenting){
                 TextField("",text: $comment)
