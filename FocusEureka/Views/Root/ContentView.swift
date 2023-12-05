@@ -18,27 +18,23 @@ struct ContentView: View {
                 PostsView()
                     .tabItem {
                         Image(systemName: "globe.americas")
-                            .frame(height:500)
                         Text("Expore")
                     }
                 CreatePost()
                     .tabItem {
-                        Image(systemName: "plus")
-                            .frame(height: 10000)
+                        Image(systemName: "plus.square.fill")
                         Text("Post")
-                    }
-                Text("Account")
-                    .tabItem{
-                        Text("tab2")
                     }
                 if (self.loginViewModel.sessionUser != nil) {
                     AccountView()
                         .tabItem {
+                            Image(systemName: "person.fill")
                             Text("User")
                         }
                 } else {
                     LoginView()
                         .tabItem {
+                            Image(systemName: "person.fill")
                             Text("User")
                         }
                 }

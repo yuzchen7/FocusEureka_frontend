@@ -38,15 +38,15 @@ struct PostDetailView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
-                .frame(height:UIScreen.main.bounds.height/2)
+//                .frame(height:UIScreen.main.bounds.height/2)
+                .frame(height:350)
                 .background(Color.gray.opacity(0.1))
                 //Title
                 HStack{
-                    VStack(alignment: .leading){
-                        Text("\(postVM.singlePost?.title ?? "")")
-                            .font(.system(size:20, design: .monospaced))
-                            .fontWeight(.bold)
-                    }
+                    Text("\(postVM.singlePost?.title ?? "")")
+                        .font(.system(size:20, design: .monospaced))
+                        .fontWeight(.bold)
+                    
                     Spacer()
                     VStack{
                         Image(systemName: "person.crop.circle")
@@ -57,56 +57,71 @@ struct PostDetailView: View {
                     .frame(width: 30)
                 }
                 .padding(.horizontal)
+                HStack(spacing: 3){
+                    HStack{
+                        if(postVM.singlePost?.event == true){
+                            Text("     ")
+                                .font(.footnote)
+                            if let DateBegin = postVM.singlePost?.start_date {
+                                Text("\(DateBegin)")
+                                    .font(.footnote)
+                            } else {
+                                Text("unknown")
+                                    .font(.footnote)
+                            }
+                            if let DateEnd = postVM.singlePost?.end_date {
+                                Text("- \(DateEnd)")
+                                    .font(.footnote)
+                            } else {
+                                Text("- unknown")
+                                    .font(.footnote)
+                            }
+                        }
+                    }
+                    HStack{
+                        if let startTime = postVM.singlePost?.start_time {
+                            Text("     ")
+                                .font(.footnote)
+                            Text("\(startTime)")
+                                .font(.footnote)
+                        } else {
+                            Text("Time: unavailable")
+                                .font(.footnote)
+                        }
+                        
+                        if let endTime = postVM.singlePost?.end_time {
+                            Text("- \(endTime)")
+                                .font(.footnote)
+                        } else {
+                            Text("- unavailable")
+                                .font(.footnote)
+                        }
+                    }
+                    Spacer()
+                }
                 //Contents
-                VStack{
+                HStack(){
                     Text(postVM.singlePost?.contents ?? "")
                         .font(.system(size: 16))
+                    Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.top)
                 .padding(.bottom)
-//                HStack(){
-//                    Button {
-//                        isGrouping = true
-//                    } label: {
-//                        Image(systemName: "person.2.circle")
-//                            .resizable()
-//                            .frame(width:30, height: 30)
-//                    }
-//                    
-//                    Button(
-//                        action: {
-//                            Task{
-//                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
-//                            }
-//                        },
-//                        label: {
-//                            HStack(spacing:3){
-//                                Image(systemName: "heart.circle")
-//                                    .resizable()
-//                                    .frame(width:30, height: 30)
-//                                Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
-//                                    .foregroundStyle(Color.black)
-//                            }
-//                        })
-//                }
-//                .padding(.top)
                 //address
                 HStack{
                     Image(systemName: "location")
                         .imageScale(.medium)
-                    VStack(alignment: .leading){
-                        Text("\(postVM.singlePost?.address ?? "")")
-                            .font(.subheadline)
-                        HStack{
-                            Group{
-                                Text("\(postVM.singlePost?.city ?? "")")
-                                Text("\(postVM.singlePost?.state ?? "")")
-                                Text("\(postVM.singlePost?.zipcode ?? "")")
-                            }
-                            .font(.subheadline)
-                        }
-                    }
+                    Text("\(postVM.singlePost?.address ?? ""), \(postVM.singlePost?.city ?? ""), \(postVM.singlePost?.state ?? "") \(postVM.singlePost?.zipcode ?? "")")
+                        .font(.footnote)
+                    Spacer()
+                }
+                .padding(.top)
+                .padding(.leading)
+                HStack{
+                    Text(" \(postVM.singlePost?.createdAt ?? "")")
+                        .font(.caption2)
+                        .foregroundStyle(Color.gray.opacity(0.8))
                     Spacer()
                     Button {
                         isGrouping = true
@@ -115,7 +130,6 @@ struct PostDetailView: View {
                             .resizable()
                             .frame(width:20, height: 20)
                     }
-                    
                     Button(
                         action: {
                             Task{
@@ -130,66 +144,10 @@ struct PostDetailView: View {
                                 Text("\(postVM.singlePost?.post_likes?.count ?? 0)")
                                     .foregroundStyle(Color.black)
                             }
-                    })
-                    Spacer()
+                        })
+//                    Spacer()
                 }
-                .padding(.top)
-                .padding(.leading)
-                Divider()
-                //date & times
-                HStack{
-                    Image(systemName: "hourglass")
-                        .imageScale(.medium)
-                    VStack{
-                        if(postVM.singlePost?.event == true){
-                            Text("Event begins: ")
-                                .font(.subheadline)
-                            if let DateBegin = postVM.singlePost?.start_date {
-                                Text("\(DateBegin)")
-                                    .font(.subheadline)
-                            } else {
-                                Text("unknown")
-                                    .font(.subheadline)
-                            }
-                            if let DateEnd = postVM.singlePost?.end_date {
-                                Text("- \(DateEnd)")
-                                    .font(.subheadline)
-                            } else {
-                                Text("unknown")
-                                    .font(.subheadline)
-                            }
-                        }
-                    }
-                    VStack{
-                        if let startTime = postVM.singlePost?.start_time {
-                            Text("")
-                            Text("Open at: \(startTime)")
-                                .font(.subheadline)
-                        } else {
-                            Text("Open time unavailable")
-                                .font(.subheadline)
-                        }
-                        
-                        if let endTime = postVM.singlePost?.end_time {
-                            Text("End at: \(endTime)")
-                                .font(.subheadline)
-                        } else {
-                            Text("End time unavailable")
-                                .font(.subheadline)
-                        }
-                    }
-                    .padding(.leading)
-                    Spacer()
-                }
-                .padding(.leading)
-                //posted date & time
-                HStack{
-                    Text("  Posted at: \(postVM.singlePost?.createdAt ?? "")")
-                        .font(.footnote)
-                        .foregroundStyle(Color.gray.opacity(0.8))
-                    Spacer()
-                }
-                .padding(.top)
+                .padding(.horizontal)
                 CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to, isCommenting: $isCommenting)
             }
             if(isCommenting){

@@ -20,6 +20,7 @@ struct CommentsComponent: View {
             Divider()
             HStack() {
                 Text("\(commentsToPost.count) Comments")
+                    .font(.subheadline)
                 Spacer()
             }
             .padding(.leading)
@@ -27,7 +28,7 @@ struct CommentsComponent: View {
                 isCommenting = true
             }, label: {
                 Rectangle()
-                    .frame(width: 200,height: 40,alignment: .leading)
+                    .frame(width: 200,height: 35,alignment: .leading)
                     .cornerRadius(30)
                     .overlay {
                         Text("Let everyone hear your voice")
@@ -80,7 +81,8 @@ struct CommentsComponent: View {
                                                 Text("\(replys.user?.username ?? "")")
                                                     .font(.caption)
                                             }
-                                            Text(": \(replys.contents)")
+                                            Text(" \(replys.contents)")
+                                                .font(.system(size: 16))
                                             Button {
                                                 isReplying = true
                                                 commentID = comment.id
