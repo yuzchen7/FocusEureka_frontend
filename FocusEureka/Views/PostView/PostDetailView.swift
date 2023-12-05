@@ -57,7 +57,7 @@ struct PostDetailView: View {
                     .frame(width: 30)
                 }
                 .padding(.horizontal)
-                HStack(spacing: 3){
+                HStack(spacing:1){
                     HStack{
                         if(postVM.singlePost?.event == true){
                             Text("     ")
@@ -69,11 +69,13 @@ struct PostDetailView: View {
                                 Text("unknown")
                                     .font(.footnote)
                             }
+                            Text("-")
+                                .font(.footnote)
                             if let DateEnd = postVM.singlePost?.end_date {
-                                Text("- \(DateEnd)")
+                                Text("\(DateEnd)")
                                     .font(.footnote)
                             } else {
-                                Text("- unknown")
+                                Text("unknown")
                                     .font(.footnote)
                             }
                         }
@@ -88,12 +90,13 @@ struct PostDetailView: View {
                             Text("Time: unavailable")
                                 .font(.footnote)
                         }
-                        
+                        Text("-")
+                            .font(.footnote)
                         if let endTime = postVM.singlePost?.end_time {
-                            Text("- \(endTime)")
+                            Text("\(endTime)")
                                 .font(.footnote)
                         } else {
-                            Text("- unavailable")
+                            Text("unavailable")
                                 .font(.footnote)
                         }
                     }
