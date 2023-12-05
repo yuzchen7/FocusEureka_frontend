@@ -13,15 +13,29 @@ struct CommentsComponent: View {
     @Binding var reply: String
     @Binding var isReplying: Bool
     @Binding var replys_to:String
+    @Binding var isCommenting: Bool
     @State var isExpanding:Bool = false
     var body: some View {
         VStack{
             Divider()
             HStack() {
                 Text("\(commentsToPost.count) Comments")
+                    .font(.subheadline)
                 Spacer()
             }
             .padding(.leading)
+            Button(action: {
+                isCommenting = true
+            }, label: {
+                Rectangle()
+                    .frame(width: 200,height: 35,alignment: .leading)
+                    .cornerRadius(30)
+                    .overlay {
+                        Text("Let everyone hear your voice")
+                            .foregroundStyle(Color.black.opacity(0.3))
+                    }
+                    .foregroundColor(.gray.opacity(0.1))
+            })
             .padding(.bottom)
             VStack{
                 ForEach(commentsToPost, id: \.self){comment in
@@ -67,7 +81,8 @@ struct CommentsComponent: View {
                                                 Text("\(replys.user?.username ?? "")")
                                                     .font(.caption)
                                             }
-                                            Text(": \(replys.contents)")
+                                            Text(" \(replys.contents)")
+                                                .font(.system(size: 16))
                                             Button {
                                                 isReplying = true
                                                 commentID = comment.id
@@ -145,6 +160,7 @@ struct CommentsComponent: View {
         commentID: .constant(0),
         reply: .constant(""),
         isReplying: .constant(false),
-        replys_to: .constant("")
+        replys_to: .constant(""),
+        isCommenting: .constant(false)
     )
 }

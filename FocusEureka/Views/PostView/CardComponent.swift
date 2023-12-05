@@ -41,8 +41,11 @@ struct CardComponent: View {
                             }
                         },
                         label: {
-                            Image(systemName: "heart.circle")
-                            Text("\(Likes)")
+                            HStack(spacing:3){
+                                Image(systemName: "heart.circle")
+                                Text("\(Likes)")
+                            }
+
                         })
                 }
             }
