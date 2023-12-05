@@ -24,7 +24,9 @@ struct PostDetailView: View {
     @State var replys_to:String = ""
     @FocusState var focusTextField: userInput?
     //varaible for mapkit
-    @State var mapCoordination: MapCameraPosition = .region(.defaultRegion)
+    @State var mapCamreaPosition: MapCameraPosition = .automatic
+    @State var coordination = [MKMapItem]()
+    @State var mapSelection: MKMapItem?
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -117,15 +119,27 @@ struct PostDetailView: View {
                 .padding(.bottom)
                 
                 //Map
-                Map(position: $mapCoordination){
-                    
+                Map(position: $mapCamreaPosition, selection: $mapSelection){
+                    ForEach(coordination, id: \.self){ address in
+                        let mark = address.placemark
+                        Marker(mark.name ?? "", coordinate: mark.coordinate)
+                    }
                 }
                 .frame(width: 350, height: 200)
-//                .mapStyle(.standard)
                 .mapControls{
                     MapCompass()
-                    MapPitchToggle()
                 }
+                .overlay(alignment: .bottomTrailing) {
+                    if(mapSelection != nil){
+                        Button {
+                            mapSelection?.openInMaps()
+                        } label: {
+                            Image(systemName: "map.fill")
+                        }
+                        .padding()
+                    }
+                }
+
                 //address
                 HStack{
                     Image(systemName: "location")
@@ -220,6 +234,7 @@ struct PostDetailView: View {
         .task{
             Task{
                 try await postVM.fetchSinglePost(postID: detailedPost.id)
+                await findLocation()
             }
         }
         .sheet(isPresented: $isGrouping, content: {
@@ -227,13 +242,23 @@ struct PostDetailView: View {
         })
         
     }
-}
-
-extension MKCoordinateRegion {
-    static var defaultRegion: MKCoordinateRegion{
-        return .init(center: CLLocationCoordinate2D(latitude: 40.776676, longitude: -73.971321), latitudinalMeters: 5000, longitudinalMeters: 5000)
+    
+    func findLocation() async{
+        let request = MKLocalSearch.Request()
+        let address = postVM.singlePost?.address ?? ""
+        let city = postVM.singlePost?.city ?? ""
+        let state = postVM.singlePost?.state ?? ""
+        let zipcode = postVM.singlePost?.zipcode ?? ""
+        let addressString = address + " " + city + " " + state + ", " + zipcode
+            
+        print(addressString)
+        request.naturalLanguageQuery = addressString
+        let results = try? await MKLocalSearch(request: request).start()
+        self.coordination = results?.mapItems ?? []
+        self.mapCamreaPosition = .region(results!.boundingRegion)
     }
 }
+
 #Preview {
     PostDetailView(
         detailedPost:
