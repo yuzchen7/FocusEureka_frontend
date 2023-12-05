@@ -11,5 +11,6 @@ struct PostLikes: Codable{
     let user_id: Int
     let post_id: Int
     let user: Owner?
+    let message: Int?
     
 }
