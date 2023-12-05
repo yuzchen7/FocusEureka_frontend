@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PostDetailView: View {
     var detailedPost:Posts
@@ -22,6 +23,8 @@ struct PostDetailView: View {
     @State var isReplying: Bool = false
     @State var replys_to:String = ""
     @FocusState var focusTextField: userInput?
+    //varaible for mapkit
+    @State var mapCoordination: MapCameraPosition = .region(.defaultRegion)
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -57,6 +60,7 @@ struct PostDetailView: View {
                     .frame(width: 30)
                 }
                 .padding(.horizontal)
+                //Time & lcoation
                 HStack(spacing:1){
                     HStack{
                         if(postVM.singlePost?.event == true){
@@ -111,6 +115,17 @@ struct PostDetailView: View {
                 .padding(.horizontal)
                 .padding(.top)
                 .padding(.bottom)
+                
+                //Map
+                Map(position: $mapCoordination){
+                    
+                }
+                .frame(width: 350, height: 200)
+//                .mapStyle(.standard)
+                .mapControls{
+                    MapCompass()
+                    MapPitchToggle()
+                }
                 //address
                 HStack{
                     Image(systemName: "location")
@@ -121,6 +136,7 @@ struct PostDetailView: View {
                 }
                 .padding(.top)
                 .padding(.leading)
+                //posted time & Likes button
                 HStack{
                     Text(" \(postVM.singlePost?.createdAt ?? "")")
                         .font(.caption2)
@@ -153,6 +169,7 @@ struct PostDetailView: View {
                 .padding(.horizontal)
                 CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to, isCommenting: $isCommenting)
             }
+            //textfield for comment
             if(isCommenting){
                 TextField("",text: $comment)
                     .disableAutocorrection(true)
@@ -173,6 +190,7 @@ struct PostDetailView: View {
                         }
                     }
             }
+            //textfield for reply
             if(isReplying){
                 TextField("",text: $reply)
                     .disableAutocorrection(true)
@@ -211,6 +229,11 @@ struct PostDetailView: View {
     }
 }
 
+extension MKCoordinateRegion {
+    static var defaultRegion: MKCoordinateRegion{
+        return .init(center: CLLocationCoordinate2D(latitude: 40.776676, longitude: -73.971321), latitudinalMeters: 5000, longitudinalMeters: 5000)
+    }
+}
 #Preview {
     PostDetailView(
         detailedPost:
