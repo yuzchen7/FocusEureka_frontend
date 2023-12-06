@@ -236,4 +236,31 @@ extension PostsViewModel{
             RColumns = RC
         }
     }
+    
+    func userAddLikes(postID: Int, userID: Int) async throws{
+        do{
+            likesRes = try await swiftxios.post(
+                "http://localhost:8080/api/posts/Likes",
+                [
+                    "post_id" : postID,
+                    "user_id" : userID
+                ],
+                [
+                    "application/json" : "Content-Type"
+                ]
+            )
+        }catch Swiftxios.FetchError.invalidURL {
+            print("function signIn from class Swiftxios has URL error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidResponse {
+            print("function signIn from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidData {
+            print("function signIn from class Swiftxios has response Data error (╯’ – ‘)╯︵")
+        } catch Swiftxios.FetchError.invalidObjectConvert {
+            print("function signIn from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
+        } catch {
+            print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
+        }
+        loadUserPostData(userID: userID)
+        try await fetchSinglePost(postID: postID)
+    }
 }

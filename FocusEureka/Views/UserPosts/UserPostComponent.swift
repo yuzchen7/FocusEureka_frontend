@@ -14,6 +14,8 @@ struct UserPostComponent: View {
     var postLColumn:[Posts]
     var postRColumn:[Posts]
     @EnvironmentObject var postVM : PostsViewModel
+    @EnvironmentObject var loginViewModel: LoginViewModel
+
     var body: some View {
         ScrollView(showsIndicators: false){
             HStack(alignment: .top, spacing: 1){
@@ -24,7 +26,7 @@ struct UserPostComponent: View {
                         ){
                             UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
-                                          userId: 1
+                                              userId: loginViewModel.currentUser?.id ?? 0
                             )
                         }
                     }
@@ -36,7 +38,7 @@ struct UserPostComponent: View {
                         ){
                             UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
-                                          userId: 1)
+                                          userId: loginViewModel.currentUser?.id ?? 0)
                         }
                     }
                 }

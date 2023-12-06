@@ -36,7 +36,7 @@ struct UserCardComponent: View {
                         Button(
                             action: {
                                 Task{
-                                    try await postVM.addLikes(postID: postId, userID: userId)
+                                    try await postVM.userAddLikes(postID: postId, userID: userId)
                                 }
                             },
                             label: {
