@@ -49,6 +49,7 @@
 		2AC8B2172B0AB58C001D3388 /* PostComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8B2162B0AB58C001D3388 /* PostComponent.swift */; };
 		2AC8B2192B0AE229001D3388 /* CommentsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC8B2182B0AE229001D3388 /* CommentsComponent.swift */; };
 		2AD539B42B2010C000E5D2D6 /* UserPostComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD539B32B2010C000E5D2D6 /* UserPostComponent.swift */; };
+		2AD539B62B2011BE00E5D2D6 /* UserCardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD539B52B2011BE00E5D2D6 /* UserCardComponent.swift */; };
 		C40A28222B1C1C3B008E57F2 /* FriendAcceptResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40A28212B1C1C3B008E57F2 /* FriendAcceptResult.swift */; };
 		C427DD462B06B11200F7F704 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C427DD452B06B11200F7F704 /* AccountView.swift */; };
 		C437EC852B195E9500774C63 /* SearchFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC842B195E9500774C63 /* SearchFriend.swift */; };
@@ -96,6 +97,7 @@
 		2AC8B2162B0AB58C001D3388 /* PostComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostComponent.swift; sourceTree = "<group>"; };
 		2AC8B2182B0AE229001D3388 /* CommentsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsComponent.swift; sourceTree = "<group>"; };
 		2AD539B32B2010C000E5D2D6 /* UserPostComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostComponent.swift; sourceTree = "<group>"; };
+		2AD539B52B2011BE00E5D2D6 /* UserCardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardComponent.swift; sourceTree = "<group>"; };
 		C40A28212B1C1C3B008E57F2 /* FriendAcceptResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAcceptResult.swift; sourceTree = "<group>"; };
 		C427DD452B06B11200F7F704 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		C437EC842B195E9500774C63 /* SearchFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriend.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				2AD539B32B2010C000E5D2D6 /* UserPostComponent.swift */,
+				2AD539B52B2011BE00E5D2D6 /* UserCardComponent.swift */,
 			);
 			path = UserPosts;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				2A47F84A2B06C0D100039B14 /* PostDetailView.swift in Sources */,
 				2A47F83B2B06BCA800039B14 /* Image_set.swift in Sources */,
 				2A47F84D2B06C15200039B14 /* CreatePostViewModel.swift in Sources */,
+				2AD539B62B2011BE00E5D2D6 /* UserCardComponent.swift in Sources */,
 				2A47F8412B06BCFE00039B14 /* Posts.swift in Sources */,
 				2A47F84F2B06C17500039B14 /* CreatePost.swift in Sources */,
 				2AD539B42B2010C000E5D2D6 /* UserPostComponent.swift in Sources */,
