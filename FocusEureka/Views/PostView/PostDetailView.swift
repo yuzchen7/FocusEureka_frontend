@@ -29,6 +29,8 @@ struct PostDetailView: View {
     @State var coordination = [MKMapItem]()
     @State var mapSelection: MKMapItem?
     @State var undefinedAddress: Bool = false
+    @State var showFullScreenMap: Bool = false
+    
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -121,34 +123,42 @@ struct PostDetailView: View {
                 .padding(.bottom)
                 
                 //Map
-                Map(position: $mapCamreaPosition, selection: $mapSelection){
-                    ForEach(coordination, id: \.self){ address in
-                        let mark = address.placemark
-                        Marker(mark.name ?? "", coordinate: mark.coordinate)
-                    }
-                }
-                .frame(width: 350, height: 200)
-                .mapControls{
-                    MapCompass()
-                }
-                .overlay(alignment: .bottomTrailing) {
-                    if(mapSelection != nil){
-                        Button {
-                            mapSelection?.openInMaps()
-                        } label: {
-                            Image(systemName: "map.fill")
+                Button(action: {
+                    self.showFullScreenMap = true
+                }, label: {
+                    Map(position: $mapCamreaPosition, selection: $mapSelection){
+                        ForEach(coordination, id: \.self){ address in
+                            let mark = address.placemark
+                            Marker(mark.name ?? "", coordinate: mark.coordinate)
                         }
-                        .padding()
                     }
-                }
-                .overlay(alignment: .center) {
-                    if(undefinedAddress ){
-                        Text("Unknown Address")
-                            .background(Color.mint)
-                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .frame(width: 350, height: 200)
+                    .mapControls{
+                        MapCompass()
                     }
-                }
-
+                    .overlay(alignment: .bottomTrailing) {
+                        if(mapSelection != nil){
+                            Button {
+                                mapSelection?.openInMaps()
+                            } label: {
+                                Image(systemName: "map.fill")
+                            }
+                            .padding()
+                        }
+                    }
+                    .overlay(alignment: .center) {
+                        if(undefinedAddress ){
+                            Text("Unknown Address")
+                                .background(Color.mint)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        }
+                    }
+                })
+                .sheet(isPresented: $showFullScreenMap, content: {
+                    FullScreenMapView(mapSelection: $mapSelection)
+                        .environmentObject(self.postVM)
+                })
+                
                 //address
                 HStack{
                     Image(systemName: "location")
