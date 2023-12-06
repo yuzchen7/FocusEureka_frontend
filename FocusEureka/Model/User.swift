@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Equatable {
     let id: Int;
     let username: String;
     let fristName: String;
@@ -77,6 +77,10 @@ struct User: Identifiable, Codable {
     
     mutating func setPassword(password: String) -> Void {
         self.password = password
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id && lhs.fullName == rhs.fullName
     }
 }
 

@@ -12,19 +12,24 @@ struct ScheuleView: View {
     var currentUser: User
     
     @ObservedObject var scheduleViewModel: ScheduleViewModel = ScheduleViewModel()
-    // @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
         if let schedules = scheduleViewModel.schedule, scheduleViewModel.isUpdate == false {
             VStack {
                 // single scheule view
                 ForEach(schedules.scheduleDay.indices, id: \.self) {index in
-                    Button(action: {
-                        scheduleViewModel.updateScheduleData(userId: self.currentUser.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
-                    }, label: {
-                        let element = schedules.scheduleDay[index]
+                    let element = schedules.scheduleDay[index]
+                    
+                    if currentUser == loginViewModel.currentUser! {
+                        Button(action: {
+                            scheduleViewModel.updateScheduleData(userId: self.currentUser.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
+                        }, label: {
+                            SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
+                        })
+                    } else {
                         SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
-                    })
+                    }
                 }
             }
         } else {
