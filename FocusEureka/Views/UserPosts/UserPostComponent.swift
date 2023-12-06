@@ -22,7 +22,7 @@ struct UserPostComponent: View {
                         NavigationLink(
                             value: post
                         ){
-                            CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                            UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
                                           userId: 1
                             )
@@ -34,7 +34,7 @@ struct UserPostComponent: View {
                         NavigationLink(
                             value: post
                         ){
-                            CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                            UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
                                           userId: 1)
                         }
@@ -43,8 +43,6 @@ struct UserPostComponent: View {
             }
         }
         .background(.gray.opacity(0.2))
-//        .navigationTitle("Interesting Spot")
-//        .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
                 .environmentObject(postVM)

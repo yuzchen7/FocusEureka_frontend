@@ -164,7 +164,7 @@ struct AccountView: View {
                     }
                     
                     if (self.isShowPost) {
-                        PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
+                        UserPostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
                                 .environmentObject(postVM)
                     }
                 }
