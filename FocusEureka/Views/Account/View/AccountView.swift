@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @StateObject var postVM = PostsViewModel()
     
     @State var isShowPost: Bool = true;
     @State var isShowSchedule: Bool = false;
@@ -161,8 +162,16 @@ struct AccountView: View {
                         // display FriendList page
                         FriendListView()
                     }
+                    
+                    if (self.isShowPost) {
+                        PostComponent(postLColumn: postVM.LColumns, postRColumn: postVM.RColumns)
+                                .environmentObject(postVM)
+                    }
                 }
                 .padding()
+                .onAppear(){
+                    postVM.loadUserPostData(userID: currentUser.id)
+                }
                 
                 Spacer()
                 
