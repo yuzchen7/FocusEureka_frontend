@@ -64,7 +64,7 @@ class CreatePostViewModel: ObservableObject{
     
     func uploadPost(title:String, contents:String, address:String, city:String, state:String,
                     zipcode:String, start_date:String, start_time:String, end_date:String,
-                    end_time:String, isEvent:Bool) async throws{
+                    end_time:String, isEvent:Bool, ownerid:Int) async throws{
         isLoading = true;
         if selectedImages.isEmpty{
             return
@@ -95,7 +95,7 @@ class CreatePostViewModel: ObservableObject{
                     "start_time":start_time,
                     "end_date":end_date,
                     "end_time":end_time,
-                    "ownerid":1,
+                    "ownerid":ownerid,
                     "event":isEvent,
                     "urls":ImageURL
                 ],
@@ -103,14 +103,6 @@ class CreatePostViewModel: ObservableObject{
                     "application/json" : "Content-Type"
                 ]
             )
-        } catch Swiftxios.FetchError.invalidURL {
-            print("function signIn from class Swiftxios has URL error (╯’ – ‘)╯︵")
-        } catch Swiftxios.FetchError.invalidResponse {
-            print("function signIn from class Swiftxios has HttpResponse error (╯’ – ‘)╯︵")
-        } catch Swiftxios.FetchError.invalidData {
-            print("function signIn from class Swiftxios has response Data error (╯’ – ‘)╯︵")
-        } catch Swiftxios.FetchError.invalidObjectConvert {
-            print("function signIn from class Swiftxios has Converting Data error (╯’ – ‘)╯︵")
         } catch {
             print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
         }

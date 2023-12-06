@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct PostDetailView: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel;
     var detailedPost:Posts
     enum userInput{
         case commentInput, userReply
@@ -174,7 +175,7 @@ struct PostDetailView: View {
                     Button(
                         action: {
                             Task{
-                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: loginViewModel.currentUser?.id ?? 0)
                             }
                         },
                         label: {
@@ -205,7 +206,7 @@ struct PostDetailView: View {
                     .onSubmit {
                         Task{
                             if(!comment.isEmpty && !comment.trimmingCharacters(in: .whitespaces).isEmpty){
-                                try await postVM.userInputComment(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: comment)
+                                try await postVM.userInputComment(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 1, userInput: comment)
                             }
                             isCommenting = false
                             comment = ""
@@ -227,9 +228,9 @@ struct PostDetailView: View {
                         Task{
                             if(!reply.isEmpty && !reply.trimmingCharacters(in: .whitespaces).isEmpty){
                                 if(replys_to.isEmpty){
-                                    try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID)
+                                    try await postVM.userInputReply(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID)
                                 }else{
-                                    try await postVM.replyToResponse(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID, userReplied: replys_to)
+                                    try await postVM.replyToResponse(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID, userReplied: replys_to)
                                 }
                             }
                             isReplying = false

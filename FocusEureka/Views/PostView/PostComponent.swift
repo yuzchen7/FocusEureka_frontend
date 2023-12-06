@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PostComponent: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel;
     var pinterestView: [GridItem] = [
         .init(.flexible())
     ]
@@ -24,8 +25,7 @@ struct PostComponent: View {
                         ){
                             CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
-                                          userId: 1
-                            )
+                                          userId: loginViewModel.currentUser?.id ?? 0)
                         }
                     }
                 }
@@ -36,7 +36,7 @@ struct PostComponent: View {
                         ){
                             CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
-                                          userId: 1)
+                                          userId: loginViewModel.currentUser?.id ?? 0)
                         }
                     }
                 }
