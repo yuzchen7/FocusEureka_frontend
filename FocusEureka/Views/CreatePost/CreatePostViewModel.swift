@@ -107,6 +107,8 @@ class CreatePostViewModel: ObservableObject{
             print("unknow error -> unexpected \(error.localizedDescription) (╯’ – ‘)╯︵")
         }
         self.selectedImages.removeAll()
+        self.ImageURL.removeAll()
+        self.inputImages.removeAll()
         isLoading = false;
     }
 
