@@ -27,6 +27,7 @@ struct PostDetailView: View {
     @State var mapCamreaPosition: MapCameraPosition = .automatic
     @State var coordination = [MKMapItem]()
     @State var mapSelection: MKMapItem?
+    @State var undefinedAddress: Bool = false
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -137,6 +138,13 @@ struct PostDetailView: View {
                             Image(systemName: "map.fill")
                         }
                         .padding()
+                    }
+                }
+                .overlay(alignment: .center) {
+                    if(undefinedAddress ){
+                        Text("Unknown Address")
+                            .background(Color.mint)
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                 }
 
@@ -255,6 +263,9 @@ struct PostDetailView: View {
         request.naturalLanguageQuery = addressString
         let results = try? await MKLocalSearch(request: request).start()
         self.coordination = results?.mapItems ?? []
+        if(results?.boundingRegion == nil){
+            undefinedAddress = true
+        }
         self.mapCamreaPosition = .region(results?.boundingRegion ?? .defaultRegion)
     }
 }
