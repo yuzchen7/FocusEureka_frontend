@@ -14,6 +14,7 @@
 		C437EC892B198BD800774C63 /* RequestFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC882B198BD800774C63 /* RequestFriendView.swift */; };
 		C437EC8B2B198BE300774C63 /* RequestFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC8A2B198BE300774C63 /* RequestFriendModel.swift */; };
 		C437EC8D2B199B1E00774C63 /* FriendRequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437EC8C2B199B1E00774C63 /* FriendRequestResult.swift */; };
+		C43B84F22B1FF3E60082E345 /* OtherUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84F12B1FF3E60082E345 /* OtherUserView.swift */; };
 		C441E8022B13DF4600CD1C49 /* FriendListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8012B13DF4600CD1C49 /* FriendListModel.swift */; };
 		C441E8042B13E15000CD1C49 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8032B13E15000CD1C49 /* FriendListView.swift */; };
 		C441E8062B13E28E00CD1C49 /* UserSingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C441E8052B13E28E00CD1C49 /* UserSingleCardView.swift */; };
@@ -45,6 +46,7 @@
 		C437EC882B198BD800774C63 /* RequestFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendView.swift; sourceTree = "<group>"; };
 		C437EC8A2B198BE300774C63 /* RequestFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendModel.swift; sourceTree = "<group>"; };
 		C437EC8C2B199B1E00774C63 /* FriendRequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestResult.swift; sourceTree = "<group>"; };
+		C43B84F12B1FF3E60082E345 /* OtherUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserView.swift; sourceTree = "<group>"; };
 		C441E8012B13DF4600CD1C49 /* FriendListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListModel.swift; sourceTree = "<group>"; };
 		C441E8032B13E15000CD1C49 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		C441E8052B13E28E00CD1C49 /* UserSingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSingleCardView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C43B84EB2B1FF3860082E345 /* OtherUser */ = {
+			isa = PBXGroup;
+			children = (
+				C43B84EC2B1FF3910082E345 /* View */,
+			);
+			path = OtherUser;
+			sourceTree = "<group>";
+		};
+		C43B84EC2B1FF3910082E345 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C43B84F12B1FF3E60082E345 /* OtherUserView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C441E7FE2B13DE7600CD1C49 /* FriendList */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +282,7 @@
 		C4BC8AF22B0347BC00DFBED1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C43B84EB2B1FF3860082E345 /* OtherUser */,
 				C4927E672B06AE2D006CA4A8 /* Account */,
 				C4927E552B06A9AB006CA4A8 /* Authentication */,
 				C441E7FE2B13DE7600CD1C49 /* FriendList */,
@@ -377,6 +396,7 @@
 				C4BC8AE62B03463200DFBED1 /* ContentView.swift in Sources */,
 				C427DD462B06B11200F7F704 /* AccountView.swift in Sources */,
 				C437EC892B198BD800774C63 /* RequestFriendView.swift in Sources */,
+				C43B84F22B1FF3E60082E345 /* OtherUserView.swift in Sources */,
 				C4BC8AF92B03492900DFBED1 /* SwiftxiosCodeable.swift in Sources */,
 				C4927E582B06A9D4006CA4A8 /* LoginViewModel.swift in Sources */,
 				C40A28222B1C1C3B008E57F2 /* FriendAcceptResult.swift in Sources */,
