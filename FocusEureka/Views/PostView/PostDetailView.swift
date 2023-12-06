@@ -27,6 +27,8 @@ struct PostDetailView: View {
     @State var mapCamreaPosition: MapCameraPosition = .automatic
     @State var coordination = [MKMapItem]()
     @State var mapSelection: MKMapItem?
+    @State var showFullScreenMap: Bool = false
+    
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -119,27 +121,35 @@ struct PostDetailView: View {
                 .padding(.bottom)
                 
                 //Map
-                Map(position: $mapCamreaPosition, selection: $mapSelection){
-                    ForEach(coordination, id: \.self){ address in
-                        let mark = address.placemark
-                        Marker(mark.name ?? "", coordinate: mark.coordinate)
-                    }
-                }
-                .frame(width: 350, height: 200)
-                .mapControls{
-                    MapCompass()
-                }
-                .overlay(alignment: .bottomTrailing) {
-                    if(mapSelection != nil){
-                        Button {
-                            mapSelection?.openInMaps()
-                        } label: {
-                            Image(systemName: "map.fill")
+                Button(action: {
+                    self.showFullScreenMap = true
+                }, label: {
+                    Map(position: $mapCamreaPosition, selection: $mapSelection){
+                        ForEach(coordination, id: \.self){ address in
+                            let mark = address.placemark
+                            Marker(mark.name ?? "", coordinate: mark.coordinate)
                         }
-                        .padding()
                     }
-                }
-
+                    .frame(width: 350, height: 200)
+                    .mapControls{
+                        MapCompass()
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if(mapSelection != nil){
+                            Button {
+                                mapSelection?.openInMaps()
+                            } label: {
+                                Image(systemName: "map.fill")
+                            }
+                            .padding()
+                        }
+                    }
+                })
+                .sheet(isPresented: $showFullScreenMap, content: {
+                    FullScreenMapView(mapSelection: $mapSelection)
+                        .environmentObject(self.postVM)
+                })
+                
                 //address
                 HStack{
                     Image(systemName: "location")
