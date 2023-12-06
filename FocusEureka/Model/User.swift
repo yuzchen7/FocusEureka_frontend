@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct User: Identifiable, Codable, Equatable {
+struct User: Identifiable, Codable, Equatable, Hashable{
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     let id: Int;
     let username: String;
     let fristName: String;

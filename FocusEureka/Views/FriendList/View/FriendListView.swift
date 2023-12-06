@@ -62,8 +62,22 @@ struct FriendListView: View {
                     ForEach(friendList.indices, id: \.self) {index in
                         let currentUser = friendList[index]
                         
-                        NavigationLink(destination: { OtherUserView(currentUser: currentUser)
-                        }, label: {
+//                        NavigationLink(destination: { OtherUserView(currentUser: currentUser)
+//                        }, label: {
+//                            UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
+//                                .frame(height: 40)
+//                                .swipeActions(edge: .trailing) {
+//                                    Button(action: {
+//                                        friendListModel.deleteFriend(id: loginViewModel.currentUser!.id, friendId: currentUser.id)
+//                                    }, label: {
+//                                        Image(systemName: "trash")
+//                                    })
+//                                    .tint(.red)
+//                                }
+//                        })
+                        NavigationLink(
+                            value: currentUser
+                        ){
                             UserSingleCardView(initials: currentUser.initials, fullname: currentUser.fullName)
                                 .frame(height: 40)
                                 .swipeActions(edge: .trailing) {
@@ -74,12 +88,16 @@ struct FriendListView: View {
                                     })
                                     .tint(.red)
                                 }
-                        })
+                        }
+
                         
                     }
                 }
                 .listStyle(PlainListStyle())
             }
+            .navigationDestination(for: User.self, destination: { friend in
+                OtherUserView(currentUser: friend)
+            })
             .onChange(of: keyword) { oldValue, newValue in
                 if (oldValue != newValue) {
                     friendListModel.filterFriendList(searchText: newValue)

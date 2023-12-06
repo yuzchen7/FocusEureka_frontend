@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OtherUserView: View {
+//    var pinterestView: [GridItem] = [
+//        .init(.flexible())
+//    ]
     var currentUser: User
     
     @State var isShowPost: Bool = true;
@@ -113,8 +116,38 @@ struct OtherUserView: View {
                     }
                 }
                 if (self.isShowPost) {
-                    UserPostComponent(postLColumn: otherUserPostVM.LColumns, postRColumn: otherUserPostVM.RColumns)
+                    ScrollView(showsIndicators: false){
+                        HStack(alignment: .top, spacing: 1){
+                            LazyVGrid(columns: pinterestView) {
+                                ForEach(otherUserPostVM.LColumns){ post in
+                                    NavigationLink(
+                                        value: post
+                                    ){
+                                        UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                                                      postId:post.id,
+                                                          userId: self.currentUser.id
+                                        )
+                                    }
+                                }
+                            }
+                            LazyVGrid(columns: pinterestView) {
+                                ForEach(otherUserPostVM.RColumns){ post in
+                                    NavigationLink(
+                                        value: post
+                                    ){
+                                        UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                                                      postId:post.id,
+                                                      userId: self.currentUser.id)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .background(.gray.opacity(0.2))
+                    .navigationDestination(for: Posts.self, destination: { detailPost in
+                        PostDetailView(detailedPost: detailPost)
                             .environmentObject(otherUserPostVM)
+                    })
                 }
             }
             .padding()
