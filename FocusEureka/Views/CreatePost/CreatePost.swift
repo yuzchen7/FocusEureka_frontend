@@ -46,6 +46,7 @@ struct CreatePost: View {
                 Section{
                     
                     TextEditor(text: $contents)
+                        .disableAutocorrection(true)
                         .font(.custom("HelveticaNeue", size: 18))
                         .lineSpacing(5)
                         .frame(height: 260)
