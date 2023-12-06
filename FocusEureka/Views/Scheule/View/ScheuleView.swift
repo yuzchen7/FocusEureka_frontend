@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ScheuleView: View {
     
+    var currentUser: User
+    
     @ObservedObject var scheduleViewModel: ScheduleViewModel = ScheduleViewModel()
-    @EnvironmentObject var loginViewModel: LoginViewModel
+    // @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
         if let schedules = scheduleViewModel.schedule, scheduleViewModel.isUpdate == false {
@@ -18,7 +20,7 @@ struct ScheuleView: View {
                 // single scheule view
                 ForEach(schedules.scheduleDay.indices, id: \.self) {index in
                     Button(action: {
-                        scheduleViewModel.updateScheduleData(userId: loginViewModel.currentUser!.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
+                        scheduleViewModel.updateScheduleData(userId: self.currentUser.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
                     }, label: {
                         let element = schedules.scheduleDay[index]
                         SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
@@ -28,12 +30,12 @@ struct ScheuleView: View {
         } else {
             Text("Loading...")
                 .onAppear {
-                    self.scheduleViewModel.getScheduleData(userId: loginViewModel.currentUser!.id)
+                    self.scheduleViewModel.getScheduleData(userId: currentUser.id)
                 }
         }
     }
 }
 
 #Preview {
-    ScheuleView(scheduleViewModel: ScheduleViewModel())
+    ScheuleView(currentUser: User(id: 1, username: "Kaifeng111", fristName: "Kai", middleName: "", lastName: "Feng"), scheduleViewModel: ScheduleViewModel())
 }
