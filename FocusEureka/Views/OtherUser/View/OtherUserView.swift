@@ -15,8 +15,8 @@ struct OtherUserView: View {
     
     @State var isShowPost: Bool = true;
     @State var isShowSchedule: Bool = false;
-    @StateObject var otherUserPostVM = PostsViewModel()
-
+    @StateObject var PostVM = PostsViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
     var body: some View {
 //        NavigationStack{
         VStack{
@@ -116,43 +116,13 @@ struct OtherUserView: View {
                     }
                 }
                 if (self.isShowPost) {
-                    ScrollView(showsIndicators: false){
-                        HStack(alignment: .top, spacing: 1){
-                            LazyVGrid(columns: pinterestView) {
-                                ForEach(otherUserPostVM.LColumns){ post in
-                                    NavigationLink(
-                                        value: post
-                                    ){
-                                        UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
-                                                      postId:post.id,
-                                                          userId: self.currentUser.id
-                                        )
-                                    }
-                                }
-                            }
-                            LazyVGrid(columns: pinterestView) {
-                                ForEach(otherUserPostVM.RColumns){ post in
-                                    NavigationLink(
-                                        value: post
-                                    ){
-                                        UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
-                                                      postId:post.id,
-                                                      userId: self.currentUser.id)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .background(.gray.opacity(0.2))
-                    .navigationDestination(for: Posts.self, destination: { detailPost in
-                        PostDetailView(detailedPost: detailPost)
-                            .environmentObject(otherUserPostVM)
-                    })
+                    OtherUserPostView(postLColumn: PostVM.LColumns, postRColumn: PostVM.RColumns, friendID: self.currentUser.id)
+                            .environmentObject(PostVM)
                 }
             }
             .padding()
             .onAppear(){
-                otherUserPostVM.loadUserPostData(userID: self.currentUser.id)
+                PostVM.loadUserPostData(userID: self.currentUser.id)
             }
             Spacer()
             
