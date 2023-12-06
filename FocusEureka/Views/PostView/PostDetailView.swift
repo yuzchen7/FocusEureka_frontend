@@ -255,7 +255,13 @@ struct PostDetailView: View {
         request.naturalLanguageQuery = addressString
         let results = try? await MKLocalSearch(request: request).start()
         self.coordination = results?.mapItems ?? []
-        self.mapCamreaPosition = .region(results!.boundingRegion)
+        self.mapCamreaPosition = .region(results?.boundingRegion ?? .defaultRegion)
+    }
+}
+
+extension MKCoordinateRegion {
+    static var defaultRegion: MKCoordinateRegion{
+        return .init(center: CLLocationCoordinate2D(latitude: 40.776676, longitude: -73.971321), latitudinalMeters: 5000, longitudinalMeters: 5000)
     }
 }
 
