@@ -12,9 +12,12 @@ struct OtherUserView: View {
     
     @State var isShowPost: Bool = true;
     @State var isShowSchedule: Bool = false;
-    
+    @StateObject var otherUserPostVM = PostsViewModel()
+
     var body: some View {
-        NavigationStack{
+//        NavigationStack{
+        VStack{
+
             
             VStack() {
                 
@@ -109,10 +112,15 @@ struct OtherUserView: View {
                         ScheuleView(currentUser: self.currentUser)
                     }
                 }
-                
+                if (self.isShowPost) {
+                    UserPostComponent(postLColumn: otherUserPostVM.LColumns, postRColumn: otherUserPostVM.RColumns)
+                            .environmentObject(otherUserPostVM)
+                }
             }
             .padding()
-            
+            .onAppear(){
+                otherUserPostVM.loadUserPostData(userID: self.currentUser.id)
+            }
             Spacer()
             
         } // VStack
