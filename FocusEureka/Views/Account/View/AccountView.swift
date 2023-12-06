@@ -152,7 +152,9 @@ struct AccountView: View {
                 // content view section
                 Section {
                     if (self.isShowSchedule) {
-                        ScheuleView()
+                        ScrollView {
+                            ScheuleView(currentUser: loginViewModel.currentUser!)
+                        }
                     }
                     
                     if (self.isShowFriendList) {
