@@ -198,3 +198,42 @@ extension PostsViewModel{
         try await fetchSinglePost(postID: postID)
     }
 }
+
+//current user & friend personal posts
+extension PostsViewModel{
+    //network calling to backend
+    func fetchUserPosts(ID: Int) async throws{
+        guard let url = URL(string:baseURL + "user?userId=\(ID)") else{
+            return
+        }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let fetchedPosts = try JSONDecoder().decode([Posts].self, from: data)
+            self.posts = fetchedPosts
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    func loadUserPostData(userID: Int) {
+        Task (priority: .medium){
+            posts.removeAll()
+            var LC = [Posts]()
+            var RC = [Posts]()
+            try await fetchUserPosts(ID:userID)
+            var counter = 0
+            for fetchedPost in posts{
+                if(counter%2==0){
+                    LC.append(fetchedPost)
+                }
+                else{
+                    RC.append(fetchedPost)
+
+                }
+                counter+=1
+            }
+            LColumns = LC
+            RColumns = RC
+        }
+    }
+}
