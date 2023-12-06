@@ -105,7 +105,9 @@ struct OtherUserView: View {
             // content view section
             Section {
                 if (self.isShowSchedule) {
-                    ScheuleView(currentUser: self.currentUser)
+                    ScrollView {
+                        ScheuleView(currentUser: self.currentUser)
+                    }
                 }
                 
             }
