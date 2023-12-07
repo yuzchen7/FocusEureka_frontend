@@ -83,7 +83,7 @@ class CreatePostViewModel: ObservableObject{
                 self.ImageURL.append("\(downloadURL)")
             }
             fetchedPost = try await swiftxios.post(
-                "http://localhost:8080/api/posts/create",
+                "https://focuseureka-backend.onrender.com/api/posts/create",
                 [
                     "title":title,
                     "contents":contents,

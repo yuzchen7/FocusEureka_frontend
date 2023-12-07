@@ -17,7 +17,7 @@ class RequestFriendModel: ObservableObject {
         Task {
             do {
                 print("requestFriendFetch run -> user ID : \(id)")
-                let urlString: String = "http://localhost:8080/api/friend_request/receiving?targetid=\(id)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/friend_request/receiving?targetid=\(id)"
                 self.requestFriendList = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
                 self.isUpdate = false
             } catch Swiftxios.FetchError.invalidURL {
@@ -38,7 +38,7 @@ class RequestFriendModel: ObservableObject {
         Task {
             do {
                 print("acceptFriendRequestFetch run -> userID : \(id), targetID : \(targetID)")
-                let urlString: String = "http://localhost:8080/api/friend_request/acceptRequest"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/friend_request/acceptRequest"
                 self.friendAcceptResult = try await swiftxios.post(
                     urlString,
                     [
@@ -71,7 +71,7 @@ class RequestFriendModel: ObservableObject {
         Task {
             do {
                 print("declineFriendRequestFetch run -> userID : \(id), targetID : \(targetID)")
-                let urlString: String = "http://localhost:8080/api/friend_request/rejectRequest?currentUser=\(id)&sender=\(targetID)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/friend_request/rejectRequest?currentUser=\(id)&sender=\(targetID)"
                 var _: Int? = try await swiftxios.delete(urlString, ["application/json" : "Content-Type"])
                 self.isUpdate = true
             } catch Swiftxios.FetchError.invalidURL {

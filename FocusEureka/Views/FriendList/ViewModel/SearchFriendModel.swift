@@ -16,7 +16,7 @@ class SearchFriendModel: ObservableObject {
         Task {
             do {
                 print("searchFetch run -> username : \(username)")
-                let urlString: String = "http://localhost:8080/api/users/findUserAll?username=\(username)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/users/findUserAll?username=\(username)"
                 self.resultFriendList = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
             } catch Swiftxios.FetchError.invalidURL {
                 print("function getScheduleData from class Swiftxios has URL error (╯’ – ‘)╯︵")
@@ -36,7 +36,7 @@ class SearchFriendModel: ObservableObject {
         Task {
             do {
                 print("createRequestFetch run -> currentUser : \(id), targetId : \(targetId)")
-                let urlString: String = "http://localhost:8080/api/friend_request/createRequest"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/friend_request/createRequest"
                 self.requestResult = try await swiftxios.post(
                     urlString,
                     [

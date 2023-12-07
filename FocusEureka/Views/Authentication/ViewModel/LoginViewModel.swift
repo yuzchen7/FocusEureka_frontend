@@ -28,7 +28,7 @@ class LoginViewModel: ObservableObject {
     func signOut() {
         Task {
             do {
-                let urlString: String = "http://localhost:8080/auth/logout"
+                let urlString: String = "https://focuseureka-backend.onrender.com/auth/logout"
                 guard let url: URL = URL(string: urlString) else {
                     throw LoginViewModelError.invalidURL
                 }
@@ -58,7 +58,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func fetchUser() async {
-        let urlString: String = "http://localhost:8080/auth/me"
+        let urlString: String = "https://focuseureka-backend.onrender.com/auth/me"
         print(urlString);
         
         do {
@@ -104,7 +104,7 @@ extension LoginViewModel {
         Task {
             do {
                 self.sessionUser = try await swiftxios.post(
-                        "http://localhost:8080/auth/signup",
+                        "https://focuseureka-backend.onrender.com/auth/signup",
                         [
                             "username" : username,
                             "password" : password,
@@ -207,7 +207,7 @@ extension LoginViewModel {
         Task {
             do {
                 self.sessionUser = try await swiftxios.post(
-                        "http://localhost:8080/auth/login",
+                        "https://focuseureka-backend.onrender.com/auth/login",
                         [
                             "username" : username,
                             "password" : password,

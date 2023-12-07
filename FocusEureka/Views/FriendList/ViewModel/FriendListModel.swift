@@ -30,7 +30,7 @@ class FriendListModel: ObservableObject {
         Task {
             do {
                 print("getFriendList run -> current user id:\(id)")
-                let urlString: String = "http://localhost:8080/api/users/friendList?onwerid=\(id)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/users/friendList?onwerid=\(id)"
                 print("url -> \(urlString)")
                 self.friendList = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
                 self.filteredFriendList = self.friendList
@@ -53,7 +53,7 @@ class FriendListModel: ObservableObject {
         Task {
             do {
                 print("deleteFriend run -> current user id:\(id), friend id \(friendId)")
-                let urlString: String = "http://localhost:8080/api/friend_request?currentUser=\(id)&friend=\(friendId)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/friend_request?currentUser=\(id)&friend=\(friendId)"
                 print("url -> \(urlString)")
                 let row: Int? = try await swiftxios.delete(urlString, ["application/json" : "Content-Type"])
                 if let row = row, row <= 0 {

@@ -22,7 +22,7 @@ class PostsViewModel : ObservableObject{
     @Published var title = "Discover & Enjoy"
     @State var fetchedComment:Comments?
     var likesRes:PostLikes?
-    let baseURL =  "http://localhost:8080/api/posts/"
+    let baseURL =  "https://focuseureka-backend.onrender.com/api/posts/"
     
     
     func fetchSinglePost(postID: Int) async throws {
@@ -43,7 +43,7 @@ class PostsViewModel : ObservableObject{
     func addLikes(postID: Int, userID: Int) async throws{
         do{
             likesRes = try await swiftxios.post(
-                "http://localhost:8080/api/posts/Likes",
+                "https://focuseureka-backend.onrender.com/api/posts/Likes",
                 [
                     "post_id" : postID,
                     "user_id" : userID
@@ -142,7 +142,7 @@ extension PostsViewModel{
     
     func userInputComment(userID: Int, postID: Int, userInput: String) async throws{
         fetchedComment = try await swiftxios.post(
-            "http://localhost:8080/api/comments/write",
+            "https://focuseureka-backend.onrender.com/api/comments/write",
             [
                 "onwer_id":userID,
                 "post_id":postID,
@@ -158,7 +158,7 @@ extension PostsViewModel{
     
     func userInputReply(userID: Int, postID: Int, userInput: String, replyID:Int) async throws{
         fetchedComment = try await swiftxios.post(
-            "http://localhost:8080/api/comments/write",
+            "https://focuseureka-backend.onrender.com/api/comments/write",
             [
                 "onwer_id":userID,
                 "post_id":postID,
@@ -175,7 +175,7 @@ extension PostsViewModel{
     
     func replyToResponse(userID: Int, postID: Int, userInput: String, replyID:Int, userReplied: String) async throws{
         fetchedComment = try await swiftxios.post(
-            "http://localhost:8080/api/comments/write",
+            "https://focuseureka-backend.onrender.com/api/comments/write",
             [
                 "onwer_id": userID,
                 "post_id": postID,
@@ -232,7 +232,7 @@ extension PostsViewModel{
     func userAddLikes(postID: Int, userID: Int) async throws{
         do{
             likesRes = try await swiftxios.post(
-                "http://localhost:8080/api/posts/Likes",
+                "https://focuseureka-backend.onrender.com/api/posts/Likes",
                 [
                     "post_id" : postID,
                     "user_id" : userID
@@ -254,7 +254,7 @@ extension PostsViewModel{
     func  friendAddLikes(postID: Int, userID: Int, friendID: Int) async throws{
         do{
             likesRes = try await swiftxios.post(
-                "http://localhost:8080/api/posts/Likes",
+                "https://focuseureka-backend.onrender.com/api/posts/Likes",
                 [
                     "post_id" : postID,
                     "user_id" : userID

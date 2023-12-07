@@ -38,7 +38,7 @@ class ScheduleViewModel: ObservableObject {
         Task {
             do {
                 print("getScheduleData run -> ")
-                let urlString: String = "http://localhost:8080/api/schedule/update"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/schedule/update"
                 guard let day: String = matchDay(day: schedule!.scheduleDay[index].day) else {return}
                 self.schedule = try await swiftxios.put(
                     urlString,
@@ -70,7 +70,7 @@ class ScheduleViewModel: ObservableObject {
         Task {
             do {
                 print("getScheduleData run -> ")
-                let urlString: String = "http://localhost:8080/api/schedule/currentUser?userId=\(userId)"
+                let urlString: String = "https://focuseureka-backend.onrender.com/api/schedule/currentUser?userId=\(userId)"
                 self.schedule = try await swiftxios.get(urlString, ["application/json" : "Content-Type"])
                 // print(self.schedule ?? "nothing")
                 self.isUpdate = false
