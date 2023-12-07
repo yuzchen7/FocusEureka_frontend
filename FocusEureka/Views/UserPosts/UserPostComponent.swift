@@ -1,20 +1,21 @@
 //
-//  PostComponent.swift
+//  UserPostsView.swift
 //  FocusEureka
 //
-//  Created by kai on 11/19/23.
+//  Created by kai on 12/5/23.
 //
 
 import SwiftUI
 
-struct PostComponent: View {
-    @EnvironmentObject var loginViewModel: LoginViewModel;
+struct UserPostComponent: View {
     var pinterestView: [GridItem] = [
         .init(.flexible())
     ]
     var postLColumn:[Posts]
     var postRColumn:[Posts]
     @EnvironmentObject var postVM : PostsViewModel
+    @EnvironmentObject var loginViewModel: LoginViewModel
+
     var body: some View {
         ScrollView(showsIndicators: false){
             HStack(alignment: .top, spacing: 1){
@@ -23,9 +24,10 @@ struct PostComponent: View {
                         NavigationLink(
                             value: post
                         ){
-                            CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                            UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
-                                          userId: loginViewModel.currentUser?.id ?? 0)
+                                              userId: loginViewModel.currentUser?.id ?? 0
+                            )
                         }
                     }
                 }
@@ -34,7 +36,7 @@ struct PostComponent: View {
                         NavigationLink(
                             value: post
                         ){
-                            CardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
+                            UserCardComponent(imageURL: post.image_set.urls[0], title: post.title, Likes: post.post_likes?.count ?? 0, posterName: post.owner.username,
                                           postId:post.id,
                                           userId: loginViewModel.currentUser?.id ?? 0)
                         }
@@ -43,8 +45,6 @@ struct PostComponent: View {
             }
         }
         .background(.gray.opacity(0.2))
-//        .navigationTitle("Interesting Spot")
-//        .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: Posts.self, destination: { detailPost in
             PostDetailView(detailedPost: detailPost)
                 .environmentObject(postVM)
@@ -53,5 +53,5 @@ struct PostComponent: View {
 }
 
 #Preview {
-    PostComponent(postLColumn: [], postRColumn: [])
+    UserPostComponent(postLColumn: [], postRColumn: [])
 }

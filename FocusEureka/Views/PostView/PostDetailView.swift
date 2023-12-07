@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PostDetailView: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel;
     var detailedPost:Posts
     enum userInput{
         case commentInput, userReply
@@ -22,6 +24,13 @@ struct PostDetailView: View {
     @State var isReplying: Bool = false
     @State var replys_to:String = ""
     @FocusState var focusTextField: userInput?
+    //varaible for mapkit
+    @State var mapCamreaPosition: MapCameraPosition = .automatic
+    @State var coordination = [MKMapItem]()
+    @State var mapSelection: MKMapItem?
+    @State var undefinedAddress: Bool = false
+    @State var showFullScreenMap: Bool = false
+    
     var body: some View {
         VStack{
             ScrollView(showsIndicators: false){
@@ -57,6 +66,7 @@ struct PostDetailView: View {
                     .frame(width: 30)
                 }
                 .padding(.horizontal)
+                //Time & lcoation
                 HStack(spacing:1){
                     HStack{
                         if(postVM.singlePost?.event == true){
@@ -111,6 +121,44 @@ struct PostDetailView: View {
                 .padding(.horizontal)
                 .padding(.top)
                 .padding(.bottom)
+                
+                //Map
+                Button(action: {
+                    self.showFullScreenMap = true
+                }, label: {
+                    Map(position: $mapCamreaPosition, selection: $mapSelection){
+                        ForEach(coordination, id: \.self){ address in
+                            let mark = address.placemark
+                            Marker(mark.name ?? "", coordinate: mark.coordinate)
+                        }
+                    }
+                    .frame(width: 350, height: 200)
+                    .mapControls{
+                        MapCompass()
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if(mapSelection != nil){
+                            Button {
+                                mapSelection?.openInMaps()
+                            } label: {
+                                Image(systemName: "map.fill")
+                            }
+                            .padding()
+                        }
+                    }
+                    .overlay(alignment: .center) {
+                        if(undefinedAddress ){
+                            Text("Unknown Address")
+                                .background(Color.mint)
+                                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        }
+                    }
+                })
+                .sheet(isPresented: $showFullScreenMap, content: {
+                    FullScreenMapView(mapSelection: $mapSelection)
+                        .environmentObject(self.postVM)
+                })
+                
                 //address
                 HStack{
                     Image(systemName: "location")
@@ -121,6 +169,7 @@ struct PostDetailView: View {
                 }
                 .padding(.top)
                 .padding(.leading)
+                //posted time & Likes button
                 HStack{
                     Text(" \(postVM.singlePost?.createdAt ?? "")")
                         .font(.caption2)
@@ -136,7 +185,7 @@ struct PostDetailView: View {
                     Button(
                         action: {
                             Task{
-                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: 1)
+                                try await postVM.addLikes(postID: postVM.singlePost?.id ?? 6, userID: loginViewModel.currentUser?.id ?? 0)
                             }
                         },
                         label: {
@@ -153,6 +202,7 @@ struct PostDetailView: View {
                 .padding(.horizontal)
                 CommentsComponent(commentsToPost: postVM.singlePost?.comments ?? [], commentID: $commentID, reply: $reply, isReplying: $isReplying, replys_to: $replys_to, isCommenting: $isCommenting)
             }
+            //textfield for comment
             if(isCommenting){
                 TextField("",text: $comment)
                     .disableAutocorrection(true)
@@ -166,13 +216,14 @@ struct PostDetailView: View {
                     .onSubmit {
                         Task{
                             if(!comment.isEmpty && !comment.trimmingCharacters(in: .whitespaces).isEmpty){
-                                try await postVM.userInputComment(userID: 1, postID: postVM.singlePost?.id ?? 1, userInput: comment)
+                                try await postVM.userInputComment(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 1, userInput: comment)
                             }
                             isCommenting = false
                             comment = ""
                         }
                     }
             }
+            //textfield for reply
             if(isReplying){
                 TextField("",text: $reply)
                     .disableAutocorrection(true)
@@ -187,9 +238,9 @@ struct PostDetailView: View {
                         Task{
                             if(!reply.isEmpty && !reply.trimmingCharacters(in: .whitespaces).isEmpty){
                                 if(replys_to.isEmpty){
-                                    try await postVM.userInputReply(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID)
+                                    try await postVM.userInputReply(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID)
                                 }else{
-                                    try await postVM.replyToResponse(userID: 1, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID, userReplied: replys_to)
+                                    try await postVM.replyToResponse(userID: loginViewModel.currentUser?.id ?? 0, postID: postVM.singlePost?.id ?? 0, userInput: reply, replyID: commentID, userReplied: replys_to)
                                 }
                             }
                             isReplying = false
@@ -202,12 +253,37 @@ struct PostDetailView: View {
         .task{
             Task{
                 try await postVM.fetchSinglePost(postID: detailedPost.id)
+                await findLocation()
             }
         }
         .sheet(isPresented: $isGrouping, content: {
             
         })
         
+    }
+    
+    func findLocation() async{
+        let request = MKLocalSearch.Request()
+        let address = postVM.singlePost?.address ?? ""
+        let city = postVM.singlePost?.city ?? ""
+        let state = postVM.singlePost?.state ?? ""
+        let zipcode = postVM.singlePost?.zipcode ?? ""
+        let addressString = address + " " + city + " " + state + ", " + zipcode
+            
+        print(addressString)
+        request.naturalLanguageQuery = addressString
+        let results = try? await MKLocalSearch(request: request).start()
+        self.coordination = results?.mapItems ?? []
+        if(results?.boundingRegion == nil){
+            undefinedAddress = true
+        }
+        self.mapCamreaPosition = .region(results?.boundingRegion ?? .defaultRegion)
+    }
+}
+
+extension MKCoordinateRegion {
+    static var defaultRegion: MKCoordinateRegion{
+        return .init(center: CLLocationCoordinate2D(latitude: 40.776676, longitude: -73.971321), latitudinalMeters: 5000, longitudinalMeters: 5000)
     }
 }
 

@@ -8,6 +8,7 @@
 import SwiftUI
 import PhotosUI
 struct CreatePost: View {
+    @EnvironmentObject var loginViewModel: LoginViewModel;
     @StateObject var createPostVM = CreatePostViewModel()
     @State var title: String = ""
     @State var contents: String = ""
@@ -45,6 +46,7 @@ struct CreatePost: View {
                 Section{
                     
                     TextEditor(text: $contents)
+                        .disableAutocorrection(true)
                         .font(.custom("HelveticaNeue", size: 18))
                         .lineSpacing(5)
                         .frame(height: 260)
@@ -94,7 +96,7 @@ struct CreatePost: View {
                                                               start_time:convertTimeToString(originalTime: self.start_time),
                                                               end_date:convertDateToString(originalDate: self.end_date),
                                                               end_time:convertTimeToString(originalTime: self.end_time),
-                                                              isEvent:self.isEvent)
+                                                              isEvent:self.isEvent, ownerid: loginViewModel.currentUser?.id ?? 0)
                             title = ""
                             contents = ""
                             address = ""

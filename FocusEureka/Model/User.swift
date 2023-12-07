@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Equatable, Hashable{
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     let id: Int;
     let username: String;
     let fristName: String;
@@ -60,7 +65,7 @@ struct User: Identifiable, Codable {
     
     var fullName: String {
         get {
-            return self.fristName + " " + self.middleName + " " + self.lastName
+            return self.fristName + " " + (self.middleName == "null" ? "" : self.middleName + " ") + self.lastName
         }
     }
     
@@ -77,6 +82,10 @@ struct User: Identifiable, Codable {
     
     mutating func setPassword(password: String) -> Void {
         self.password = password
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id && lhs.fullName == rhs.fullName
     }
 }
 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ScheuleView: View {
     
+    var currentUser: User
+    
     @ObservedObject var scheduleViewModel: ScheduleViewModel = ScheduleViewModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
     
@@ -17,25 +19,28 @@ struct ScheuleView: View {
             VStack {
                 // single scheule view
                 ForEach(schedules.scheduleDay.indices, id: \.self) {index in
-                    Button(action: {
-                        print("Click able")
-                        scheduleViewModel.updateScheduleData(userId: loginViewModel.currentUser!.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
-                        print(schedules.scheduleDay)
-                    }, label: {
-                        let element = schedules.scheduleDay[index]
+                    let element = schedules.scheduleDay[index]
+                    
+                    if currentUser == loginViewModel.currentUser! {
+                        Button(action: {
+                            scheduleViewModel.updateScheduleData(userId: self.currentUser.id, at: index, isAvaliable: !(schedules.scheduleDay[index].isAvaliable))
+                        }, label: {
+                            SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
+                        })
+                    } else {
                         SingleScheuleView(index: index, day: element.day, isAvailable: element.isAvaliable)
-                    })
+                    }
                 }
             }
         } else {
             Text("Loading...")
                 .onAppear {
-                    self.scheduleViewModel.getScheduleData(userId: loginViewModel.currentUser!.id)
+                    self.scheduleViewModel.getScheduleData(userId: currentUser.id)
                 }
         }
     }
 }
 
 #Preview {
-    ScheuleView(scheduleViewModel: ScheduleViewModel())
+    ScheuleView(currentUser: User(id: 1, username: "Kaifeng111", fristName: "Kai", middleName: "", lastName: "Feng"), scheduleViewModel: ScheduleViewModel())
 }
