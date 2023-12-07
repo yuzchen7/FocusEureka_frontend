@@ -21,6 +21,7 @@ struct CreatePost: View {
     @State var end_date = Date()
     @State var end_time = Date()
     @State var isEvent: Bool = false
+    @State var isSpots: Bool = true
     @FocusState var displayKeybaord:Bool
 
     var body: some View {
@@ -70,10 +71,49 @@ struct CreatePost: View {
                     TextField("zip-code",text: $zipcode)
                         .disableAutocorrection(true)
                         .focused($displayKeybaord)
-                    Toggle(isOn: $isEvent) {
-                        Label("Event?", systemImage: "balloon.fill")
+                    
+                    HStack(spacing: 20) {
+                        Button(action: {
+                            if !self.isSpots {
+                                self.isSpots.toggle()
+                                self.isEvent = false
+                            }
+                        }, label: {
+                            HStack {
+                                Image(systemName: "mappin.and.ellipse")
+                                Text("Spots")
+                            }
+                        })
+                        .foregroundStyle(self.isSpots ? .white : .pink.opacity(0.7))
+                        .frame(width: 100, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundStyle(self.isSpots ? .pink.opacity(0.7) : .white)
+                        )
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Button(action: {
+                            if !self.isEvent {
+                                self.isEvent.toggle()
+                                self.isSpots = false
+                            }
+                            print("isSpots -> \(isSpots)")
+                            print("isEvent -> \(isEvent)")
+                        }, label: {
+                            HStack {
+                                Image(systemName: "balloon.fill")
+                                Text("Event")
+                            }
+                        })
+                        .foregroundStyle(self.isEvent ? .white : .pink.opacity(0.7))
+                        .frame(width: 100, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundStyle(self.isEvent ? .pink.opacity(0.7) : .white)
+                        )
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .toggleStyle(.button)
+                    
                     if(isEvent){
                             DatePicker("date start", selection: $start_date, displayedComponents: .date)
                             DatePicker("date end", selection: $end_date, displayedComponents: .date)
