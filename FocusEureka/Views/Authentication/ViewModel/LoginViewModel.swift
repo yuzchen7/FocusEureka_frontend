@@ -117,12 +117,15 @@ extension LoginViewModel {
                         ]
                 )
                 
-                self.sessionUser = self.currentUser
+                self.currentUser = self.sessionUser
                 
                 await fetchUser()
                 
                 saveItem(forkey: "username", item: username)
                 saveItem(forkey: username, item: password)
+                
+                // print(sessionUser ?? "null")
+                // print(currentUser ?? "null")
                 
             } catch Swiftxios.FetchError.invalidURL {
                 print("function signIn from class Swiftxios has URL error (╯’ – ‘)╯︵")
