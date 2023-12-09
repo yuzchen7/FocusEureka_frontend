@@ -21,6 +21,7 @@ class PostsViewModel : ObservableObject{
     @Published var singlePost:Posts?
     @Published var title = "Discover & Enjoy"
     @State var fetchedComment:Comments?
+    @Published var friendItems = [User]()
     var likesRes:PostLikes?
     let baseURL =  "http://localhost:8080/api/posts/"
     
@@ -268,5 +269,16 @@ extension PostsViewModel{
         }
         loadUserPostData(userID: friendID)
         try await fetchSinglePost(postID: postID)
+    }
+}
+
+//Check avaliable friends of current User
+extension PostsViewModel{
+    func  avaliableFriends(userID: Int, weekday: String) async throws{
+        guard let url = URL(string: "http://localhost:8080/api/schedule/checkAvailableFriends?owner_id=\(userID)&weekday=\(weekday)") else {
+            return
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        self.friendItems = try JSONDecoder().decode([User].self, from: data)
     }
 }
