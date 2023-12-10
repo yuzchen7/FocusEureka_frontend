@@ -30,6 +30,7 @@ struct PostDetailView: View {
     @State var mapSelection: MKMapItem?
     @State var undefinedAddress: Bool = false
     @State var showFullScreenMap: Bool = false
+    @State var displayUsername: Bool = false
     
     var body: some View {
         VStack{
@@ -57,13 +58,21 @@ struct PostDetailView: View {
                         .fontWeight(.bold)
                     
                     Spacer()
-                    VStack{
-                        Image(systemName: "person.crop.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.red)
+                    Text(postVM.singlePost?.owner.initials ?? "")
+                        .fontWeight(.semibold)
+                        .lineLimit(1)
+                        .foregroundStyle(Color(.white))
+                        .frame(width: 30, height: 30)
+                        .background(Color(.systemRed))
+                        .clipShape(Circle())
+                        .onTapGesture {
+                            displayUsername = !displayUsername
+                        }
+                    if(displayUsername){
+                        Text(postVM.singlePost?.owner.username ?? "")
+                            .font(.caption)
+                            .fontWeight(.semibold)
                     }
-                    .frame(width: 30)
                 }
                 .padding(.horizontal)
                 //Time & lcoation

@@ -33,7 +33,7 @@ struct Posts: Codable, Identifiable, Hashable{
     var createdAt: String
     let updatedAt: String
     let image_set: Image_set
-    let owner: Owner
+    let owner: User
     let post_likes: [PostLikes]?
     let comments:[Comments]?
 }
@@ -58,12 +58,11 @@ struct MockData {
         image_set: FocusEureka.Image_set(
             post_id: 6,
             urls: ["https://images.squarespace-cdn.com/content/v1/571abd61e3214001fb3b9966/1518814837468-LZXSJ9HHAUX6YEDZQMF9/entrance.jpg?format=2500w", "https://images.squarespace-cdn.com/content/v1/571abd61e3214001fb3b9966/1518814402334-EDMWCIKTFR4TDOSG0SVP/IMG_1374.jpg?format=2500w"]),
-        owner: FocusEureka.Owner(
+        owner: FocusEureka.User(
             id: 2,
-            first_name: "Kaifeng",
-            last_name: "Yu",
-            middle_name: nil,
-            username: "Kaifeng99890@gmail.com"),
+            username: "Kaifeng99890@gmail.com", fristName: "Kaifeng",
+            middleName: "",
+            lastName: "Yu"),
         post_likes: nil,
         comments: nil)
 }
