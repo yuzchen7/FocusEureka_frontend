@@ -14,7 +14,9 @@ struct PostDetailView: View {
     enum userInput{
         case commentInput, userReply
     }
-//    @StateObject var postVM = PostsViewModel()
+    @State var weekdays:[String] = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    @State var dayInWeek: String?
+    //    @StateObject var postVM = PostsViewModel()
     @EnvironmentObject var postVM: PostsViewModel
     @State var isGrouping: Bool = false
     @State var comment: String = ""
@@ -266,8 +268,53 @@ struct PostDetailView: View {
             }
         }
         .sheet(isPresented: $isGrouping, content: {
-            
+            VStack(alignment: .leading){
+                ScrollView(.horizontal, showsIndicators: false){
+                    Spacer()
+                    HStack(spacing: 0){
+                        ForEach(weekdays, id: \.self) { dayOfWeek in
+                            VStack{
+                                Text("\(dayOfWeek)")
+//                                    .frame(width: 150, height: 150)
+                                Text("Number of friends available: \(postVM.friendItems.count)")
+                                    .font(.caption)
+                            }
+                            .containerRelativeFrame(.horizontal)
+                        }
+                    }
+                    .scrollTargetLayout()
+                    Spacer()
+                }
+                .font(.title)
+                .scrollTargetBehavior(.paging)
+                .scrollPosition(id: $dayInWeek)
+                .onChange(of: dayInWeek) { oldValue, newValue in
+                    Task{
+                        let day = String(newValue?.prefix(3) ?? "").lowercased()
+                        try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: day)
+                    }
+                }
+                .frame(height:200)
+                Divider()
+                List{
+                    ForEach(postVM.friendItems) { friend in
+                        HStack{
+                            UserSingleCardView(initials: friend.initials, fullname: friend.fullName)
+                                .frame(height:40)
+                        }
+                        .background(Gradient(colors: [.pink,.blue]))
+                    }
+                }
+                .listStyle(PlainListStyle())
+                Spacer()
+            }
+//            .background(Gradient(colors: [.mint,.purple]))
         })
+        .onAppear{
+            Task{
+                try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "sun")
+            }
+        }
         
     }
     
