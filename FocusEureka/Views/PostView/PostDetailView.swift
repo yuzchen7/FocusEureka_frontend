@@ -270,11 +270,16 @@ struct PostDetailView: View {
         .sheet(isPresented: $isGrouping, content: {
             VStack(alignment: .leading){
                 ScrollView(.horizontal, showsIndicators: false){
+                    Spacer()
                     HStack(spacing: 0){
                         ForEach(weekdays, id: \.self) { dayOfWeek in
-                            Text("\(dayOfWeek)")
-                                .frame(width: 150, height: 150)
-                                .containerRelativeFrame(.horizontal)
+                            VStack{
+                                Text("\(dayOfWeek)")
+//                                    .frame(width: 150, height: 150)
+                                Text("Number of friends available: \(postVM.friendItems.count)")
+                                    .font(.caption)
+                            }
+                            .containerRelativeFrame(.horizontal)
                         }
                     }
                     .scrollTargetLayout()
@@ -285,25 +290,25 @@ struct PostDetailView: View {
                 .scrollPosition(id: $dayInWeek)
                 .onChange(of: dayInWeek) { oldValue, newValue in
                     Task{
-                        print(newValue ?? "")
                         let day = String(newValue?.prefix(3) ?? "").lowercased()
                         try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: day)
                     }
                 }
                 .frame(height:200)
                 Divider()
-                Text("    Number of friends available: \(postVM.friendItems.count)")
-                    .padding(.bottom)
-                ForEach(postVM.friendItems) { friend in
-                    HStack{
-                        Image(systemName: "face.smiling")
-                        Text(friend.fullName)
+                List{
+                    ForEach(postVM.friendItems) { friend in
+                        HStack{
+                            UserSingleCardView(initials: friend.initials, fullname: friend.fullName)
+                                .frame(height:40)
+                        }
+                        .background(Gradient(colors: [.pink,.blue]))
                     }
-                    .frame(width: UIScreen.main.bounds.width, height:50)
                 }
+                .listStyle(PlainListStyle())
                 Spacer()
             }
-            .background(Gradient(colors: [.mint,.purple]))
+//            .background(Gradient(colors: [.mint,.purple]))
         })
         .onAppear{
             Task{
