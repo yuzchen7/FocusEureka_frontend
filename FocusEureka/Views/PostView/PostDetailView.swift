@@ -268,79 +268,9 @@ struct PostDetailView: View {
             }
         }
         .sheet(isPresented: $isGrouping, content: {
-            VStack(){
+            VStack(alignment: .leading){
                 ScrollView(.horizontal, showsIndicators: false){
-                    LazyHStack(spacing: 0){
-//                        Text("Monday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.orange)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("1")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "mon")
-//                                    }
-//                            }
-//                        Text("Tuesday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.green)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("2")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "tue")
-//                                    }
-//                            }
-//                        Text("Wednesday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.yellow)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("3")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "wed")
-//                                    }
-//                            }
-//                        Text("Thursday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.red)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("4")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "thu")
-//                                    }
-//                            }
-//                        Text("Friday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.teal)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("5")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "fri")
-//                                    }
-//                            }
-//                        Text("Saturday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.purple)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("6")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "sat")
-//                                    }
-//                            }
-//                        Text("Sunday")
-//                            .frame(width: 150, height: 150)
-//                            .containerRelativeFrame(.horizontal)
-//                            .background(Color.cyan)
-//                            .onTapGesture{
-//                                Task{
-//                                    print("7")
-//                                    try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: "sun")
-//                                    }
-//                            }
+                    HStack(spacing: 0){
                         ForEach(weekdays, id: \.self) { dayOfWeek in
                             Text("\(dayOfWeek)")
                                 .frame(width: 150, height: 150)
@@ -348,7 +278,7 @@ struct PostDetailView: View {
                         }
                     }
                     .scrollTargetLayout()
-                    
+                    Spacer()
                 }
                 .font(.title)
                 .scrollTargetBehavior(.paging)
@@ -360,11 +290,20 @@ struct PostDetailView: View {
                         try await postVM.avaliableFriends(userID: loginViewModel.currentUser?.id ?? 0, weekday: day)
                     }
                 }
+                .frame(height:200)
+                Divider()
+                Text("Number of friends available: \(postVM.friendItems.count)")
+                    .padding(.bottom)
                 ForEach(postVM.friendItems) { friend in
-                    Text(friend.fullName)
+                    HStack{
+                        Image(systemName: "face.smiling")
+                        Text(friend.fullName)
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height:50)
                 }
+                Spacer()
             }
-            
+            .background(Gradient(colors: [.mint,.purple]))
         })
         .onAppear{
             Task{
