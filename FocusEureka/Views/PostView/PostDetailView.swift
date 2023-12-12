@@ -292,7 +292,7 @@ struct PostDetailView: View {
                 }
                 .frame(height:200)
                 Divider()
-                Text("Number of friends available: \(postVM.friendItems.count)")
+                Text("    Number of friends available: \(postVM.friendItems.count)")
                     .padding(.bottom)
                 ForEach(postVM.friendItems) { friend in
                     HStack{
