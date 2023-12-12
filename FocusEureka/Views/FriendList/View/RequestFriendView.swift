@@ -50,6 +50,18 @@ struct RequestFriendView: View {
                                             .frame(width: 30, height: 30)
                                             .padding(.trailing)
                                     })
+                                    .buttonStyle(PlainButtonStyle())
+                                    
+                                    Button(action: {
+                                        self.requestFriendModel.declineFriendRequestFetch(id: self.loginViewModel.currentUser!.id, targetID: currentUser.id)
+                                    }, label: {
+                                        Image(systemName: "minus.square")
+                                            .resizable()
+                                            .foregroundStyle(Color.pink.opacity(0.8))
+                                            .frame(width: 30, height: 30)
+                                            .padding(.trailing)
+                                    })
+                                    .buttonStyle(PlainButtonStyle())
                                     
                                 }
                                 
